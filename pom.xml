@@ -42,8 +42,9 @@
 			</executions>
 
 			<configuration>
-				<failOnViolation>false</failOnViolation>
+				<failOnViolation>true</failOnViolation>
 				<configLocation>checkstyle.xml</configLocation>
+				<failsOnError>true</failsOnError>
 			</configuration>
 		</plugin>
 		<!-- PMD -->
