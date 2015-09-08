@@ -2,6 +2,7 @@ package entities;
 
 import java.awt.Graphics2D;
 
+import animations.Animation;
 import enumerations.Direction;
 import handlers.OptionsHandler;
 
@@ -9,32 +10,58 @@ public class Player extends Entity {
 
     private final int SCOREINCREMENT = 10;
     private final int SCALEINCREMENT = 10;
-    private int score;
+   
+    private final double MOVESPEED = 10;
+    
+    private final double ENTITYWIDTH = 100;
+    private final double ENTITYHEIGHT = 50;
+    
+    private final double SPRITEWIDTH = 300;
+    private final double SPRITEHEIGHT = 300;
+    private final String ANIMATIONKEY = "Player";
+    private final String ANIMATIONURL = "/sprites/Player.png";
+    private final int NUMBERFRAMES = 2;
+    private final int ANIMATIONDELAY = 10;
+    
+    private final double STARTSCALE = 20;
+    private final double TARGETSCALE = 100;
+   
+    private int currentScore;
     private int numberFishEaten;
-
-    protected double moveSpeed;
 
     public Player() {
         super();
-        score = 0;
+        currentScore = 0;
         numberFishEaten = 0;
-        x = OptionsHandler.getInstance().getWidth() / 2;
+    }
+    
+    @Override
+    protected void initialiseEntity(){
+    	entityWidth = ENTITYWIDTH;
+        entityHeight = ENTITYHEIGHT;
+    }
+    
+    @Override
+    protected void initialiseSprite(){
+    	x = OptionsHandler.getInstance().getWidth() / 2;
         y = OptionsHandler.getInstance().getHeight() / 2;
-        currentScale = 20;
-        targetScale = 100;
+    	spriteWidth = SPRITEWIDTH;
+    	spriteHeight = SPRITEHEIGHT;
+        currentScale = STARTSCALE;
+        targetScale = TARGETSCALE;
+    }
+    
+    @Override
+    protected Animation createAnimation() {
+        return Animation.createAnimation(ANIMATIONKEY, ANIMATIONURL, NUMBERFRAMES, (int)SPRITEWIDTH, (int)SPRITEHEIGHT, ANIMATIONDELAY);
     }
 
     @Override
-    public void update() {
-        animation.update();
-    }
+    protected void update() {}
 
     @Override
-    public void draw(Graphics2D g) {
-        if (alive)
-            drawFrame(g);
-    }
-
+    protected void draw(Graphics2D g) {}
+    
     public void moveUp() {
         y = 0;
     }
@@ -68,39 +95,29 @@ public class Player extends Entity {
         }
     }
 
-    @Override
-    protected void setupAnimation() {
-        animationURL = "/sprites/Player.png";
-        numerFrames = 2;
-        spriteWidth = 300;
-        spriteHeight = 300;
-        delay = 10;
-    }
+    /**
+     * Assuming not null and consumable
+     */
+	@Override
+	protected void consume(Entity food) {
+		numberFishEaten++;
+		currentScore+=food.consumedBy(this);
+	}
 
-    @Override
-    public boolean canConsume(Entity food) {
-        return isLargerThan(food);
-    }
+	@Override
+	protected int consumedBy(Entity eater) {
+		kill();
+		return 0;
+	}
+	
+	public boolean isFull(){
+		return currentScale >= targetScale;
+	}
+	
+	public int getScore(){
+		return currentScore;
+	}
 
-    private void increaseScore(Entity food) {
-        score += (int) (food.getRatio() * SCOREINCREMENT);
-    }
 
-    private void increaseSize(Entity food) {
-        currentScale += (int) (food.getRatio() * SCALEINCREMENT);
-    }
-
-    @Override
-    public void consume(Entity food) {
-        increaseScore(food);
-        increaseSize(food);
-        food.isConsumed();
-    }
-
-    @Override
-    public void createBoundingBox() {
-        entityWidth = 100;
-        entityHeight = 50;
-    }
 
 }

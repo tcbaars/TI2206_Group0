@@ -4,11 +4,12 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import entities.Enemy;
+import entities.Player;
 import entities.Trout;
 
 public class EnemyHandler {
 
-    protected Random generator;
+    private Random generator;
     private Enemy enemies[];
     private int max;
     private int currentNumber;
@@ -25,12 +26,15 @@ public class EnemyHandler {
         delay = 10;
     }
 
-    public void update() {
+    public void update(Player player) {
         for (int i = 0; i < max; i++) {
             if (enemies[i] != null) {
-                enemies[i].update();
+                enemies[i].updateEntity();
                 if (!enemies[i].isAlive()) {
-                    if (!enemies[i].hasBubbles()) {
+                	if(currentNumber <= 1){ 	//If last fish dont check for bubbles
+                		enemies[i] = null;			
+                        currentNumber--;
+                	} else if (!enemies[i].hasBubbles()) {
                         enemies[i] = null;
                         currentNumber--;
                     }
@@ -41,8 +45,10 @@ public class EnemyHandler {
         updateCount++;
         if (updateCount >= delay) {
             updateCount = 0;
-            if (currentNumber <= desiredNumber()) {
-                spawnEnemy();
+        	if (currentNumber <= desiredNumber()) {
+        		if(!player.isFull()){
+        			spawnEnemy();
+        		}
             }
         }
     }
@@ -50,7 +56,7 @@ public class EnemyHandler {
     public void draw(Graphics2D g) {
         for (int i = 0; i < max; i++) {
             if (enemies[i] != null) {
-                enemies[i].draw(g);
+                enemies[i].drawEntity(g);
             }
         }
     }
@@ -80,6 +86,10 @@ public class EnemyHandler {
 
     public Enemy[] getEnemies() {
         return enemies;
+    }
+    
+    public int getNumberEnemies(){
+    	return  currentNumber;
     }
 
 }

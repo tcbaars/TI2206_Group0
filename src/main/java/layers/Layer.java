@@ -30,9 +30,12 @@ public abstract class Layer extends JPanel {
         this.prev = prev;
     }
 
-    public void addLayer(Layer next) {
-        this.next = next;
-        next.setPrevious(this);
+    public void addLayer(Layer layer) {
+        this.next = layer;
+        if(layer != null){
+        	layer.setPrevious(this);
+        }
+        
     }
 
     public void removeLayer() {
@@ -62,36 +65,58 @@ public abstract class Layer extends JPanel {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
-
-    public abstract void update();
-
-    protected void updateNext() {
+    
+    public void updateLayer(){
+    	update();
+    	updateNext();
+    }
+    
+    protected abstract void update();
+    
+    private void updateNext() {
         if (next != null) {
-            next.update();
+            next.updateLayer();
+        }
+    }
+    
+    public void drawLayer(Graphics2D g){
+    	if(visible){
+    		g = draw(g);
+    	}
+    	drawNext(g);
+    }
+    
+    protected abstract Graphics2D draw(Graphics2D g);
+
+    private void drawNext(Graphics2D g) {
+        if (next != null) {
+            next.drawLayer(g);
+        }
+    }
+    
+    public void handleKeyPress(Key e){
+    	keyPressed(e);
+    	passKeyPress(e);
+    }
+    
+    public void handleKeyRelease(Key e){
+    	keyReleased(e);
+    	passKeyRelease(e);
+    }
+    
+    protected abstract void keyPressed(Key e);
+    
+    protected abstract void keyReleased(Key e);
+
+    private void passKeyPress(Key e) {
+        if (next != null) {
+            next.handleKeyPress(e);
         }
     }
 
-    public abstract void draw(Graphics2D g);
-
-    protected void drawNext(Graphics2D g) {
+    private void passKeyRelease(Key e) {
         if (next != null) {
-            next.draw(g);
-        }
-    }
-
-    public abstract void keyPressed(Key e);
-
-    public abstract void keyReleased(Key e);
-
-    protected void passKeyPress(Key e) {
-        if (next != null) {
-            next.keyPressed(e);
-        }
-    }
-
-    protected void passKeyRelease(Key e) {
-        if (next != null) {
-            next.keyReleased(e);
+            next.handleKeyRelease(e);
         }
     }
 }

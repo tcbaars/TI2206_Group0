@@ -5,22 +5,9 @@ import entities.Entity;
 public class CollisionHandler {
 
     private static void HandleSingleCollision(Entity eater, Entity food) {
-
-        if (eater != null) {
-            if (food != null) {
-                if (eater.getBoundingBox().intersects(food.getBoundingBox())) {
-                    if (food.isConsumable()) {
-                        System.out.println("Collision");
-                        if (eater.isAlive()) {
-                            if (eater.canConsume(food)) {
-
-                                eater.consume(food);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    	if(eater != null){
+    		eater.handleCollision(food);
+    	}
     }
 
     public static void HandleCollisions(Entity e1, Entity e2) {

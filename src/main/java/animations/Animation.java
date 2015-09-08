@@ -1,9 +1,7 @@
 package animations;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import handlers.ImageHandler;
 
 public class Animation {
 
@@ -17,12 +15,12 @@ public class Animation {
 
     private int timesLooped;
 
-    public Animation(BufferedImage[] frames) {
-        this.frames = frames;
-        numberFrames = frames.length;
-        startFrame = currentFrame = 0;
+    private Animation(String animationKey, int numberFrames, int startFrame, int delay) {
+        frames = ImageHandler.getInstance().getAnimation(animationKey); //getNaimation may be null
+        this.numberFrames = numberFrames;
+        this.startFrame = currentFrame = startFrame;
+        this.delay = delay;
         updateCount = 0;
-        delay = 0;
         timesLooped = 0;
     }
 
@@ -75,23 +73,9 @@ public class Animation {
         return true;
     }
 
-    public static Animation createAnimation(String animationURL, int numberFrames, int frameWidth, int frameHeight)
-            throws IOException {
-
-        BufferedImage image = ImageIO.read(Animation.class.getResourceAsStream(animationURL));
-
-        BufferedImage[] frames = new BufferedImage[numberFrames];
-        for (int i = 0; i < numberFrames; i++) {
-            frames[i] = getSubimage(image, i, 0, 0, frameWidth, frameHeight);
-
-        }
-        return new Animation(frames);
+    public static Animation createAnimation(String animationKey, String animationURL, int numberFrames, int frameWidth, int frameHeight, int delay){
+    	ImageHandler.getInstance().loadAnimation(animationKey, animationURL, numberFrames, frameWidth, frameHeight);
+    	int initalFrame = 0;
+    	return new Animation(animationKey, numberFrames, initalFrame, delay);
     }
-
-    private static BufferedImage getSubimage(BufferedImage image, int index, int startX, int startY, int frameWidth,
-            int frameHeight) {
-        int tempStartX = startX + (index * frameWidth);
-        return image.getSubimage(tempStartX, startY, frameWidth, frameHeight);
-    }
-
 }

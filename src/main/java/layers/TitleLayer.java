@@ -30,15 +30,12 @@ public class TitleLayer extends Layer {
     }
 
     private void select() {
-        System.out.println(options[selected]);
         if (selected == 0) {
             addLayer(new GameLayer());
-            deactivate();
-            setVisible(false);
+            removeLayer();
         } else if (selected == 1) {
             addLayer(new InstructionsLayer());
-            deactivate();
-            setVisible(false);
+            removeLayer();
         } else if (selected == 2) {
             System.exit(0);
         }
@@ -46,26 +43,25 @@ public class TitleLayer extends Layer {
 
     @Override
     public void update() {
-        updateNext();
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        if (isVisible()) {
-            g.setColor(titleColor);
-            g.setFont(titleFont);
-            g.drawString("Fishy", 20, 20);
+    public Graphics2D draw(Graphics2D g) {
+        
+        g.setColor(titleColor);
+        g.setFont(titleFont);
+        g.drawString("Fishy", 20, 20);
 
-            g.setFont(optionFont);
-            for (int i = 0; i < options.length; i++) {
-                g.setColor(optionColor);
-                if (selected == i) {
-                    g.setColor(selectedColor);
-                }
-                g.drawString(options[i], 20, 40 + (20 * i));
+        g.setFont(optionFont);
+        for (int i = 0; i < options.length; i++) {
+            g.setColor(optionColor);
+            if (selected == i) {
+                g.setColor(selectedColor);
             }
+            g.drawString(options[i], 20, 40 + (20 * i));
         }
-        drawNext(g);
+        
+        return g;
     }
 
     @Override
@@ -84,16 +80,13 @@ public class TitleLayer extends Layer {
                 selected = (selected + 1) % options.length;
                 break;
             case ENTER:
-
                 select();
                 break;
             }
         }
-        passKeyPress(e);
     }
 
     @Override
     public void keyReleased(Key e) {
-        passKeyRelease(e);
     }
 }

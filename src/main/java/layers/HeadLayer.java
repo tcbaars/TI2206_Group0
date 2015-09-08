@@ -54,8 +54,8 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
         while (running) {
 
             start = System.nanoTime();
-            update();
-            draw(g);
+            updateLayer();
+            drawLayer(g);
             drawToScreen();
             elapsed = System.nanoTime() - start;
 
@@ -72,13 +72,12 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
     }
 
     @Override
-    public void update() {
-        updateNext();
+    protected void update() {
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        drawNext(g);
+    protected Graphics2D draw(Graphics2D g) {
+    	return this.g;
     }
 
     public void drawToScreen() {
@@ -89,27 +88,21 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
-        keyPressed(KeyHandler.convertToKey(e));
+    	handleKeyPress(KeyHandler.convertToKey(e));
     }
 
     public void keyReleased(KeyEvent e) {
-        keyReleased(KeyHandler.convertToKey(e));
+    	handleKeyRelease(KeyHandler.convertToKey(e));
     }
 
     public void keyTyped(KeyEvent e) {
     }
 
     @Override
-    public void keyPressed(Key e) {
-        if (e != null) {
-            passKeyPress(e);
-        }
+    protected void keyPressed(Key e) {
     }
 
     @Override
-    public void keyReleased(Key e) {
-        if (e != null) {
-            passKeyRelease(e);
-        }
+    protected void keyReleased(Key e) {
     }
 }

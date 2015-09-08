@@ -6,31 +6,28 @@ import entities.Player;
 import enumerations.Direction;
 
 public abstract class GameHandler {
-
-    // private boolean gameWon;
-    private boolean gameOver;
-    private boolean paused;
-
-    protected EnemyHandler enemies;
+ 
+    
+    protected boolean paused;
 
     public GameHandler() {
-        gameOver = false;
-        paused = false;
-        enemies = new EnemyHandler();
+    	newGame();
     }
-
-    protected void handleCollisions(Player player) {
-        CollisionHandler.HandleCollisions(player, enemies.getEnemies());
+    
+    protected abstract void newGame();
+    
+    public boolean isPaused(){
+    	return paused;
     }
-
-    protected void updateEnemies() {
-        enemies.update();
+    
+    public void pause(){
+    	paused = true;
     }
-
-    protected void drawEnemies(Graphics2D g) {
-        enemies.draw(g);
+    
+    public void resume(){
+    	paused = false;
     }
-
+  
     public abstract void update();
 
     public abstract void draw(Graphics2D g);
@@ -38,4 +35,7 @@ public abstract class GameHandler {
     public abstract void drawHUD(Graphics2D g);
 
     public abstract void move(Direction d);
+    
+    public abstract boolean isGameOver();
+    public abstract boolean isGameWon();
 }

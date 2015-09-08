@@ -9,8 +9,6 @@ import handlers.SinglePlayerGameHandler;
 
 public class GameLayer extends Layer {
 
-    // private ArrayList<Entity> entities = new ArrayList<Entity>();
-
     private GameHandler game;
 
     public GameLayer() {
@@ -19,15 +17,37 @@ public class GameLayer extends Layer {
 
     @Override
     public void update() {
-        game.update();
-        updateNext();
-
+    	if(!isActive()){
+    		if(game.isPaused()){
+    			return;
+    		} else {
+    			activate();
+    			setVisible(true);
+    		}
+    	}
+    	
+        if(game.isPaused()){
+           	if(game.isGameOver()){
+        		if(game.isGameWon()){
+        			addLayer(new WinLayer(game));
+        			removeLayer();
+        		} else {
+        			addLayer(new LoseLayer(game));
+        			removeLayer();
+        		}
+        	}     
+           	deactivate();
+        	setVisible(false);
+            addLayer(new PauseLayer(game));	
+        } else {
+        	game.update();
+        }     
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public Graphics2D draw(Graphics2D g) {
         game.draw(g);
-        drawNext(g);
+        return g;
 
     }
 
@@ -47,13 +67,14 @@ public class GameLayer extends Layer {
             game.move(Direction.RIGHT);
             break;
         }
-        passKeyPress(e);
-
     }
 
     @Override
     public void keyReleased(Key e) {
-        passKeyRelease(e);
-
+    	 switch (e) {
+         case ESC:
+             game.pause();
+             break;
+         }
     }
 }

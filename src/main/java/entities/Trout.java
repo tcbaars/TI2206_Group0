@@ -3,84 +3,83 @@ package entities;
 import java.awt.Graphics2D;
 import java.util.Random;
 
+import animations.Animation;
 import enumerations.Direction;
-import handlers.OptionsHandler;
+
 
 public class Trout extends Enemy {
 
-    private Random generator = new Random(System.currentTimeMillis());
-    private Direction moving;
-    private int minScale;
-
+	private final double MOVESPEED = 10;
+	private final double BASEVALUE = 10;
+    
+    private final double ENTITYWIDTH = 100;
+    private final double ENTITYHEIGHT = 50;
+    
+    private final double SPRITEWIDTH = 300;
+    private final double SPRITEHEIGHT = 300;
+    private final String ANIMATIONKEY = "Trout";
+    private final String ANIMATIONURL = "/sprites/Trout.png";
+    private final int NUMBERFRAMES = 2;
+    private final int ANIMATIONDELAY = 10;
+    
+    private final double MINSCALE = 20;
+    private final double MAXSCALE = 100;
+    
+    private Direction movingDirection;
+    
     public Trout() {
         super();
-        minScale = 10;
-        moveSpeed = 10;
-        randomlyGenerate();
     }
 
-    private void randomlyGenerate() {
+	@Override
+	protected void initialiseEntity() {
+		entityWidth = ENTITYWIDTH;
+		entityHeight = ENTITYHEIGHT;
+		moveSpeed = MOVESPEED;
+	}
 
-        double rand = generator.nextInt(2);
+	@Override
+	protected void initialiseSprite() {
+		generator = new Random(System.currentTimeMillis());
+		spriteWidth = SPRITEWIDTH;
+    	spriteHeight = SPRITEHEIGHT;
+    	setRandomSide();
+    	setRandomDepth();
+    	setRandomScale(MINSCALE, MAXSCALE);
+	}
 
-        // random side of screen
-        if (rand < 1) {
-            // Right side of screen
+	@Override
+	protected Animation createAnimation() {
+		return Animation.createAnimation(ANIMATIONKEY, ANIMATIONURL, NUMBERFRAMES, (int)SPRITEWIDTH, (int)SPRITEHEIGHT, ANIMATIONDELAY);
+	}
+	
+	public void setDirection(Direction direction){
+		this.movingDirection = direction;
+	}
 
-            x = OptionsHandler.getInstance().getWidth();
-            moving = Direction.LEFT;
-            setFacingRight(false);
-        } else {
-            // Left side
+	@Override
+	protected void update() {
+		move(movingDirection);
+	}
 
-            x = 0 - getGlobalSpriteWidth();
-            moving = Direction.RIGHT;
-            setFacingRight(true);
-        }
+	@Override
+	protected void draw(Graphics2D g) {}
 
-        // random depth
-        rand = generator.nextInt(OptionsHandler.getInstance().getHeight() - getGlobalSpriteHeight());
-        y = rand;
+	
+	public double getBaseValue(){
+		return BASEVALUE;
+	}
+	
+	@Override
+	protected void consume(Entity food) {
+		food.consumedBy(this);
+	}
 
-        // random size
-        rand = generator.nextInt((int) getTargetScale() - minScale);
-        setCurrentScale((int) rand + minScale);
-    }
-
-    @Override
-    protected void setupAnimation() {
-        animationURL = "/sprites/Trout.png";
-        numerFrames = 2;
-        spriteWidth = 300;
-        spriteHeight = 300;
-        delay = 10;
-    }
-
-    @Override
-    public void update() {
-        move(moving);
-        animation.update();
-    }
-
-    @Override
-    public void draw(Graphics2D g) {
-        drawFrame(g);
-    }
-
-    @Override
-    public void consume(Entity food) {
-        food.isConsumed();
-    }
-
-    @Override
-    public boolean canConsume(Entity food) {
-        return isLargerThan(food);
-    }
-
-    @Override
-    public void createBoundingBox() {
-        entityWidth = 100;
-        entityHeight = 50;
-    }
-
+	@Override
+	protected int consumedBy(Entity eater) {
+		kill();
+		return calculateValue();
+	}
+	
+	
 }

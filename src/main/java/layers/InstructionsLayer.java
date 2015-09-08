@@ -13,9 +13,9 @@ public class InstructionsLayer extends Layer {
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public Graphics2D draw(Graphics2D g) {
         // TODO Auto-generated method stub
-
+    	return g;
     }
 
     @Override
