@@ -4,7 +4,7 @@
     "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
 <module name="Checker">
-    <module name="FileTabCharacter">
+	<module name="FileTabCharacter">
         <property name="eachLine" value="true" />
     </module>
     <module name="TreeWalker">

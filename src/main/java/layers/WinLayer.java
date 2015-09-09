@@ -1,61 +1,62 @@
 package layers;
 
+import enumerations.Key;
+import handlers.GameHandler;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import enumerations.Key;
-import handlers.GameHandler;
-
 public class WinLayer extends Layer{
 
-	private GameHandler game;
-	private Color textColor;
-	private Font textFont;
-	
-	public WinLayer(GameHandler game){
-		this.game = game;
-		textColor = Color.WHITE;
-        textFont = new Font("Times New Roman", Font.PLAIN, 16);
-	}
-	
-	private void newGame(){
-		addLayer(new GameLayer());
-        removeLayer();
-	}
-	
-	@Override
-	protected void update() {
-		// TODO Auto-generated method stub
-		
-	}
+  private GameHandler game;
+  private Color textColor;
+  private Font textFont;
 
-	@Override
-	public Graphics2D draw(Graphics2D g) {
-		g.setColor(textColor);
-        g.setFont(textFont);
-		g.drawString("Win", 20, 20);
-		return g;
-	}
+  /**
+   * Display win screen.
+   */
+  public WinLayer(GameHandler game) {
+    this.game = game;
+    textColor = Color.WHITE;
+    textFont = new Font("Times New Roman", Font.PLAIN, 16);
+  }
 
-	@Override
-	public void keyPressed(Key e) {
-		// TODO Auto-generated method stub
-		
-	}
+  private void newGame() {
+    addLayer(new GameLayer());
+    removeLayer();
+  }
 
-	@Override
-	public void keyReleased(Key e) {
-		switch (e) {
-        case ESC:
-	        System.exit(0);
-            break;
-        case ENTER:
-        	newGame();
-        	break;
-        }
-		
-	}
-	
+  @Override
+  protected void update() {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public Graphics2D draw(Graphics2D graphic) {
+    graphic.setColor(textColor);
+    graphic.setFont(textFont);
+    graphic.drawString("Win", 20, 20);
+    return graphic;
+  }
+
+  @Override
+  public void keyPressed(Key key) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void keyReleased(Key key) {
+    switch (key) {
+      case ESC:
+        System.exit(0);
+        break;
+      case ENTER:
+        newGame();
+        break;
+      default:
+    }
+  }
+
 
 }

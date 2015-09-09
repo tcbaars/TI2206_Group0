@@ -1,30 +1,33 @@
 package gui;
 
-import javax.swing.JFrame;
-
 import layers.HeadLayer;
+
+import javax.swing.JFrame;
 
 public class MainFrame extends JFrame {
 
-    private static MainFrame instance = new MainFrame();
-    private boolean displayed;
+  private static MainFrame instance = new MainFrame();
+  private boolean displayed;
 
-    private MainFrame() {
-        super("Fishy Game");
-        displayed = false;
-    }
+  private MainFrame() {
+    super("Fishy Game");
+    displayed = false;
+  }
 
-    public static MainFrame getInstance() {
-        return instance;
-    }
+  public static MainFrame getInstance() {
+    return instance;
+  }
 
-    public void display() {
-    	if(!displayed){
-			add(new HeadLayer());
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        setResizable(false);
-	        pack();
-	        setVisible(true);
-    	}
+  /**
+   * display frame.
+   */
+  public void display() {
+    if (!displayed) {
+      add(new HeadLayer());
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      setResizable(false);
+      pack();
+      setVisible(true);
     }
+  }
 }

@@ -1,108 +1,123 @@
 package layers;
 
+import enumerations.Key;
+import handlers.KeyHandler;
+import handlers.OptionsHandler;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import enumerations.Key;
-import handlers.KeyHandler;
-import handlers.OptionsHandler;
-
 public class HeadLayer extends Layer implements Runnable, KeyListener {
 
-    private Thread thread;
-    private boolean running;
-    private long targetTime = 1000 / OptionsHandler.getInstance().getTargetFPS();
+  private Thread thread;
+  private boolean running;
+  private long targetTime = 1000 / OptionsHandler.getInstance().getTargetFps();
 
-    private BufferedImage image;
-    private Graphics2D g;
+  private BufferedImage image;
+  private Graphics2D graphic;
 
-    public HeadLayer() {
-        super();
-        running = false;
-        setFocusable(true);
-        requestFocus();
+  /**
+   * Head of all layers.
+   */
+  public HeadLayer() {
+    super();
+    running = false;
+    setFocusable(true);
+    requestFocus();
+  }
+
+  private void init() {
+    image = new BufferedImage(OptionsHandler.getInstance().getWidth(),
+        OptionsHandler.getInstance().getHeight(), BufferedImage.TYPE_INT_RGB);
+    graphic = (Graphics2D) image.getGraphics();
+    running = true;
+    addLayer(new BackgroundLayer());
+  }
+
+  /**
+   * Notify.
+   */
+  public void addNotify() {
+    super.addNotify();
+    if (thread == null) {
+      thread = new Thread(this);
+      addKeyListener(this);
+      thread.start();
     }
+  }
 
-    private void init() {
-        image = new BufferedImage(OptionsHandler.getInstance().getWidth(), OptionsHandler.getInstance().getHeight(),
-                BufferedImage.TYPE_INT_RGB);
-        g = (Graphics2D) image.getGraphics();
-        running = true;
-        addLayer(new BackgroundLayer());
+  /**
+   * run thread.
+   */
+  public void run() {
+    init();
+
+    long start;
+    long elapsed;
+    long wait;
+
+      // game loop
+    while (running) {
+
+      start = System.nanoTime();
+      updateLayer();
+      drawLayer(graphic);
+      drawToScreen();
+      elapsed = System.nanoTime() - start;
+
+      wait = targetTime - elapsed / 1000000;
+      if (wait < 0) {
+        wait = 5;
+      }
+
+      try {
+        Thread.sleep(wait);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
+  }
 
-    public void addNotify() {
-        super.addNotify();
-        if (thread == null) {
-            thread = new Thread(this);
-            addKeyListener(this);
-            thread.start();
-        }
-    }
+  @Override
+  protected void update() {
+  }
 
-    public void run() {
-        init();
+  @Override
+  protected Graphics2D draw(Graphics2D graphic) {
+    return this.graphic;
+  }
 
-        long start;
-        long elapsed;
-        long wait;
+  /**
+   * Draw final image to screen.
+   */
+  public void drawToScreen() {
+    Graphics g2 = getGraphics();
+    g2.drawImage(image, 0, 0, OptionsHandler.getInstance().getWidth(),
+        OptionsHandler.getInstance().getHeight(), null);
+    g2.dispose();
+  }
 
-        // game loop
-        while (running) {
 
-            start = System.nanoTime();
-            updateLayer();
-            drawLayer(g);
-            drawToScreen();
-            elapsed = System.nanoTime() - start;
+  public void keyPressed(KeyEvent keyEvent) {
+    handleKeyPress(KeyHandler.convertToKey(keyEvent));
+  }
 
-            wait = targetTime - elapsed / 1000000;
-            if (wait < 0)
-                wait = 5;
+  @Override
+  protected void keyPressed(Key key) {
+  }
 
-            try {
-                Thread.sleep(wait);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+  public void keyReleased(KeyEvent keyEvent) {
+    handleKeyRelease(KeyHandler.convertToKey(keyEvent));
+  }
 
-    @Override
-    protected void update() {
-    }
+  @Override
+  protected void keyReleased(Key key) {
+  }
 
-    @Override
-    protected Graphics2D draw(Graphics2D g) {
-    	return this.g;
-    }
+  public void keyTyped(KeyEvent keyEvent) {
+  }
 
-    public void drawToScreen() {
-        Graphics g2 = getGraphics();
-        g2.drawImage(image, 0, 0, OptionsHandler.getInstance().getWidth(), OptionsHandler.getInstance().getHeight(),
-                null);
-        g2.dispose();
-    }
-
-    public void keyPressed(KeyEvent e) {
-    	handleKeyPress(KeyHandler.convertToKey(e));
-    }
-
-    public void keyReleased(KeyEvent e) {
-    	handleKeyRelease(KeyHandler.convertToKey(e));
-    }
-
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    protected void keyPressed(Key e) {
-    }
-
-    @Override
-    protected void keyReleased(Key e) {
-    }
 }

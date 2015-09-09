@@ -1,122 +1,133 @@
 package layers;
 
+import enumerations.Key;
+import handlers.OptionsHandler;
+
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import enumerations.Key;
-import handlers.OptionsHandler;
-
 public abstract class Layer extends JPanel {
 
-    private Layer prev;
-    private Layer next;
+  private Layer prev;
+  private Layer next;
 
-    private boolean active;
-    private boolean visible;
+  private boolean active;
+  private boolean visible;
 
-    public Layer() {
-        super();
-        setPreferredSize(
-                new Dimension(OptionsHandler.getInstance().getWidth(), OptionsHandler.getInstance().getHeight()));
-        prev = null;
-        next = null;
-        active = true;
-        visible = true;
-    }
+  /**
+   * ContentLayer.
+   */
+  public Layer() {
+    super();
+    setPreferredSize( new Dimension(OptionsHandler.getInstance().getWidth(),
+        OptionsHandler.getInstance().getHeight()));
+    prev = null;
+    next = null;
+    active = true;
+    visible = true;
+  }
 
-    private void setPrevious(Layer prev) {
-        this.prev = prev;
-    }
+  private void setPrevious(Layer prev) {
+    this.prev = prev;
+  }
 
-    public void addLayer(Layer layer) {
-        this.next = layer;
-        if(layer != null){
-        	layer.setPrevious(this);
-        }
-        
+  /**
+   * Adds a layer to the image.
+   */
+  public void addLayer(Layer layer) {
+    this.next = layer;
+    if (layer != null) {
+      layer.setPrevious(this);
     }
+  }
 
-    public void removeLayer() {
-        if (prev != null) {
-            prev.addLayer(next);
-        }
-        prev = null;
-        next = null;
+  /**
+   * Remove a layer.
+   */
+  public void removeLayer() {
+    if (prev != null) {
+      prev.addLayer(next);
     }
+    prev = null;
+    next = null;
+  }
 
-    public boolean isActive() {
-        return active;
-    }
+  public boolean isActive() {
+    return active;
+  }
 
-    public void activate() {
-        active = true;
-    }
+  public void activate() {
+    active = true;
+  }
 
-    public void deactivate() {
-        active = false;
-    }
+  public void deactivate() {
+    active = false;
+  }
 
-    public boolean isVisible() {
-        return visible;
-    }
+  public boolean isVisible() {
+    return visible;
+  }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-    
-    public void updateLayer(){
-    	update();
-    	updateNext();
-    }
-    
-    protected abstract void update();
-    
-    private void updateNext() {
-        if (next != null) {
-            next.updateLayer();
-        }
-    }
-    
-    public void drawLayer(Graphics2D g){
-    	if(visible){
-    		g = draw(g);
-    	}
-    	drawNext(g);
-    }
-    
-    protected abstract Graphics2D draw(Graphics2D g);
+  public void setVisible(boolean visible) {
+    this.visible = visible;
+  }
 
-    private void drawNext(Graphics2D g) {
-        if (next != null) {
-            next.drawLayer(g);
-        }
-    }
-    
-    public void handleKeyPress(Key e){
-    	keyPressed(e);
-    	passKeyPress(e);
-    }
-    
-    public void handleKeyRelease(Key e){
-    	keyReleased(e);
-    	passKeyRelease(e);
-    }
-    
-    protected abstract void keyPressed(Key e);
-    
-    protected abstract void keyReleased(Key e);
+  public void updateLayer() {
+    update();
+    updateNext();
+  }
 
-    private void passKeyPress(Key e) {
-        if (next != null) {
-            next.handleKeyPress(e);
-        }
-    }
+  protected abstract void update();
 
-    private void passKeyRelease(Key e) {
-        if (next != null) {
-            next.handleKeyRelease(e);
-        }
+  private void updateNext() {
+    if (next != null) {
+      next.updateLayer();
     }
+  }
+
+  /**
+   * Draws the layer to the image.
+   */
+  public void drawLayer(Graphics2D graphic) {
+    if (visible) {
+      graphic = draw(graphic);
+    }
+    drawNext(graphic);
+  }
+
+  protected abstract Graphics2D draw(Graphics2D graphic);
+
+  private void drawNext(Graphics2D graphic) {
+    if (next != null) {
+      next.drawLayer(graphic);
+    }
+  }
+
+  public void handleKeyPress(Key key) {
+    keyPressed(key);
+    passKeyPress(key);
+  }
+
+  public void handleKeyRelease(Key key) {
+    keyReleased(key);
+    passKeyRelease(key);
+  }
+
+  protected abstract void keyPressed(Key key);
+
+  protected abstract void keyReleased(Key key);
+
+  private void passKeyPress(Key key) {
+    if (next != null) {
+      next.handleKeyPress(key);
+    }
+  }
+
+  private void passKeyRelease(Key key) {
+    if (next != null) {
+      next.handleKeyRelease(key);
+    }
+  }
 }

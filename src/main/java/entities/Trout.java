@@ -1,85 +1,84 @@
 package entities;
 
-import java.awt.Graphics2D;
-import java.util.Random;
-
 import animations.Animation;
 import enumerations.Direction;
 
+import java.awt.Graphics2D;
+import java.util.Random;
 
 public class Trout extends Enemy {
 
-	private final double MOVESPEED = 10;
-	private final double BASEVALUE = 10;
-    
-    private final double ENTITYWIDTH = 100;
-    private final double ENTITYHEIGHT = 50;
-    
-    private final double SPRITEWIDTH = 300;
-    private final double SPRITEHEIGHT = 300;
-    private final String ANIMATIONKEY = "Trout";
-    private final String ANIMATIONURL = "/sprites/Trout.png";
-    private final int NUMBERFRAMES = 2;
-    private final int ANIMATIONDELAY = 10;
-    
-    private final double MINSCALE = 20;
-    private final double MAXSCALE = 100;
-    
-    private Direction movingDirection;
-    
-    public Trout() {
-        super();
-    }
+  private final double movespeed = 10;
+  private final double basevalue = 10;
 
-	@Override
-	protected void initialiseEntity() {
-		entityWidth = ENTITYWIDTH;
-		entityHeight = ENTITYHEIGHT;
-		moveSpeed = MOVESPEED;
-	}
+  private final double entitywidth = 100;
+  private final double entityheight = 50;
 
-	@Override
-	protected void initialiseSprite() {
-		generator = new Random(System.currentTimeMillis());
-		spriteWidth = SPRITEWIDTH;
-    	spriteHeight = SPRITEHEIGHT;
-    	setRandomSide();
-    	setRandomDepth();
-    	setRandomScale(MINSCALE, MAXSCALE);
-	}
+  private final double spritewidth = 300;
+  private final double spriteheight = 300;
+  private final String animationkey = "Trout";
+  private final String animationurl = "/sprites/Trout.png";
+  private final int numberframes = 2;
+  private final int animationdelay = 10;
 
-	@Override
-	protected Animation createAnimation() {
-		return Animation.createAnimation(ANIMATIONKEY, ANIMATIONURL, NUMBERFRAMES, (int)SPRITEWIDTH, (int)SPRITEHEIGHT, ANIMATIONDELAY);
-	}
-	
-	public void setDirection(Direction direction){
-		this.movingDirection = direction;
-	}
+  private final double minscale = 20;
+  private final double maxscale = 100;
 
-	@Override
-	protected void update() {
-		move(movingDirection);
-	}
+  private Direction movingDirection;
 
-	@Override
-	protected void draw(Graphics2D g) {}
+  public Trout() {
+      super();
+  }
 
-	
-	public double getBaseValue(){
-		return BASEVALUE;
-	}
-	
-	@Override
-	protected void consume(Entity food) {
-		food.consumedBy(this);
-	}
+  @Override
+  protected void initialiseEntity() {
+    entityWidth = entitywidth;
+    entityHeight = entityheight;
+    moveSpeed = movespeed;
+  }
 
-	@Override
-	protected int consumedBy(Entity eater) {
-		kill();
-		return calculateValue();
-	}
-	
-	
+  @Override
+  protected void initialiseSprite() {
+    generator = new Random(System.currentTimeMillis());
+    spriteWidth = spritewidth;
+    spriteHeight = spriteheight;
+    setRandomSide();
+    setRandomDepth();
+    setRandomScale(minscale, maxscale);
+  }
+
+  @Override
+  protected Animation createAnimation() {
+    return Animation.createAnimation(animationkey, animationurl, numberframes,
+        (int)spritewidth, (int)spriteheight, animationdelay);
+  }
+
+  public void setDirection(Direction direction) {
+    this.movingDirection = direction;
+  }
+
+  @Override
+  protected void update() {
+    move(movingDirection);
+  }
+
+  @Override
+  protected void draw(Graphics2D graphics) {}
+
+
+  public double getBaseValue() {
+    return basevalue;
+  }
+
+  @Override
+  protected void consume(Entity food) {
+    food.consumedBy(this);
+  }
+
+  @Override
+  protected int consumedBy(Entity eater) {
+    kill();
+    return calculateValue();
+  }
+
 }
