@@ -75,11 +75,11 @@ public class SinglePlayerGameHandler extends GameHandler {
   public void draw(Graphics2D graphic) {
     player.drawEntity(graphic);
     enemies.draw(graphic);
-    drawHUD(graphic);
+    drawHud(graphic);
   }
 
   @Override
-  public void drawHUD(Graphics2D graphic) {
+  public void drawHud(Graphics2D graphic) {
     //System.out.println(player.getScore());
   }
 

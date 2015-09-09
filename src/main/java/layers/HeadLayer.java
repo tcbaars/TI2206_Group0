@@ -14,7 +14,7 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
 
   private Thread thread;
   private boolean running;
-  private long targetTime = 1000 / OptionsHandler.getInstance().getTargetFPS();
+  private long targetTime = 1000 / OptionsHandler.getInstance().getTargetFps();
 
   private BufferedImage image;
   private Graphics2D graphic;

@@ -90,7 +90,7 @@ public abstract class Layer extends JPanel {
   /**
    * Draws the layer to the image.
    */
-  public void drawLayer(Graphics2D graphic){
+  public void drawLayer(Graphics2D graphic) {
     if (visible) {
       graphic = draw(graphic);
     }
@@ -105,12 +105,12 @@ public abstract class Layer extends JPanel {
     }
   }
   
-  public void handleKeyPress(Key key){
+  public void handleKeyPress(Key key) {
     keyPressed(key);
     passKeyPress(key);
   }
   
-  public void handleKeyRelease(Key key){
+  public void handleKeyRelease(Key key) {
     keyReleased(key);
     passKeyRelease(key);
   }
