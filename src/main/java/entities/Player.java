@@ -8,22 +8,22 @@ import java.awt.Graphics2D;
 
 public class Player extends Entity {
 
-    
+
   private final double movespeed = 10;
-    
+
   private final double entitywidth = 100;
   private final double entityheight = 50;
-    
+
   private final double spritewidth = 300;
   private final double spriteheight = 300;
   private final String animationkey = "Player";
   private final String animationurl = "/sprites/Player.png";
   private final int numberframes = 2;
   private final int animationdely = 10;
-    
+
   private final double startscale = 20;
   private final double targetscale = 100;
-   
+
   private int currentScore;
   private int numberFishEaten;
 
@@ -35,13 +35,13 @@ public class Player extends Entity {
     currentScore = 0;
     numberFishEaten = 0;
   }
-    
+
   @Override
    protected void initialiseEntity() {
     entityWidth = entitywidth;
     entityHeight = entityheight;
   }
-    
+
   @Override
   protected void initialiseSprite() {
     topLeftX = OptionsHandler.getInstance().getWidth() / 2;
@@ -51,10 +51,10 @@ public class Player extends Entity {
     currentScale = startscale;
     targetScale = targetscale;
   }
-    
+
   @Override
   protected Animation createAnimation() {
-    return Animation.createAnimation(animationkey, animationurl, numberframes, (int)spritewidth, 
+    return Animation.createAnimation(animationkey, animationurl, numberframes, (int)spritewidth,
         (int)spriteheight, animationdely);
   }
 
@@ -63,7 +63,7 @@ public class Player extends Entity {
 
   @Override
   protected void draw(Graphics2D graphic) {}
-    
+
   public void moveUp() {
     topLeftY = 0;
   }

@@ -9,48 +9,48 @@ public class SinglePlayerGameHandler extends GameHandler {
 
   private boolean gameOver;
   private boolean gameWon;
-  
+
   private Player player;
   private EnemyHandler enemies;
 
   public SinglePlayerGameHandler() {
     super();
-  }  
-        
+  }
+
   protected void newGame() {
     player = new Player();
     gameOver = gameWon = false;
     paused = false;
     enemies = new EnemyHandler();
   }
-    
+
   private void handleCollisions() {
     CollisionHandler.handlecollisions(player, enemies.getEnemies());
   }
-    
+
   public boolean isGameOver() {
     return gameOver;
   }
-    
+
   public boolean isGameWon() {
     return gameWon;
   }
-        
+
   public void gameOver() {
     pause();
     gameOver = true;
   }
-    
+
   public void gameLost() {
     gameOver();
     gameWon = false;
   }
-    
+
   public void gameWon() {
     gameOver();
     gameWon = true;
   }
- 
+
   @Override
   public void update() {
     if (!paused) {

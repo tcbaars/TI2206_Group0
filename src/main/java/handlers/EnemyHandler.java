@@ -13,10 +13,10 @@ public class EnemyHandler {
   private Enemy[] enemies;
   private int max;
   private int currentNumber;
-  
+
   private int updateCount;
   private int delay;
-  
+
   /**
    * Handle enemey spawning.
    */
@@ -28,7 +28,7 @@ public class EnemyHandler {
     updateCount = 0;
     delay = 10;
   }
-  
+
   /**
    * Update enemies if player not full.
    */
@@ -47,7 +47,7 @@ public class EnemyHandler {
         }
       }
     }
-  
+
     updateCount++;
     if (updateCount >= delay) {
       updateCount = 0;
@@ -58,7 +58,7 @@ public class EnemyHandler {
       }
     }
   }
-  
+
   /**
    * Draw.
    */
@@ -69,7 +69,7 @@ public class EnemyHandler {
       }
     }
   }
-  
+
   protected void spawnEnemy() {
     for (int i = 0; i < max; i++) {
       if (enemies[i] == null) {
@@ -79,7 +79,7 @@ public class EnemyHandler {
       }
     }
   }
-  
+
   protected int desiredNumber() {
     int min = OptionsHandler.getInstance().getMinEnemies();
     int max = OptionsHandler.getInstance().getMaxEnemies() + 1;
@@ -87,16 +87,16 @@ public class EnemyHandler {
                                                 // exclusive
     return number;
   }
-  
+
   protected Enemy generateEnemy() {
     Enemy enemy = new Trout();
     return enemy;
   }
-  
+
   public Enemy[] getEnemies() {
     return enemies;
   }
-  
+
   public int getNumberEnemies() {
     return  currentNumber;
   }

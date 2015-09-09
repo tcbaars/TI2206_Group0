@@ -12,7 +12,7 @@ public class WinLayer extends Layer{
   private GameHandler game;
   private Color textColor;
   private Font textFont;
-  
+
   /**
    * Display win screen.
    */
@@ -21,17 +21,17 @@ public class WinLayer extends Layer{
     textColor = Color.WHITE;
     textFont = new Font("Times New Roman", Font.PLAIN, 16);
   }
-  
+
   private void newGame() {
     addLayer(new GameLayer());
     removeLayer();
   }
-  
+
   @Override
   protected void update() {
     // TODO Auto-generated method stub
   }
-  
+
   @Override
   public Graphics2D draw(Graphics2D graphic) {
     graphic.setColor(textColor);
@@ -39,12 +39,12 @@ public class WinLayer extends Layer{
     graphic.drawString("Win", 20, 20);
     return graphic;
   }
-  
+
   @Override
   public void keyPressed(Key key) {
     // TODO Auto-generated method stub
   }
-  
+
   @Override
   public void keyReleased(Key key) {
     switch (key) {

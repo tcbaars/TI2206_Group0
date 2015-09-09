@@ -26,19 +26,19 @@ public abstract class Enemy extends Entity {
     currentBubbles = 0;
     bubbles = new Bubble[maxBubbles];
   }
-    
+
   protected void spawnLeft() {
     topLeftX = 0 - getGlobalSpriteWidth();
     setDirection(Direction.RIGHT);
     setFacingRight(true);
   }
-    
+
   protected void spawnRight() {
     topLeftX = OptionsHandler.getInstance().getWidth();
     setDirection(Direction.LEFT);
     setFacingRight(false);
   }
-    
+
   protected void setRandomSide() {
     int side = generator.nextInt(2);
     if (side == 0) {
@@ -47,12 +47,12 @@ public abstract class Enemy extends Entity {
       spawnRight();
     }
   }
-    
+
   protected void setRandomDepth() {
-    topLeftY = 
+    topLeftY =
         generator.nextInt((OptionsHandler.getInstance().getHeight() - getGlobalSpriteHeight()));
   }
-    
+
   protected void setRandomScale(double minScale, double targetScale) {
     this.targetScale = targetScale;
     int rand = generator.nextInt((int)(targetScale - minScale));
@@ -89,15 +89,15 @@ public abstract class Enemy extends Entity {
       default:
     }
   }
-    
+
   public int calculateValue() {
     return (int)(getScaling() * getBaseValue());
   }
 
   public abstract void setDirection(Direction direction);
-  
+
   public abstract double getBaseValue();
-    
+
   public boolean hasBubbles() {
     return false;
   }

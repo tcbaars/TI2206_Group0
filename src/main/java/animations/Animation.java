@@ -70,7 +70,7 @@ public class Animation {
     return hasLooped(1);
   }
 
-  /** 
+  /**
    * If looped.
    */
   public boolean hasLooped(int times) {
@@ -83,9 +83,9 @@ public class Animation {
   /**
    * create.
    */
-  public static Animation createAnimation(String animationKey, String animationUrl, 
+  public static Animation createAnimation(String animationKey, String animationUrl,
       int numberFrames, int frameWidth, int frameHeight, int delay) {
-    ImageHandler.getInstance().loadAnimation(animationKey, animationUrl, numberFrames, frameWidth, 
+    ImageHandler.getInstance().loadAnimation(animationKey, animationUrl, numberFrames, frameWidth,
         frameHeight);
     int initalFrame = 0;
     return new Animation(animationKey, numberFrames, initalFrame, delay);

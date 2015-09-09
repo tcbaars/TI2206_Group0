@@ -27,7 +27,7 @@ public class BackgroundLayer extends Layer {
 
   @Override
   public Graphics2D draw(Graphics2D graphics) {
-    graphics.drawImage(ImageHandler.getInstance().getImage(bgkey), 0, 0, 
+    graphics.drawImage(ImageHandler.getInstance().getImage(bgkey), 0, 0,
         OptionsHandler.getInstance().getWidth(),
         OptionsHandler.getInstance().getHeight(), null);
     return graphics;

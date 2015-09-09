@@ -36,7 +36,7 @@ public abstract class Entity {
   * scaling information
   */
   protected double targetScale;
-  protected double currentScale;    
+  protected double currentScale;
 
   /**
    * Entity.
@@ -46,23 +46,23 @@ public abstract class Entity {
     alive = true;
     visible = true;
     facingRight = true;
-        
+
     initialiseEntity();
     initialiseSprite();
     animation = createAnimation();
   }
-    
-    
+
+
   protected abstract void initialiseEntity();
-  
+
   protected abstract void initialiseSprite();
-  
+
   protected abstract Animation createAnimation();
-  
+
   protected abstract void update();
-  
+
   protected abstract void draw(Graphics2D graphic);
-  
+
 
   /**
    * Update.
@@ -80,21 +80,21 @@ public abstract class Entity {
   public void drawEntity(Graphics2D graphic) {
     if (isAlive()) {
       if (isVisible()) {
-        graphic.drawImage(animation.getCurrentFrame(), getGlobalSpriteX(), getGlobalSpriteY(), 
+        graphic.drawImage(animation.getCurrentFrame(), getGlobalSpriteX(), getGlobalSpriteY(),
             getGlobalSpriteWidth(), getGlobalSpriteHeight(), null);
         draw(graphic);
       }
     }
   }
-    
+
   public boolean isConsumable() {
     return isAlive() && consumable;
   }
-    
+
   public void setConsumable(boolean consumable) {
     this.consumable = consumable;
   }
-    
+
   public boolean isAlive() {
     return alive;
   }
@@ -119,39 +119,39 @@ public abstract class Entity {
   public boolean isFacingRight() {
     return facingRight;
   }
-    
+
   public double getScaling() {
     return currentScale / targetScale;
   }
-    
+
   public int getGlobalSpriteX() {
     return (int)topLeftX;
   }
-    
+
   public int getGlobalSpriteY() {
     return (int)topLeftY;
   }
-    
+
   public int getGlobalEntityX(double centreX) {
     return (int)(centreX - (getGlobalEntityWidth() / 2));
   }
-    
+
   public int getGlobalEntityY(double centreY) {
     return (int)(centreY - (getGlobalEntityHeight() / 2));
   }
-        
+
   public int getGlobalSpriteWidth() {
     return (int)(spriteWidth * getScaling());
   }
-    
+
   public int getGlobalSpriteHeight() {
     return (int)(spriteHeight * getScaling());
   }
-    
+
   public int getGlobalEntityWidth() {
     return (int)(entityWidth * getScaling());
   }
-    
+
   public int getGlobalEntityHeight() {
     return (int)(entityWidth * getScaling());
   }
@@ -160,11 +160,11 @@ public abstract class Entity {
    * Global bounding box.
    */
   public Rectangle getGlobalSpriteBoundingBox() {
-    Rectangle globalSprite = new Rectangle(getGlobalSpriteX(), getGlobalSpriteY(), 
+    Rectangle globalSprite = new Rectangle(getGlobalSpriteX(), getGlobalSpriteY(),
         getGlobalSpriteWidth(), getGlobalSpriteHeight());
     return globalSprite;
   }
-   
+
   /**
    * Box.
    */
@@ -172,7 +172,7 @@ public abstract class Entity {
     Rectangle globalSprite = getGlobalSpriteBoundingBox();
     double centreX = globalSprite.getCenterX();
     double centreY = globalSprite.getCenterY();
-    return new Rectangle(getGlobalEntityX(centreX), getGlobalEntityY(centreY), 
+    return new Rectangle(getGlobalEntityX(centreX), getGlobalEntityY(centreY),
         getGlobalEntityWidth(), getGlobalEntityHeight());
   }
 
@@ -187,7 +187,7 @@ public abstract class Entity {
     }
     return false;
   }
-    
+
   /**
    * Is larger.
    */
@@ -202,7 +202,7 @@ public abstract class Entity {
     }
     return true;
   }
-    
+
   /**
    * handle collison.
    */
@@ -217,10 +217,10 @@ public abstract class Entity {
       }
     }
   }
-    
+
   protected abstract void consume(Entity food);
-    
+
   protected abstract int consumedBy(Entity eater);
-    
-    
+
+
 }

@@ -21,7 +21,7 @@ public abstract class Layer extends JPanel {
    */
   public Layer() {
     super();
-    setPreferredSize( new Dimension(OptionsHandler.getInstance().getWidth(), 
+    setPreferredSize( new Dimension(OptionsHandler.getInstance().getWidth(),
         OptionsHandler.getInstance().getHeight()));
     prev = null;
     next = null;
@@ -73,20 +73,20 @@ public abstract class Layer extends JPanel {
   public void setVisible(boolean visible) {
     this.visible = visible;
   }
-  
+
   public void updateLayer() {
     update();
     updateNext();
   }
-  
+
   protected abstract void update();
-  
+
   private void updateNext() {
     if (next != null) {
       next.updateLayer();
     }
   }
-  
+
   /**
    * Draws the layer to the image.
    */
@@ -96,7 +96,7 @@ public abstract class Layer extends JPanel {
     }
     drawNext(graphic);
   }
-  
+
   protected abstract Graphics2D draw(Graphics2D graphic);
 
   private void drawNext(Graphics2D graphic) {
@@ -104,19 +104,19 @@ public abstract class Layer extends JPanel {
       next.drawLayer(graphic);
     }
   }
-  
+
   public void handleKeyPress(Key key) {
     keyPressed(key);
     passKeyPress(key);
   }
-  
+
   public void handleKeyRelease(Key key) {
     keyReleased(key);
     passKeyRelease(key);
   }
-  
+
   protected abstract void keyPressed(Key key);
-  
+
   protected abstract void keyReleased(Key key);
 
   private void passKeyPress(Key key) {

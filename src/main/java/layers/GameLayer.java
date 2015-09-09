@@ -35,13 +35,13 @@ public class GameLayer extends Layer {
           addLayer(new LoseLayer(game));
           removeLayer();
         }
-      }     
+      }
       deactivate();
       setVisible(false);
       addLayer(new PauseLayer(game));
     } else {
       game.update();
-    }     
+    }
   }
 
   @Override
@@ -65,7 +65,7 @@ public class GameLayer extends Layer {
       case RIGHT:
         game.move(Direction.RIGHT);
         break;
-      default: 
+      default:
     }
   }
 

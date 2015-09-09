@@ -30,7 +30,7 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
   }
 
   private void init() {
-    image = new BufferedImage(OptionsHandler.getInstance().getWidth(), 
+    image = new BufferedImage(OptionsHandler.getInstance().getWidth(),
         OptionsHandler.getInstance().getHeight(), BufferedImage.TYPE_INT_RGB);
     graphic = (Graphics2D) image.getGraphics();
     running = true;
@@ -72,7 +72,7 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
       if (wait < 0) {
         wait = 5;
       }
- 
+
       try {
         Thread.sleep(wait);
       } catch (Exception e) {
@@ -95,16 +95,16 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
    */
   public void drawToScreen() {
     Graphics g2 = getGraphics();
-    g2.drawImage(image, 0, 0, OptionsHandler.getInstance().getWidth(), 
+    g2.drawImage(image, 0, 0, OptionsHandler.getInstance().getWidth(),
         OptionsHandler.getInstance().getHeight(), null);
     g2.dispose();
   }
-  
+
 
   public void keyPressed(KeyEvent keyEvent) {
     handleKeyPress(KeyHandler.convertToKey(keyEvent));
   }
-  
+
   @Override
   protected void keyPressed(Key key) {
   }
@@ -112,7 +112,7 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
   public void keyReleased(KeyEvent keyEvent) {
     handleKeyRelease(KeyHandler.convertToKey(keyEvent));
   }
-  
+
   @Override
   protected void keyReleased(Key key) {
   }

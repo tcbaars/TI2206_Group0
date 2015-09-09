@@ -11,16 +11,16 @@ public class ImageHandler {
   private static ImageHandler instance = new ImageHandler();
   private static HashMap<String, BufferedImage> imageLoader;
   private static HashMap<String, BufferedImage[]> animationLoader;
-  
+
   private ImageHandler() {
     imageLoader = new HashMap<String, BufferedImage>();
     animationLoader = new HashMap<String, BufferedImage[]>();
   }
-  
+
   public static ImageHandler getInstance() {
     return instance;
   }
-  
+
   /**
    * Load single image.
    */
@@ -35,15 +35,15 @@ public class ImageHandler {
       }
     }
   }
-  
+
   public BufferedImage getImage(String imageKey) {
     return imageLoader.get(imageKey);
   }
-  
+
   /**
    * Load a sequence of images.
    */
-  public void loadAnimation(String animationKey, String animationUrl, 
+  public void loadAnimation(String animationKey, String animationUrl,
       int numberFrames, int frameWidth, int frameHeight) {
     if (!animationLoader.containsKey(animationKey)) {
       BufferedImage image;
@@ -61,7 +61,7 @@ public class ImageHandler {
       }
     }
   }
-  
+
   public BufferedImage[] getAnimation(String animationKey) {
     return animationLoader.get(animationKey);
   }

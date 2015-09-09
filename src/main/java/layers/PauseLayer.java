@@ -12,7 +12,7 @@ public class PauseLayer extends Layer{
   private GameHandler game;
   private Color textColor;
   private Font textFont;
-  
+
   /**
    * Layer to display pause screen.
    */
@@ -21,14 +21,14 @@ public class PauseLayer extends Layer{
     textColor = Color.WHITE;
     textFont = new Font("Times New Roman", Font.PLAIN, 16);
   }
-  
+
   @Override
   protected void update() {
     if (!game.isPaused()) {
       removeLayer();
     }
   }
-  
+
   @Override
   public Graphics2D draw(Graphics2D graphic) {
     graphic.setColor(textColor);
@@ -36,18 +36,18 @@ public class PauseLayer extends Layer{
     graphic.drawString("Paused", 20, 20);
     return graphic;
   }
-  
+
   @Override
   public void keyPressed(Key key) {
   }
-  
+
   @Override
   public void keyReleased(Key key) {
     switch (key) {
       case ESC:
         game.resume();
         break;
-      default :
+      default:
     }
   }
 
