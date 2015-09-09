@@ -68,15 +68,14 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
             drawToScreen();
             elapsed = System.nanoTime() - start;
 
-            wait = targetTime - elapsed / 1000000;
-            if (wait < 0) {
-                wait = 5;
-            }
+            wait = targetTime - (elapsed / 1000000);
 
-            try {
-                Thread.sleep(wait);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (wait > 0) {
+                try {
+                    Thread.sleep(wait);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

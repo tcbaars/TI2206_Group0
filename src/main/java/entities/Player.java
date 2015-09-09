@@ -8,20 +8,14 @@ import handlers.OptionsHandler;
 
 public class Player extends Entity {
 
+    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
+
     private final double movespeed = 75;
 
-    private final double entitywidth = 100;
-    private final double entityheight = 50;
-
-    private final double spritewidth = 300;
-    private final double spriteheight = 300;
     private final String animationkey = "Player";
     private final String animationurl = "/sprites/Player.png";
     private final int numberframes = 2;
     private final int animationdely = 10;
-
-    private final double startscale = 20;
-    private final double targetscale = 100;
 
     private int currentScore;
     private int numberFishEaten;
@@ -37,24 +31,24 @@ public class Player extends Entity {
 
     @Override
     protected void initialiseEntity() {
-        entityWidth = entitywidth;
-        entityHeight = entityheight;
+        entityWidth = 100;
+        entityHeight = 50;
     }
 
     @Override
     protected void initialiseSprite() {
         topLeftX = OptionsHandler.getInstance().getWidth() / 2;
         topLeftY = OptionsHandler.getInstance().getHeight() / 2;
-        spriteWidth = spritewidth;
-        spriteHeight = spriteheight;
-        currentScale = startscale;
-        targetScale = targetscale;
+        spriteWidth = 300;
+        spriteHeight = 300;
+        currentScale = 20;
+        targetScale = 100;
     }
 
     @Override
     protected Animation createAnimation() {
-        return Animation.createAnimation(animationkey, animationurl, numberframes, (int) spritewidth,
-                (int) spriteheight, animationdely);
+        return Animation.createAnimation(animationkey, animationurl, numberframes, (int) spriteWidth,
+                (int) spriteHeight, animationdely);
     }
 
     @Override
@@ -66,19 +60,27 @@ public class Player extends Entity {
     }
 
     public void moveUp() {
-        topLeftY -= movespeed;
+        if ((topLeftY - movespeed) > 0) {
+            topLeftY -= movespeed;
+        }
     }
 
     public void moveDown() {
-        topLeftY += movespeed;
+        if ((topLeftY + movespeed) < _optionsHandler.getHeight()) {
+            topLeftY += movespeed;
+        }
     }
 
     public void moveLeft() {
-        topLeftX -= movespeed;
+        if ((topLeftX - movespeed) > 0) {
+            topLeftX -= movespeed;
+        }
     }
 
     public void moveRight() {
-        topLeftX += movespeed;
+        if ((topLeftX + movespeed) < _optionsHandler.getWidth()) {
+            topLeftX += movespeed;
+        }
     }
 
     /**
