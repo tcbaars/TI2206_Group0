@@ -1,37 +1,43 @@
 package layers;
 
-import java.awt.Graphics2D;
 import enumerations.Key;
 import handlers.ImageHandler;
 import handlers.OptionsHandler;
 
+import java.awt.Graphics2D;
+
+
 public class BackgroundLayer extends Layer {
 
-    private final String BGKEY = "background";
-    private final String BGURL = "/backgrounds/Background.png";
+  private final String bgkey = "background";
+  private final String bgurl = "/backgrounds/Background.png";
 
-    public BackgroundLayer() {
-        super();
-        ImageHandler.getInstance().loadImage(BGKEY, BGURL);
-        addLayer(new TitleLayer());
-    }
+  /**
+   * Background.
+   */
+  public BackgroundLayer() {
+    super();
+    ImageHandler.getInstance().loadImage(bgkey, bgurl);
+    addLayer(new TitleLayer());
+  }
 
-    @Override
-    public void update() {
-    }
+  @Override
+  public void update() {
+  }
 
-    @Override
-    public Graphics2D draw(Graphics2D g) {
-        g.drawImage(ImageHandler.getInstance().getImage(BGKEY), 0, 0, OptionsHandler.getInstance().getWidth(),
-                OptionsHandler.getInstance().getHeight(), null);
-        return g;
-    }
+  @Override
+  public Graphics2D draw(Graphics2D graphics) {
+    graphics.drawImage(ImageHandler.getInstance().getImage(bgkey), 0, 0, 
+        OptionsHandler.getInstance().getWidth(),
+        OptionsHandler.getInstance().getHeight(), null);
+    return graphics;
+  }
 
-    @Override
-    public void keyPressed(Key e) {
-    }
+  @Override
+  public void keyPressed(Key key) {
+  }
 
-    @Override
-    public void keyReleased(Key e) {
-    }
+  @Override
+  public void keyReleased(Key key) {
+  }
 }
