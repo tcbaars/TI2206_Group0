@@ -1,41 +1,40 @@
 package handlers;
 
-import enumerations.Direction;
-
 import java.awt.Graphics2D;
+
+import enumerations.Direction;
 
 public abstract class GameHandler {
 
+    protected boolean paused;
 
-  protected boolean paused;
+    public GameHandler() {
+        newGame();
+    }
 
-  public GameHandler() {
-    newGame();
-  }
+    protected abstract void newGame();
 
-  protected abstract void newGame();
+    public boolean isPaused() {
+        return paused;
+    }
 
-  public boolean isPaused() {
-    return paused;
-  }
+    public void pause() {
+        paused = true;
+    }
 
-  public void pause() {
-    paused = true;
-  }
+    public void resume() {
+        paused = false;
+    }
 
-  public void resume() {
-    paused = false;
-  }
+    public abstract void update();
 
-  public abstract void update();
+    public abstract void draw(Graphics2D graphic);
 
-  public abstract void draw(Graphics2D graphic);
+    public abstract void drawHud(Graphics2D graphic);
 
-  public abstract void drawHud(Graphics2D graphic);
+    public abstract void move(Direction drawing);
 
-  public abstract void move(Direction drawing);
+    public abstract boolean isGameOver();
 
-  public abstract boolean isGameOver();
-
-  public abstract boolean isGameWon();
+    public abstract boolean isGameWon();
 }
