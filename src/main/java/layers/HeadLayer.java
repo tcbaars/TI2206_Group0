@@ -68,15 +68,14 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
             drawToScreen();
             elapsed = System.nanoTime() - start;
 
-            wait = targetTime - elapsed / 1000000;
-            if (wait < 0) {
-                wait = 5;
-            }
+            wait = targetTime - (elapsed / 1000000);
 
-            try {
-                Thread.sleep(wait);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (wait > 0) {
+                try {
+                    Thread.sleep(wait);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -101,7 +100,11 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
     }
 
     public void keyPressed(KeyEvent keyEvent) {
-        handleKeyPress(KeyHandler.convertToKey(keyEvent));
+        Key key = KeyHandler.convertToKey(keyEvent);
+
+        if (key != null) {
+            handleKeyPress(KeyHandler.convertToKey(keyEvent));
+        }
     }
 
     @Override
@@ -109,7 +112,11 @@ public class HeadLayer extends Layer implements Runnable, KeyListener {
     }
 
     public void keyReleased(KeyEvent keyEvent) {
-        handleKeyRelease(KeyHandler.convertToKey(keyEvent));
+        Key key = KeyHandler.convertToKey(keyEvent);
+
+        if (key != null) {
+            handleKeyRelease(KeyHandler.convertToKey(keyEvent));
+        }
     }
 
     @Override
