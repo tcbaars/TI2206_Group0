@@ -13,11 +13,11 @@ public class Player extends Entity {
     private final double entitywidth = 100;
     private final double entityheight = 50;
 
-    private final double spritewidth = 300;
-    private final double spriteheight = 300;
+    private final double spritewidth = 496;
+    private final double spriteheight = 369;
     private final String animationkey = "Player";
     private final String animationurl = "/sprites/Player.png";
-    private final int numberframes = 2;
+    private final int numberframes = 1;
     private final int animationdely = 10;
 
     private final double startscale = 20;
