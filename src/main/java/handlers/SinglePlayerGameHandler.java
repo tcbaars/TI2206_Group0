@@ -31,10 +31,10 @@ public class SinglePlayerGameHandler extends GameHandler {
      */
     private final Color scorefill = Color.WHITE;
     private final Color scoreoutline = Color.BLACK;
-    private final float scoreoutlinesize = 2;
+    private final static float scoreoutlinesize = 2;
     private final Font scorefont = new Font("Times New Roman", Font.BOLD, 70);
 
-    private final int yscore = 100;
+    private final static int yscore = 100;
 
     /**
      * Creates a new single player game.

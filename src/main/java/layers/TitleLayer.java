@@ -23,16 +23,16 @@ public class TitleLayer extends Layer {
     /*
      * Appearance options of the title to be displayed
      */
-    private final String titletext = "FISHY GAME";
+    private final static String titletext = "FISHY GAME";
     private final Color titlefill = Color.WHITE;
     private final Color titleoutline = Color.BLACK;
-    private final float titleoutlinesize = 2;
+    private final static float titleoutlinesize = 2;
     private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
 
     /*
      * The Y-coordinate of the title
      */
-    private final int ytitle = 150;
+    private final static int ytitle = 150;
 
     /*
      * Appearance options of the title options to be displayed
@@ -40,15 +40,15 @@ public class TitleLayer extends Layer {
     private final Color optionfill = Color.WHITE;
     private final Color optionoutline = Color.BLACK;
     private final Color selectedfill = Color.YELLOW;
-    private final float optionoutlinesize = 1;
+    private final static float optionoutlinesize = 1;
     private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     /*
      * The Y-coordinate of the first option
      * and the offset for the following options
      */
-    private final int yoption = 350;
-    private final int yoptionstep = 100;
+    private final static int yoption = 350;
+    private final static int yoptionstep = 100;
 
     /**
      * Create a new title screen.

@@ -14,37 +14,37 @@ public class InstructionsLayer extends Layer {
     /*
      * Appearance options of the title to be displayed
      */
-    private final String titletext = "INSTRUCTIONS";
+    private final static String titletext = "INSTRUCTIONS";
     private final Color titlefill = Color.WHITE;
     private final Color titleoutline = Color.BLACK;
-    private final float titleoutlinesize = 2;
+    private final static float titleoutlinesize = 2;
     private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
 
     /*
     * Appearance options of the text to be displayed
     */
-    private final String[] text = {"Eat smaller fish to grow bigger", "Avoid larger fish",
-                            "The larger the fish, the more points", "you receive when eating"};
+    private final String[] text = {"Eat smaller fish to grow bigger.", "Avoid larger fish.",
+                            "The larger the fish, the more points", "you receive when eating."};
     private final String[] text2 = {"to move", "to pause the game", "to toggle sound", "to toggle music"};
     private final Font textfont = new Font("Times New Roman", Font.BOLD, 50);
 
     /*
      * The coordinates for the text
      */
-    private final int ytitle = 125;
-    private final int yoption = 700;
-    private final int ytext = 200;
-    private final int ytextstep = 50;
+    private final static int ytitle = 125;
+    private final static int yoption = 700;
+    private final static int ytext = 200;
+    private final static int ytextstep = 50;
     private final int ytext2 = ytext + ytextstep * text.length + 25;
-    private final int ytext2step = 60;
+    private final static int ytext2step = 60;
 
     /*
      * Appearance options of the options to be displayed
      */
-    private final String optiontext = "BACK";
+    private final static String optiontext = "BACK";
     private final Color selectedfill = Color.YELLOW;
     private final Color optionoutline = Color.BLACK;
-    private final float optionoutlinesize = 1;
+    private final static float optionoutlinesize = 1;
     private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     /*

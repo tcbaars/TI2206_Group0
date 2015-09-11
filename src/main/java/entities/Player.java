@@ -10,12 +10,12 @@ public class Player extends Entity {
 
     private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
 
-    private final double movespeed = 75;
+    private final static double movespeed = 75;
 
-    private final String animationkey = "Player";
-    private final String animationurl = "/sprites/Player.png";
-    private final int numberframes = 2;
-    private final int animationdely = 10;
+    private final static String animationkey = "Player";
+    private final static String animationurl = "/sprites/Player.png";
+    private final static int numberframes = 2;
+    private final static int animationdelay = 10;
 
     private int currentScore;
     private int numberFishEaten;
@@ -37,8 +37,8 @@ public class Player extends Entity {
 
     @Override
     protected void initialiseSprite() {
-        topLeftX = OptionsHandler.getInstance().getWidth() / 2;
-        topLeftY = OptionsHandler.getInstance().getHeight() / 2;
+        topLeftX = OptionsHandler.getInstance().getWidth() / 2.0;
+        topLeftY = OptionsHandler.getInstance().getHeight() / 2.0;
         spriteWidth = 300;
         spriteHeight = 300;
         currentScale = 20;
@@ -48,7 +48,7 @@ public class Player extends Entity {
     @Override
     protected Animation createAnimation() {
         return Animation.createAnimation(animationkey, animationurl, numberframes, (int) spriteWidth,
-                (int) spriteHeight, animationdely);
+                (int) spriteHeight, animationdelay);
     }
 
     @Override

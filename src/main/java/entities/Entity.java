@@ -131,11 +131,11 @@ public abstract class Entity {
     }
 
     public int getGlobalEntityX(double centreX) {
-        return (int) (centreX - (getGlobalEntityWidth() / 2));
+        return (int) (centreX - (getGlobalEntityWidth() / 2.0));
     }
 
     public int getGlobalEntityY(double centreY) {
-        return (int) (centreY - (getGlobalEntityHeight() / 2));
+        return (int) (centreY - (getGlobalEntityHeight() / 2.0));
     }
 
     public int getGlobalSpriteWidth() {
@@ -151,7 +151,7 @@ public abstract class Entity {
     }
 
     public int getGlobalEntityHeight() {
-        return (int) (entityWidth * getScaling());
+        return (int) (entityHeight * getScaling());
     }
 
     /**
