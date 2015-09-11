@@ -3,6 +3,7 @@ package layers;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.GameHandler;
+import handlers.OptionsHandler;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -73,6 +74,16 @@ public class PauseLayer extends Layer{
 
     @Override
     public Graphics2D draw(Graphics2D graphic) {
+
+        // Draw the opacity background square
+        int screenWidth = OptionsHandler.getInstance().getWidth();
+        final int rectWidth = 350;
+        final int alphaValue = 192;
+
+        graphic.setColor(new Color(0, 0, 0, alphaValue));
+        graphic.fillRoundRect(screenWidth / 2 - rectWidth, ytitle - 100, // Start
+                rectWidth *2, yoption + yoptionstep * options.length + 50 - ytitle, // End
+                50, 50); // Corners
 
         // Draw the title
         FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline, titleoutlinesize, ytitle);
