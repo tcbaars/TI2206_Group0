@@ -138,7 +138,7 @@ public class SinglePlayerGameHandler extends GameHandler {
     /**
      * Draws the current entities in the single player game to the specified 2-dimensional 'image'.
      *
-     * @param graphics the 2-dimensional image
+     * @param graphic the 2-dimensional image
      */
     @Override
     public void draw(Graphics2D graphic) {
@@ -150,7 +150,7 @@ public class SinglePlayerGameHandler extends GameHandler {
     /**
      * Draws the HUD used to display game information to the player.
      *
-     * @param the 2-dimensional image
+     * @param graphic 2-dimensional image
      */
     @Override
     public void drawHud(Graphics2D graphic) {
