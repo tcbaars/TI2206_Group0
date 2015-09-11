@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 public class ImageHandler {
 
     private static ImageHandler instance = new ImageHandler();
-    private static HashMap<String, BufferedImage> imageLoader;
-    private static HashMap<String, BufferedImage[]> animationLoader;
+    private HashMap<String, BufferedImage> imageLoader;
+    private HashMap<String, BufferedImage[]> animationLoader;
 
     private ImageHandler() {
         imageLoader = new HashMap<String, BufferedImage>();
@@ -52,7 +52,7 @@ public class ImageHandler {
                 BufferedImage[] frames = new BufferedImage[numberFrames];
                 int startX;
                 for (int i = 0; i < numberFrames; i++) {
-                    startX = 0 + (i * frameWidth);
+                    startX = i * frameWidth;
                     frames[i] = image.getSubimage(startX, 0, frameWidth, frameHeight);
                 }
                 animationLoader.put(animationKey, frames);

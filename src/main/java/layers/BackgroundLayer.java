@@ -8,8 +8,8 @@ import handlers.OptionsHandler;
 
 public class BackgroundLayer extends Layer {
 
-    private final String bgkey = "background";
-    private final String bgurl = "/backgrounds/Background.png";
+    private final static String bgkey = "background";
+    private final static String bgurl = "/backgrounds/Background.png";
 
     /**
      * Background.

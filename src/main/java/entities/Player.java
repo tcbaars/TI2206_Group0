@@ -8,20 +8,13 @@ import handlers.OptionsHandler;
 
 public class Player extends Entity {
 
-    private final double movespeed = 75;
+    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
 
-    private final double entitywidth = 1280;
-    private final double entityheight = 570;
-
-    private final double spritewidth = 1300;
-    private final double spriteheight = 600;
-    private final String animationkey = "Player";
-    private final String animationurl = "/sprites/Player.png";
-    private final int numberframes = 12;
-    private final int animationdely = 10;
-
-    private final double startscale = 100;
-    private final double targetscale = 1000;
+    private final static double movespeed = 75;
+    private final static String animationkey = "Player";
+    private final static String animationurl = "/sprites/Player.png";
+    private final static int numberframes = 12;
+    private final static int animationdelay = 10;
 
     private int currentScore;
     private int numberFishEaten;
@@ -37,25 +30,25 @@ public class Player extends Entity {
 
     @Override
     protected void initialiseEntity() {
-        entityWidth = entitywidth;
-        entityHeight = entityheight;
+        entityWidth = 1280;
+        entityHeight = 570;
     }
 
     @Override
     protected void initialiseSprite() {
-        topLeftX = OptionsHandler.getInstance().getWidth() / 2;
-        topLeftY = OptionsHandler.getInstance().getHeight() / 2;
-        spriteWidth = spritewidth;
-        spriteHeight = spriteheight;
-        currentScale = startscale;
-        targetScale = targetscale;
-        System.out.println("Sclaing: " + this.getScaling());
+        topLeftX = OptionsHandler.getInstance().getWidth() / 2.0;
+        topLeftY = OptionsHandler.getInstance().getHeight() / 2.0;
+        spriteWidth = 1300;
+        spriteHeight = 600;
+        currentScale = 100;
+        targetScale = 1000;
+        System.out.println("Scaling: " + this.getScaling());
     }
 
     @Override
     protected Animation createAnimation() {
-        return Animation.createAnimation(animationkey, animationurl, numberframes, (int) spritewidth,
-                (int) spriteheight, animationdely);
+        return Animation.createAnimation(animationkey, animationurl, numberframes, (int) spriteWidth,
+                (int) spriteHeight, animationdelay);
     }
 
     @Override
@@ -67,19 +60,27 @@ public class Player extends Entity {
     }
 
     public void moveUp() {
-        topLeftY -= movespeed;
+        if ((topLeftY - movespeed) > 0) {
+            topLeftY -= movespeed;
+        }
     }
 
     public void moveDown() {
-        topLeftY += movespeed;
+        if ((topLeftY + movespeed) < _optionsHandler.getHeight()) {
+            topLeftY += movespeed;
+        }
     }
 
     public void moveLeft() {
-        topLeftX -= movespeed;
+        if ((topLeftX - movespeed) > 0) {
+            topLeftX -= movespeed;
+        }
     }
 
     public void moveRight() {
-        topLeftX += movespeed;
+        if ((topLeftX + movespeed) < _optionsHandler.getWidth()) {
+            topLeftX += movespeed;
+        }
     }
 
     /**

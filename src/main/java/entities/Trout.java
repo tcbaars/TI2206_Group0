@@ -8,22 +8,19 @@ import enumerations.Direction;
 
 public class Trout extends Enemy {
 
-    private final double movespeed = 10;
-    private final double basevalue = 10;
-
-    private final double entitywidth = 1300;
-    private final double entityheight = 524;
-
-    private final double spritewidth = 1300;
-    private final double spriteheight = 600;
-    private final String animationkey = "Trout";
-    private final String animationurl = "/sprites/Trout.png";
-    private final int numberframes = 12;
-    private final int animationdelay = 10;
-
-    private final double minscale = 750;
-    private final double maxscale = 2000;
-    private final double targetscale = 10000;
+    private final static double movespeed = 10;
+    private final static double basevalue = 10;
+    private final static double entitywidth = 1300;
+    private final static double entityheight = 524;
+    private final static double spritewidth = 1300;
+    private final static double spriteheight = 600;
+    private final static String animationkey = "Trout";
+    private final static String animationurl = "/sprites/Trout.png";
+    private final static int numberframes = 12;
+    private final static int animationdelay = 10;
+    private final static double minscale = 750;
+    private final static double maxscale = 2000;
+    private final static double targetscale = 10000;
 
     private Direction movingDirection;
 
