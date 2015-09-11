@@ -4,11 +4,11 @@ public class OptionsHandler {
 
     private static OptionsHandler instance = new OptionsHandler();
 
-    private final int width = 640;
-    private final int height = 360;
+    private final static int width = 640;
+    private final static int height = 360;
     private int scale;
 
-    private final int targetfps = 60;
+    private final static int targetfps = 60;
 
     private boolean music;
     private boolean sound;

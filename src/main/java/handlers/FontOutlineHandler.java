@@ -60,9 +60,9 @@ public class FontOutlineHandler {
     public static void drawTextCenterWidth(Graphics2D graphic, Font font, String text, Color fillColor, Color outlineColor, float outlineSize, int startY){
         // Gets the estimated width of the text
         double textWidth = getFontWidth(graphic, font, text);
-        double centerScreen = OptionsHandler.getInstance().getWidth() / 2;
+        double centerScreen = OptionsHandler.getInstance().getWidth() / 2.0;
         // Gets the horizontal centre of the screen adjusting for the width of the text
-        int startX = (int) (centerScreen - (textWidth / 2));
+        int startX = (int) (centerScreen - (textWidth / 2.0));
         drawText(graphic, font, text, fillColor, outlineColor, outlineSize, startX, startY);
     }
 

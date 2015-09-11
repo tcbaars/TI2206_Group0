@@ -10,20 +10,20 @@ public abstract class Enemy extends Entity {
     protected Random generator;
     protected double moveSpeed;
 
-    private boolean bubblesBlown;
-    private int maxBubbles;
-    private int currentBubbles;
-    private Bubble[] bubbles;
+    //private boolean bubblesBlown;
+    //private int maxBubbles;
+    //private int currentBubbles;
+    //private Bubble[] bubbles;
 
     /**
      * enemy.
      */
     public Enemy() {
         super();
-        bubblesBlown = false;
-        maxBubbles = 3;
-        currentBubbles = 0;
-        bubbles = new Bubble[maxBubbles];
+        //maxBubbles = 3;
+        //bubblesBlown = false;
+        //currentBubbles = 0;
+        //bubbles = new Bubble[maxBubbles];
     }
 
     protected void spawnLeft() {
