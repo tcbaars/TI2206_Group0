@@ -29,14 +29,14 @@ public abstract class EntityTest {
             return 0;
         }
     };
-
+    /*
     @Test
     public void constructorTest() {
         assertTrue(test.isConsumable());
         assertTrue(test.isAlive());
         assertTrue(test.isVisible());
         assertTrue(test.isFacingRight());
-    }
+    }*/
 
 /*    @Test
     public void updateEntityTest() {
