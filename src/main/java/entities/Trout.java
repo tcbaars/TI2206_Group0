@@ -21,8 +21,9 @@ public class Trout extends Enemy {
     private final int numberframes = 12;
     private final int animationdelay = 10;
 
-    private final double minscale = 20;
-    private final double maxscale = 100;
+    private final double minscale = 750;
+    private final double maxscale = 2000;
+    private final double targetscale = 10000;
 
     private Direction movingDirection;
 
@@ -35,6 +36,7 @@ public class Trout extends Enemy {
         entityWidth = entitywidth;
         entityHeight = entityheight;
         moveSpeed = movespeed;
+        targetScale = targetscale;
     }
 
     @Override

@@ -20,8 +20,8 @@ public class Player extends Entity {
     private final int numberframes = 12;
     private final int animationdely = 10;
 
-    private final double startscale = 20;
-    private final double targetscale = 100;
+    private final double startscale = 100;
+    private final double targetscale = 1000;
 
     private int currentScore;
     private int numberFishEaten;
@@ -49,6 +49,7 @@ public class Player extends Entity {
         spriteHeight = spriteheight;
         currentScale = startscale;
         targetScale = targetscale;
+        System.out.println("Sclaing: " + this.getScaling());
     }
 
     @Override

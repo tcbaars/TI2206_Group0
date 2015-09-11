@@ -51,9 +51,8 @@ public abstract class Enemy extends Entity {
         topLeftY = generator.nextInt((OptionsHandler.getInstance().getHeight() - getGlobalSpriteHeight()));
     }
 
-    protected void setRandomScale(double minScale, double targetScale) {
-        this.targetScale = targetScale;
-        int rand = generator.nextInt((int) (targetScale - minScale));
+    protected void setRandomScale(double minScale, double maxScale) {
+        int rand = generator.nextInt((int) (maxScale - minScale));
         currentScale = rand + minScale;
     }
 
