@@ -2,6 +2,8 @@ package layers;
 
 import enumerations.Key;
 import handlers.FontOutlineHandler;
+import handlers.ImageHandler;
+import handlers.OptionsHandler;
 
 import java.awt.*;
 
@@ -43,6 +45,13 @@ public class InstructionsLayer extends Layer {
     private final float optionoutlinesize = 1;
     private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
+    /*
+    * The locations to the icons
+    */
+    private final String[] imageKey = {"arrowKey", "escKey", "mKey", "sKey"};
+    private final String[] imageUrl = {"/sprites/icons/arrowKeys.png", "/sprites/icons/escKey.png",
+                                        "/sprites/icons/mKey.png", "/sprites/icons/sKey.png"};
+
     public InstructionsLayer(){
         super();
     }
@@ -58,6 +67,12 @@ public class InstructionsLayer extends Layer {
     @Override
     public Graphics2D draw(Graphics2D graphic) {
 
+        // Load images from disk
+        ImageHandler handler = ImageHandler.getInstance();
+        for (int i = 0; i < imageKey.length; i++) {
+            handler.loadImage(imageKey[i], imageUrl[i]);
+        }
+
         // Title
         FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline,
                                                 titleoutlinesize, ytitle);
@@ -72,6 +87,7 @@ public class InstructionsLayer extends Layer {
         for (int i = 0; i < text2.length; i++) {
             FontOutlineHandler.drawTextCenterWidth(graphic, textfont, text2[i], titlefill, optionoutline,
                                                     optionoutlinesize, ytext2 + ytext2step * i);
+            graphic.drawImage(ImageHandler.getInstance().getImage(imageKey[i]), 350, ytext2 + ytext2step * i - 45, 60, 60, null);
         }
 
         // Back key
