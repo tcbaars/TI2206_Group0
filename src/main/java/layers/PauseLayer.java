@@ -9,47 +9,114 @@ import java.awt.Graphics2D;
 
 public class PauseLayer extends Layer{
 
-  private GameHandler game;
-  private Color textColor;
-  private Font textFont;
+    private GameHandler game;
 
-  /**
-   * Layer to display pause screen.
-   */
-  public PauseLayer(GameHandler game) {
-    this.game = game;
-    textColor = Color.WHITE;
-    textFont = new Font("Times New Roman", Font.PLAIN, 16);
-  }
+    /*
+     * The selected options index and list of options available
+     */
+    private int selected;
+    private final String[] options = {"Resume Game", "Title Screen", "Exit"};
 
-  @Override
-  protected void update() {
-    if (!game.isPaused()) {
-      removeLayer();
+    /*
+     * Appearance options of the title to be displayed
+     */
+    private final String titletext = "PAUSED";
+    private final Color titlefill = Color.WHITE;
+    private final Color titleoutline = Color.BLACK;
+    private final float titleoutlinesize = 2;
+    private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
+
+    /*
+     * Appearance options of the paused options to be displayed
+     */
+    private final Color optionfill = Color.WHITE;
+    private final Color optionoutline = Color.BLACK;
+    private final Color selectedfill = Color.YELLOW;
+    private final float optionoutlinesize = 1;
+    private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
+
+    /*
+     * The coordinates for the title/options
+     */
+    private final int ytitle = 150;
+    private final int yoption = 350;
+    private final int yoptionstep = 100;
+
+    /**
+     * Layer to display pause screen.
+     */
+    public PauseLayer(GameHandler game) {
+        this.game = game;
+        selected = 0;
     }
-  }
 
-  @Override
-  public Graphics2D draw(Graphics2D graphic) {
-    graphic.setColor(textColor);
-    graphic.setFont(textFont);
-    graphic.drawString("Paused", 20, 20);
-    return graphic;
-  }
-
-  @Override
-  public void keyPressed(Key key) {
-  }
-
-  @Override
-  public void keyReleased(Key key) {
-    switch (key) {
-      case ESC:
-        game.resume();
-        break;
-      default:
+    private void select() {
+        switch(selected) {
+            case 0: game.resume(); // Resume
+                    break;
+            case 1: addLayer(new TitleLayer()); // Title Screen
+                    removeLayer();
+                    break;
+            case 2: System.exit(0); // Exit
+                    break;
+            default: break;
+        }
     }
-  }
 
+    @Override
+    protected void update() {
+        if (!game.isPaused()) {
+            removeLayer();
+        }
+    }
 
+    @Override
+    public Graphics2D draw(Graphics2D graphic) {
+        graphic.drawString("Paused", 20, 20);
+        return graphic;
+    }
+
+    /**
+     * Handles keys pressed by the player.
+     *
+     * @param key the key pressed
+     */
+    @Override
+    public void keyPressed(Key key) {
+        switch (key) {
+        /*
+         *  Change the current selection according to what directional key is pressed
+         *  Making sure to stay within the bounds of the options available
+         */
+            case UP:
+            case LEFT:
+                selected = selected - 1;
+                if (selected < 0) {
+                    selected = options.length - 1;
+                }
+                break;
+            case DOWN:
+            case RIGHT:
+                selected = (selected + 1) % options.length;
+                break;
+            // Press the Enter to confirm the selected option
+            case ENTER:
+                select();
+                break;
+            case ESC:
+                game.resume();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Handles keys no longer pressed by the payer.
+     *
+     * @param key the key released
+     */
+    @Override
+    public void keyReleased(Key key) {
+    }
 }
