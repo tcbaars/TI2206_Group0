@@ -1,6 +1,7 @@
 package layers;
 
 import enumerations.Key;
+import handlers.FontOutlineHandler;
 import handlers.GameHandler;
 
 import java.awt.Color;
@@ -72,7 +73,22 @@ public class PauseLayer extends Layer{
 
     @Override
     public Graphics2D draw(Graphics2D graphic) {
-        graphic.drawString("Paused", 20, 20);
+
+        // Draw the title
+        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline, titleoutlinesize, ytitle);
+
+        // Draw each option
+        for(int i = 0; i < options.length; i++){
+            // Highlights the option selected
+            if (i == selected) {
+                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], selectedfill, optionoutline,
+                        optionoutlinesize, (yoption + (yoptionstep * i)));
+            } else {
+                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], optionfill, optionoutline,
+                        optionoutlinesize, (yoption + (yoptionstep * i)));
+            }
+        }
+
         return graphic;
     }
 
