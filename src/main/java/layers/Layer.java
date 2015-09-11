@@ -29,6 +29,10 @@ public abstract class Layer extends JPanel {
         visible = true;
     }
 
+    public Layer getPrevious(){
+        return prev;
+    }
+
     private void setPrevious(Layer prev) {
         this.prev = prev;
     }
