@@ -28,13 +28,8 @@ public class GameLayer extends Layer {
 
         if (game.isPaused()) {
             if (game.isGameOver()) {
-                if (game.isGameWon()) {
-                    addLayer(new WinLayer(game));
-                    removeLayer();
-                } else {
-                    addLayer(new LoseLayer(game));
-                    removeLayer();
-                }
+                addLayer(new FinishLayer(game.getScore(), game.isGameWon()));
+                removeLayer();
             }
             deactivate();
             setVisible(false);

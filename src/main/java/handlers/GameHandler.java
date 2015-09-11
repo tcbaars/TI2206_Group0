@@ -37,4 +37,6 @@ public abstract class GameHandler {
     public abstract boolean isGameOver();
 
     public abstract boolean isGameWon();
+
+    public abstract int getScore();
 }

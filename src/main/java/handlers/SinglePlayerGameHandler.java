@@ -167,4 +167,8 @@ public class SinglePlayerGameHandler extends GameHandler {
     public void move(Direction direction) {
         player.move(direction);
     }
+
+    public int getScore() {
+        return player.getScore();
+    }
 }
