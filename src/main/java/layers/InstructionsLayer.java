@@ -73,6 +73,16 @@ public class InstructionsLayer extends Layer {
             handler.loadImage(imageKey[i], imageUrl[i]);
         }
 
+        // Draw the opacity background square
+        int screenWidth = OptionsHandler.getInstance().getWidth();
+        final int rectWidth = 450;
+        final int alphaValue = 192;
+
+        graphic.setColor(new Color(0, 0, 0, alphaValue));
+        graphic.fillRoundRect(screenWidth / 2 - rectWidth, ytitle - 100, // Start
+                rectWidth * 2, yoption - 10, // End
+                50, 50); // Corners
+
         // Title
         FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline,
                                                 titleoutlinesize, ytitle);
