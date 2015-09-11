@@ -9,7 +9,7 @@ import handlers.OptionsHandler;
 public class BackgroundLayer extends Layer {
 
     private final String bgkey = "background";
-    private final String bgurl = "/backgrounds/Background.png";
+    private final String bgurl = "/backgrounds/background2.png";
 
     /**
      * Background.
