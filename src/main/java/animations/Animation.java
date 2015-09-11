@@ -17,10 +17,7 @@ public class Animation {
     private int timesLooped;
 
     private Animation(String animationKey, int numberFrames, int startFrame, int delay) {
-        frames = ImageHandler.getInstance().getAnimation(animationKey); // getNaimation
-                                                                        // may
-                                                                        // be
-                                                                        // null
+        frames = ImageHandler.getInstance().getAnimation(animationKey); // getAnimation may be null
         this.numberFrames = numberFrames;
         this.startFrame = currentFrame = startFrame;
         this.delay = delay;
@@ -28,7 +25,7 @@ public class Animation {
         timesLooped = 0;
     }
 
-    public void setNumerFrames(int numberFrames) {
+    public void setNumberFrames(int numberFrames) {
         this.numberFrames = numberFrames;
     }
 
@@ -40,7 +37,7 @@ public class Animation {
         this.currentFrame = currentFrame;
     }
 
-    public void setDely(int delay) {
+    public void setDelay(int delay) {
         this.delay = delay;
     }
 
@@ -77,10 +74,7 @@ public class Animation {
      * If looped.
      */
     public boolean hasLooped(int times) {
-        if (delay != 0) {
-            return timesLooped >= times;
-        }
-        return true;
+        return delay == 0 || timesLooped >= times;
     }
 
     /**
