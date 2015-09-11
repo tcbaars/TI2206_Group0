@@ -11,14 +11,14 @@ public class Trout extends Enemy {
     private final double movespeed = 10;
     private final double basevalue = 10;
 
-    private final double entitywidth = 100;
-    private final double entityheight = 50;
+    private final double entitywidth = 1300;
+    private final double entityheight = 524;
 
-    private final double spritewidth = 640;
-    private final double spriteheight = 320;
+    private final double spritewidth = 1300;
+    private final double spriteheight = 600;
     private final String animationkey = "Trout";
     private final String animationurl = "/sprites/Trout.png";
-    private final int numberframes = 1;
+    private final int numberframes = 12;
     private final int animationdelay = 10;
 
     private final double minscale = 20;
