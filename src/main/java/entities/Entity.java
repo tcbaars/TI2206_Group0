@@ -233,9 +233,8 @@ public abstract class Entity {
      * Global bounding box.
      */
     public Rectangle getGlobalSpriteBoundingBox() {
-        Rectangle globalSprite = new Rectangle(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
+        return new Rectangle(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
                 getGlobalSpriteHeight());
-        return globalSprite;
     }
 
     /**
