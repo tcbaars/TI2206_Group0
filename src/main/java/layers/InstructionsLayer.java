@@ -21,6 +21,7 @@ public class InstructionsLayer extends Layer {
     */
     private final String[] text = {"Eat smaller fish to grow bigger", "Avoid larger fish",
                             "The larger the fish, the more points", "you receive when eating"};
+    private final String[] text2 = {"to move", "to pause the game", "to toggle sound", "to toggle music"};
     private final Font textfont = new Font("Times New Roman", Font.BOLD, 50);
 
     /*
@@ -30,6 +31,8 @@ public class InstructionsLayer extends Layer {
     private final int yoption = 700;
     private final int ytext = 200;
     private final int ytextstep = 50;
+    private final int ytext2 = ytext + ytextstep * text.length + 25;
+    private final int ytext2step = 60;
 
     /*
      * Appearance options of the options to be displayed
@@ -63,6 +66,12 @@ public class InstructionsLayer extends Layer {
         for (int i = 0; i < text.length; i++) {
             FontOutlineHandler.drawTextCenterWidth(graphic, textfont, text[i], titlefill, optionoutline,
                                                     optionoutlinesize, ytext + ytextstep * i);
+        }
+
+        // Key explanation
+        for (int i = 0; i < text2.length; i++) {
+            FontOutlineHandler.drawTextCenterWidth(graphic, textfont, text2[i], titlefill, optionoutline,
+                                                    optionoutlinesize, ytext2 + ytext2step * i);
         }
 
         // Back key
