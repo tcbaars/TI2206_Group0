@@ -4,7 +4,9 @@ import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.OptionsHandler;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 
 /**
  * The TitleLayer class represents the title screen of the game.

@@ -5,7 +5,9 @@ import handlers.FontOutlineHandler;
 import handlers.ImageHandler;
 import handlers.OptionsHandler;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 
 public class InstructionsLayer extends Layer {
 
