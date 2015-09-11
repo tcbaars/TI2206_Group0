@@ -56,8 +56,12 @@ public abstract class Enemy extends Entity {
         currentScale = rand + minScale;
     }
 
+    private double getGlobalMoveSpeed(){
+        return moveSpeed / getScaling();
+    }
+
     private void moveLeft() {
-        topLeftX = topLeftX - moveSpeed;
+        topLeftX = topLeftX - getGlobalMoveSpeed();
         // If off-screen kill it
         if (topLeftX < (0 - getGlobalSpriteWidth())) {
             kill();
@@ -65,7 +69,7 @@ public abstract class Enemy extends Entity {
     }
 
     private void moveRight() {
-        topLeftX = topLeftX + moveSpeed;
+        topLeftX = topLeftX + getGlobalMoveSpeed();
         // If off-screen kill it
         if (topLeftX > OptionsHandler.getInstance().getWidth()) {
             kill();

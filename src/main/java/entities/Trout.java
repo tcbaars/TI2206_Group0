@@ -8,8 +8,8 @@ import enumerations.Direction;
 
 public class Trout extends Enemy {
 
-    private final static double movespeed = 10;
-    private final static double basevalue = 10;
+    private final static double movespeed = 1;
+    private final static double basevalue = 100;
     private final static double entitywidth = 1300;
     private final static double entityheight = 524;
     private final static double spritewidth = 1300;
