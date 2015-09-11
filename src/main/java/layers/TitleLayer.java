@@ -22,32 +22,32 @@ public class TitleLayer extends Layer {
     /*
      * Appearance options of the title to be displayed
      */
-    private final String titleText = "FISHY GAME";
-    private final Color titleFillColor = Color.WHITE;
-    private final Color titleOutlineColor = Color.BLACK;
-    private final float titleOutlineSize = 2;
-    private final Font titleFont = new Font("Times New Roman", Font.BOLD, 100);
+    private final String titletext = "FISHY GAME";
+    private final Color titlefill = Color.WHITE;
+    private final Color titleoutline = Color.BLACK;
+    private final float titleoutlinesize = 2;
+    private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
 
     /*
      * The Y-coordinate of the title
      */
-    private final int titleStartY = 150;
+    private final int ytitle = 150;
 
     /*
      * Appearance options of the title options to be displayed
      */
-    private final Color optionFillColor = Color.WHITE;
-    private final Color optionOutlineColor = Color.BLACK;
-    private final Color selectedFillColor = Color.YELLOW;
-    private final float optionOutlineSize = 1;
-    private final Font optionFont = new Font("Times New Roman", Font.BOLD, 85);
+    private final Color optionfill = Color.WHITE;
+    private final Color optionoutline = Color.BLACK;
+    private final Color selectedfill = Color.YELLOW;
+    private final float optionoutlinesize = 1;
+    private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     /*
      * The Y-coordinate of the first option
      * and the offset for the following options
      */
-    private final int optionStartY = 350;
-    private final int optionYStep = 100;
+    private final int yoption = 350;
+    private final int yoptionstep = 100;
 
     /**
      * Create a new title screen.
@@ -90,15 +90,15 @@ public class TitleLayer extends Layer {
     @Override
     public Graphics2D draw(Graphics2D graphic) {
         // Draw the title
-        FontOutlineHandler.drawTextCenterWidth(graphic, titleFont, titleText, titleFillColor, titleOutlineColor, titleOutlineSize, titleStartY);
+        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline, titleoutlinesize, ytitle);
 
         // Draw each option
         for(int i = 0; i < options.length; i++){
             // Highlights the option selected
             if (i == selected) {
-                FontOutlineHandler.drawTextCenterWidth(graphic, optionFont, options[i], selectedFillColor, optionOutlineColor, optionOutlineSize, (optionStartY + (optionYStep * i)));
+                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], selectedfill, optionoutline, optionoutlinesize, (yoption + (yoptionstep * i)));
             } else {
-                FontOutlineHandler.drawTextCenterWidth(graphic, optionFont, options[i], optionFillColor, optionOutlineColor, optionOutlineSize, (optionStartY + (optionYStep * i)));
+                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], optionfill, optionoutline, optionoutlinesize, (yoption + (yoptionstep * i)));
             }
         }
 

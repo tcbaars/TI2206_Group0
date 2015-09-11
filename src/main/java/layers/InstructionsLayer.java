@@ -9,22 +9,22 @@ import handlers.FontOutlineHandler;
 
 public class InstructionsLayer extends Layer {
 
-    private final String titleText = "INSTRUCTIONS";
-    private final Color titleFillColor = Color.WHITE;
-    private final Color titleOutlineColor = Color.BLACK;
-    private final float titleOutlineSize = 2;
-    private final Font titleFont = new Font("Times New Roman", Font.BOLD, 100);
+    private final String titletext = "INSTRUCTIONS";
+    private final Color titlefill = Color.WHITE;
+    private final Color titleoutline = Color.BLACK;
+    private final float titleoutlinesize = 2;
+    private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
 
-    private final int titleStartY = 125;
+    private final int ytitle = 125;
 
-    private final String optionText = "BACK";
-    private final Color selectedFillColor = Color.YELLOW;
-    private final Color optionOutlineColor = Color.BLACK;
-    private final float optionOutlineSize = 1;
-    private final Font optionFont = new Font("Times New Roman", Font.BOLD, 85);
+    private final String optiontext = "BACK";
+    private final Color selectedfill = Color.YELLOW;
+    private final Color optionoutline = Color.BLACK;
+    private final float optionoutlinesize = 1;
+    private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
-    private final int optionStartX = 300;
-    private final int optionStartY = 300;
+    private final int xoption = 300;
+    private final int yoption = 300;
 
     public InstructionsLayer(){
         super();
@@ -40,8 +40,8 @@ public class InstructionsLayer extends Layer {
 
     @Override
     public Graphics2D draw(Graphics2D graphic) {
-        FontOutlineHandler.drawTextCenterWidth(graphic, titleFont, titleText, titleFillColor, titleOutlineColor, titleOutlineSize, titleStartY);
-        FontOutlineHandler.drawText(graphic, optionFont, optionText, selectedFillColor, optionOutlineColor, optionOutlineSize, optionStartX, optionStartY);
+        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline, titleoutlinesize, ytitle);
+        FontOutlineHandler.drawText(graphic, optionfont, optiontext, selectedfill, optionoutline, optionoutlinesize, xoption, yoption);
         return graphic;
     }
 
