@@ -5,8 +5,14 @@ import java.awt.Rectangle;
 
 import animations.Animation;
 
+/**
+ * The entity class represents the rules an in-game object must have.
+ */
 public abstract class Entity {
 
+    /*
+     * Properties of the entity
+     */
     private boolean consumable;
     private boolean alive;
     private boolean visible;
@@ -15,115 +21,184 @@ public abstract class Entity {
     private Animation animation;
 
     /*
-     * sprite dimensions
+     * Sprite dimensions
      */
     protected double spriteWidth;
     protected double spriteHeight;
 
     /*
-     * coordinates of top-left corner of sprite
+     * Coordinates of top left corner of sprite
      */
     protected double topLeftX;
     protected double topLeftY;
 
     /*
-     * entity dimensions
+     * Entity dimensions
      */
     protected double entityWidth;
     protected double entityHeight;
 
     /*
-     * scaling information
+     * Scaling information
      */
     protected double targetScale;
     protected double currentScale;
 
     /**
-     * Entity.
+     * Creates a new entity.
      */
     public Entity() {
         consumable = true;
         alive = true;
         visible = true;
-        facingRight = true;
+        facingRight = false;
 
         initialiseEntity();
         initialiseSprite();
         animation = createAnimation();
     }
 
+    /**
+     * Applies the entity specific properties.
+     */
     protected abstract void initialiseEntity();
 
+    /**
+     * Applies the sprite properties.
+     */
     protected abstract void initialiseSprite();
 
+    /**
+     * Creates a sequence of images that represent the entity's animation.
+     *
+     * @return the entity's animation.
+     */
     protected abstract Animation createAnimation();
 
+    /**
+     * Updates the entity.
+     */
     protected abstract void update();
 
+    /**
+     * Draws on the specified 2-dimensional image.
+     *
+     * @param graphic the 2-dimensional image.
+     */
     protected abstract void draw(Graphics2D graphic);
 
     /**
-     * Update.
+     * Updates the entity.
      */
     public void updateEntity() {
+        // If alive
         if (isAlive()) {
+            // Then handle the current frame to be displayed
             animation.update();
             update();
         }
     }
 
     /**
-     * Draw.
+     * Draws the current frame adjusted by the scaling factor to the specified 2-dimensional image.
+     *
+     * @param graphic the 2-dimensional image.
      */
     public void drawEntity(Graphics2D graphic) {
         if (isAlive()) {
             if (isVisible()) {
-                graphic.drawImage(animation.getCurrentFrame(), getGlobalSpriteX(), getGlobalSpriteY(),
-                        getGlobalSpriteWidth(), getGlobalSpriteHeight(), null);
+                int x = getGlobalSpriteX();
+                int w = getGlobalSpriteWidth();
+                if (facingRight){
+                    x = x + w;
+                    w = -w;
+                }
+                graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(),
+                        w, getGlobalSpriteHeight(), null);
                 draw(graphic);
             }
         }
     }
 
+    /**
+     * Returns whether or not the entity can be consumed.
+     * @return <code>true</code> if and only if the entity can be consumed, otherwise <code>false</code>.
+     */
     public boolean isConsumable() {
         return isAlive() && consumable;
     }
 
+    /**
+     * Change whether or not the entity can be consumed.
+     * @param consumable if the entity can be consumed.
+     */
     public void setConsumable(boolean consumable) {
         this.consumable = consumable;
     }
 
+    /**
+     * Returns whether or not the entity is alive.
+     * @return <code>true</code> if and only if the entity is alive, otherwise <code>false</code>.
+     */
     public boolean isAlive() {
         return alive;
     }
 
+    /**
+     * Kills the entity.
+     */
     public void kill() {
         alive = false;
         visible = false;
     }
 
+    /**
+     * Returns whether or not the entity is visible.
+     * @return <code>true</code> if and only if the entity is visible, otherwise <code>false</code>.
+     */
     public boolean isVisible() {
         return visible;
     }
 
+    /**
+     * Set whether or not the entity is visible.
+     * @param visible if the entity is visible.
+     */
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
+    /**
+     * Set whether or not the entity is facing right.
+     * @param facingRight if the entity is facing right.
+     */
     public void setFacingRight(boolean facingRight) {
         this.facingRight = facingRight;
     }
 
-    public boolean isFacingRight() {
+    /**
+     * Returns whether or not the sprite is facing right.
+     *
+     * @return <code>true</code> if and only if the sprite is facing right, other <code>false</code>.
+     */
+    public boolean isFacingRight(){
         return facingRight;
     }
 
+    /**
+     * Returns the scaling factor.
+     * @return the scaling factor.
+     */
     public double getScaling() {
         return currentScale / targetScale;
     }
 
+    /**
+     * The top left x coordinate.
+     * @return top left x coordinate.
+     */
     public int getGlobalSpriteX() {
-        return (int) topLeftX;
+        return (int)topLeftX;
     }
 
     public int getGlobalSpriteY() {
