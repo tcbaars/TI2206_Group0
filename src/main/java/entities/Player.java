@@ -19,7 +19,7 @@ public class Player extends Entity {
     /*
      * Character properties
      */
-    private final static double movespeed = 10;
+    private final static double movespeed = 40;
     private final static double entitywidth = 1280;
     private final static double entityheight = 570;
 
@@ -139,9 +139,11 @@ public class Player extends Entity {
             moveDown();
             break;
         case LEFT:
+            setFacingRight(false);
             moveLeft();
             break;
         case RIGHT:
+            setFacingRight(true);
             moveRight();
             break;
         default:
