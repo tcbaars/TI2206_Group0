@@ -1,5 +1,7 @@
 package handlers;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 import entities.Player;
@@ -12,6 +14,13 @@ public class SinglePlayerGameHandler extends GameHandler {
 
     private Player player;
     private EnemyHandler enemies;
+
+    private final Color scorefill = Color.WHITE;
+    private final Color scoreoutline = Color.BLACK;
+    private final float scoreoutlinesize = 2;
+    private final Font scorefont = new Font("Times New Roman", Font.BOLD, 70);
+
+    private final int yscore = 100;
 
     public SinglePlayerGameHandler() {
         super();
@@ -80,7 +89,8 @@ public class SinglePlayerGameHandler extends GameHandler {
 
     @Override
     public void drawHud(Graphics2D graphic) {
-        // System.out.println(player.getScore());
+        String scoretext = "Score: " + player.getScore();
+        FontOutlineHandler.drawTextCenterWidth(graphic, scorefont, scoretext, scorefill, scoreoutline, scoreoutlinesize, yscore);
     }
 
     @Override
