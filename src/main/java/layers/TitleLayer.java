@@ -5,92 +5,143 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import enumerations.Key;
+import handlers.FontOutlineHandler;
 
+/**
+ * The TitleLayer class represents the title screen of the game.
+ * From which the option to start a new game, view the instructions, or exit can be selected.
+ */
 public class TitleLayer extends Layer {
 
+    /*
+     * The selected options index and list of options available
+     */
     private int selected;
     private String[] options = { "New Game", "Instructions", "Exit" };
 
-    private Color titleColor;
-    private Font titleFont;
+    /*
+     * Appearance options of the title to be displayed
+     */
+    private final String titleText = "FISHY GAME";
+    private final Color titleFillColor = Color.WHITE;
+    private final Color titleOutlineColor = Color.BLACK;
+    private final float titleOutlineSize = 2;
+    private final Font titleFont = new Font("Times New Roman", Font.BOLD, 100);
 
-    private Color optionColor;
-    private Color selectedColor;
-    private Font optionFont;
+    /*
+     * The Y-coordinate of the title
+     */
+    private final int titleStartY = 150;
+
+    /*
+     * Appearance options of the title options to be displayed
+     */
+    private final Color optionFillColor = Color.WHITE;
+    private final Color optionOutlineColor = Color.BLACK;
+    private final Color selectedFillColor = Color.YELLOW;
+    private final float optionOutlineSize = 1;
+    private final Font optionFont = new Font("Times New Roman", Font.BOLD, 85);
+
+    /*
+     * The Y-coordinate of the first option
+     * and the offset for the following options
+     */
+    private final int optionStartY = 350;
+    private final int optionYStep = 100;
 
     /**
-     * Title screen.
+     * Create a new title screen.
      */
     public TitleLayer() {
         selected = 0;
-
-        titleColor = Color.WHITE;
-        titleFont = new Font("Times New Roman", Font.PLAIN, 32);
-
-        optionColor = Color.WHITE;
-        selectedColor = Color.GREEN;
-        optionFont = new Font("Times New Roman", Font.PLAIN, 16);
     }
 
+    /**
+     * Select the currently selected option.
+     */
     private void select() {
+        // if new game
         if (selected == 0) {
             addLayer(new GameLayer());
             removeLayer();
+        // if instructions
         } else if (selected == 1) {
             addLayer(new InstructionsLayer());
             removeLayer();
+        // if exit
         } else if (selected == 2) {
             System.exit(0);
         }
     }
 
+    /**
+     * Any special updates that need to be applied to the title screen each 'tick'.
+     */
     @Override
     public void update() {
     }
 
+    /**
+     * Adds the title and options to the specified image, and returns the result.
+     *
+     * @param graphics a 2-dimensional image
+     * @return a 2-dimensional image with the added title and options
+     */
     @Override
     public Graphics2D draw(Graphics2D graphic) {
+        // Draw the title
+        FontOutlineHandler.drawTextCenterWidth(graphic, titleFont, titleText, titleFillColor, titleOutlineColor, titleOutlineSize, titleStartY);
 
-        graphic.setColor(titleColor);
-        graphic.setFont(titleFont);
-        graphic.drawString("Fishy", 20, 20);
-
-        graphic.setFont(optionFont);
-        for (int i = 0; i < options.length; i++) {
-            graphic.setColor(optionColor);
-            if (selected == i) {
-                graphic.setColor(selectedColor);
+        // Draw each option
+        for(int i = 0; i < options.length; i++){
+            // Highlights the option selected
+            if (i == selected) {
+                FontOutlineHandler.drawTextCenterWidth(graphic, optionFont, options[i], selectedFillColor, optionOutlineColor, optionOutlineSize, (optionStartY + (optionYStep * i)));
+            } else {
+                FontOutlineHandler.drawTextCenterWidth(graphic, optionFont, options[i], optionFillColor, optionOutlineColor, optionOutlineSize, (optionStartY + (optionYStep * i)));
             }
-            graphic.drawString(options[i], 20, 40 + (20 * i));
         }
 
         return graphic;
     }
 
+    /**
+     * Handles keys pressed by the player.
+     *
+     * @param key the key pressed
+     */
     @Override
     public void keyPressed(Key key) {
-        if (isActive()) {
-            switch (key) {
-            case UP:
-            case LEFT:
-                selected = selected - 1;
-                if (selected < 0) {
-                    selected = options.length - 1;
-                }
-                break;
-            case DOWN:
-            case RIGHT:
-                selected = (selected + 1) % options.length;
-                break;
-            case ENTER:
-                select();
-                break;
-            default:
-                break;
+        switch (key) {
+        /*
+         *  Change the current selection according to what directional key is pressed
+         *  Making sure to stay within the bounds of the options available
+         */
+        case UP:
+        case LEFT:
+            selected = selected - 1;
+            if (selected < 0) {
+                selected = options.length - 1;
             }
+            break;
+        case DOWN:
+        case RIGHT:
+            selected = (selected + 1) % options.length;
+            break;
+        // Press the Enter to confirm the selected option
+        case ENTER:
+            select();
+            break;
+        default:
+            break;
         }
     }
 
+    /**
+     * Handles keys no longer pressed by the payer.
+     *
+     * @param key the key released
+     */
     @Override
     public void keyReleased(Key key) {
     }
