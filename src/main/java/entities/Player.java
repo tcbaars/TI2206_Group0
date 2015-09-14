@@ -21,7 +21,7 @@ public class Player extends Entity {
      */
     private final static double movespeed = 10;
     private final static double entitywidth = 1280;
-    private final static double entityheight = 570;
+    private final static double entityheight = 560;
 
     /*
      * Sprite and animation properties
@@ -102,25 +102,25 @@ public class Player extends Entity {
     }
 
     public void moveUp() {
-        if ((topLeftY - movespeed) > 0) {
+        if ((topLeftY - movespeed) > -10) {
             topLeftY -= movespeed;
         }
     }
 
     public void moveDown() {
-        if ((topLeftY + movespeed) < _optionsHandler.getHeight()) {
+        if ((topLeftY + movespeed) < _optionsHandler.getHeight() -50) {
             topLeftY += movespeed;
         }
     }
 
     public void moveLeft() {
-        if ((topLeftX - movespeed) > 0) {
+        if ((topLeftX - movespeed) > -10) {
             topLeftX -= movespeed;
         }
     }
 
     public void moveRight() {
-        if ((topLeftX + movespeed) < _optionsHandler.getWidth()) {
+        if ((topLeftX + movespeed) < _optionsHandler.getWidth() -120) {
             topLeftX += movespeed;
         }
     }
