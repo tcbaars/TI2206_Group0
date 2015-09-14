@@ -30,7 +30,8 @@ public class FinishLayer extends Layer {
     /*
     * Appearance options of the text to be displayed
     */
-    private final String[] text = {"Fish Eaten: NaN", "Score: ", "High Score: NaN"};
+    // private final String[] text = {"Fish Eaten: NaN", "Score: ", "High Score: NaN"};
+    private final String[] text = {"", "Score: ", ""};
     private final Font textfont = new Font("Times New Roman", Font.BOLD, 50);
 
     /*

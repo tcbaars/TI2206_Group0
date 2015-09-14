@@ -8,10 +8,10 @@ import enumerations.Direction;
 
 public class Trout extends Enemy {
 
-    private final static double movespeed = 1;
+    private final static double movespeed = 0.2;
     private final static double basevalue = 100;
-    private final static double entitywidth = 1300;
-    private final static double entityheight = 524;
+    private final static double entitywidth = 1280;
+    private final static double entityheight = 510;
     private final static double spritewidth = 1300;
     private final static double spriteheight = 600;
     private final static String animationkey = "Trout";
