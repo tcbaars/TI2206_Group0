@@ -50,9 +50,9 @@ public class InstructionsLayer extends Layer {
     /*
     * The locations to the icons
     */
-    private final String[] imageKey = {"arrowKey", "escKey", "mKey", "sKey"};
+    private final String[] imageKey = {"arrowKey", "escKey", "sKey", "mKey"};
     private final String[] imageUrl = {"/sprites/icons/arrowKeys.png", "/sprites/icons/escKey.png",
-                                        "/sprites/icons/mKey.png", "/sprites/icons/sKey.png"};
+                                        "/sprites/icons/sKey.png", "/sprites/icons/mKey.png"};
 
     public InstructionsLayer(){
         super();
