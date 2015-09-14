@@ -10,6 +10,7 @@ import handlers.SinglePlayerGameHandler;
 public class GameLayer extends Layer {
 
     private GameHandler game;
+    private Boolean keys[] = {false, false, false, false}; // up, left, down, right
 
     public GameLayer() {
         game = new SinglePlayerGameHandler();
@@ -35,6 +36,18 @@ public class GameLayer extends Layer {
             setVisible(false);
             addLayer(new PauseLayer(game));
         } else {
+            if (keys[0]) {
+                game.move(Direction.UP);
+            }
+            if (keys[1]) {
+                game.move(Direction.LEFT);
+            }
+            if (keys[2]) {
+                game.move(Direction.DOWN);
+            }
+            if (keys[3]) {
+                game.move(Direction.RIGHT);
+            }
             game.update();
         }
     }
@@ -48,29 +61,43 @@ public class GameLayer extends Layer {
     @Override
     public void keyPressed(Key key) {
         switch (key) {
-        case UP:
-            game.move(Direction.UP);
-            break;
-        case DOWN:
-            game.move(Direction.DOWN);
-            break;
-        case LEFT:
-            game.move(Direction.LEFT);
-            break;
-        case RIGHT:
-            game.move(Direction.RIGHT);
-            break;
-        default:
+            case UP:
+                keys[0] = true;
+                break;
+            case DOWN:
+                keys[2] = true;
+                break;
+            case LEFT:
+                keys[1] = true;
+                break;
+            case RIGHT:
+                keys[3] = true;
+                break;
+            default:
+                break;
         }
     }
 
     @Override
     public void keyReleased(Key key) {
         switch (key) {
-        case ESC:
-            game.pause();
-            break;
-        default:
+            case UP:
+                keys[0] = false;
+                break;
+            case DOWN:
+                keys[2] = false;
+                break;
+            case LEFT:
+                keys[1] = false;
+                break;
+            case RIGHT:
+                keys[3] = false;
+                break;
+            case ESC:
+                game.pause();
+                break;
+            default:
+                break;
         }
     }
 }
