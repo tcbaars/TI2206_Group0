@@ -1,7 +1,8 @@
 package entities;
 
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Ellipse2D.Double;
 
 import animations.Animation;
 
@@ -19,6 +20,7 @@ public abstract class Entity {
     private boolean facingRight;
 
     private Animation animation;
+    private final static boolean debug = true;
 
     /*
      * Sprite dimensions
@@ -115,6 +117,12 @@ public abstract class Entity {
                 }
                 graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(),
                         w, getGlobalSpriteHeight(), null);
+
+                if (debug) {
+                    Shape boundingBox = getGlobalEntityBoundingBox();
+                    graphic.draw(boundingBox);
+                }
+
                 draw(graphic);
             }
         }
@@ -232,19 +240,19 @@ public abstract class Entity {
     /**
      * Global bounding box.
      */
-    public Rectangle getGlobalSpriteBoundingBox() {
-        return new Rectangle(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
+    public Ellipse2D getGlobalSpriteBoundingBox() {
+        return new Ellipse2D.Double(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
                 getGlobalSpriteHeight());
     }
 
     /**
      * Box.
      */
-    public Rectangle getGlobalEntityBoundingBox() {
-        Rectangle globalSprite = getGlobalSpriteBoundingBox();
+    public Ellipse2D getGlobalEntityBoundingBox() {
+        Ellipse2D globalSprite = getGlobalSpriteBoundingBox();
         double centreX = globalSprite.getCenterX();
         double centreY = globalSprite.getCenterY();
-        return new Rectangle(getGlobalEntityX(centreX), getGlobalEntityY(centreY), getGlobalEntityWidth(),
+        return new Ellipse2D.Double(getGlobalEntityX(centreX), getGlobalEntityY(centreY), getGlobalEntityWidth(),
                 getGlobalEntityHeight());
     }
 
@@ -253,9 +261,9 @@ public abstract class Entity {
      */
     public boolean intersects(Entity entity) {
         if (entity != null) {
-            Rectangle thisBox = getGlobalEntityBoundingBox();
-            Rectangle thatBox = entity.getGlobalEntityBoundingBox();
-            return thisBox.intersects(thatBox);
+            Ellipse2D thisBox = getGlobalEntityBoundingBox();
+            Ellipse2D thatBox = entity.getGlobalEntityBoundingBox();
+            return thisBox.intersects(thatBox.getBounds());
         }
         return false;
     }
