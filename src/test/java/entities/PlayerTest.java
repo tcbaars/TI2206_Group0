@@ -1,14 +1,14 @@
 package entities;
 
-import enumerations.Direction;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import org.junit.Test;
+
+import enumerations.Direction;
+
 /**
- * Created by Adriaan on 11-9-2015.
- * Test method for entities.Player class.
+ * Created by Adriaan on 11-9-2015. Test method for entities.Player class.
  */
 public class PlayerTest extends EntityTest {
     private static final double DELTA = 1e-15;
@@ -24,7 +24,7 @@ public class PlayerTest extends EntityTest {
         Player test = new Player();
         test.initialiseEntity();
         assertEquals(1280, test.entityWidth, DELTA);
-        assertEquals(570, test.entityHeight, DELTA);
+        assertEquals(560, test.entityHeight, DELTA);
     }
 
     @Test
