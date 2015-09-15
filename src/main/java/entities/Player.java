@@ -36,8 +36,8 @@ public class Player extends Entity {
     /*
      * Starting size
      */
-    private final static double initialscale = 100;
-    private final static double targetscale = 1000;
+    private final static double initialscale = 1000;
+    private final static double targetscale = 10000;
 
     /*
      * Player progress information
@@ -160,7 +160,7 @@ public class Player extends Entity {
         if (food != null){
             numberFishEaten++;
             currentScore += food.consumedBy(this);
-            currentScale += food.getScaling();
+            currentScale += food.getScaling() * 1000;
         }
     }
 

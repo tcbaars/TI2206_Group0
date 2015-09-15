@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 
 import animations.Animation;
+import util.Geo2D;
 
 /**
  * The entity class represents the rules an in-game object must have.
@@ -121,6 +122,7 @@ public abstract class Entity {
                 if (debug) {
                     Shape boundingBox = getGlobalEntityBoundingBox();
                     graphic.draw(boundingBox);
+                    graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());
                 }
 
                 draw(graphic);
@@ -263,7 +265,7 @@ public abstract class Entity {
         if (entity != null) {
             Ellipse2D thisBox = getGlobalEntityBoundingBox();
             Ellipse2D thatBox = entity.getGlobalEntityBoundingBox();
-            return thisBox.intersects(thatBox.getBounds());
+            return Geo2D.intersection(thisBox, thatBox);
         }
         return false;
     }
