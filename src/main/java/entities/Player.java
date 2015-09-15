@@ -159,8 +159,9 @@ public class Player extends Entity {
     protected void consume(Entity food) {
         if (food != null){
             numberFishEaten++;
-            currentScore += food.consumedBy(this);
+            food.consumedBy(this);
             currentScale += food.getScaling() * 1000;
+            currentScore = (int) currentScale - 1000;
         }
     }
 
