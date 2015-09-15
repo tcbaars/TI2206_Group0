@@ -5,12 +5,15 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 
 import animations.Animation;
+import handlers.OptionsHandler;
 import util.Geo2D;
 
 /**
  * The entity class represents the rules an in-game object must have.
  */
 public abstract class Entity {
+
+    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
 
     /*
      * Properties of the entity
@@ -21,7 +24,6 @@ public abstract class Entity {
     private boolean facingRight;
 
     private Animation animation;
-    private final static boolean debug = true;
 
     /*
      * Sprite dimensions
@@ -119,7 +121,7 @@ public abstract class Entity {
                 graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(),
                         w, getGlobalSpriteHeight(), null);
 
-                if (debug) {
+                if (_optionsHandler.getDebug()) {
                     Shape boundingBox = getGlobalEntityBoundingBox();
                     graphic.draw(boundingBox);
                     graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());

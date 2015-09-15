@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  */
 public class TitleLayer extends Layer {
 
+    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
+
     /*
      * The selected options index and list of options available
      */
@@ -129,23 +131,26 @@ public class TitleLayer extends Layer {
          *  Change the current selection according to what directional key is pressed
          *  Making sure to stay within the bounds of the options available
          */
-        case UP:
-        case LEFT:
-            selected = selected - 1;
-            if (selected < 0) {
-                selected = options.length - 1;
-            }
-            break;
-        case DOWN:
-        case RIGHT:
-            selected = (selected + 1) % options.length;
-            break;
-        // Press the Enter to confirm the selected option
-        case ENTER:
-            select();
-            break;
-        default:
-            break;
+            case UP:
+            case LEFT:
+                selected = selected - 1;
+                if (selected < 0) {
+                    selected = options.length - 1;
+                }
+                break;
+            case DOWN:
+            case RIGHT:
+                selected = (selected + 1) % options.length;
+                break;
+            // Press the Enter to confirm the selected option
+            case ENTER:
+                select();
+                break;
+            case DEBUG:
+                _optionsHandler.toggleDebug();
+                break;
+            default:
+                break;
         }
     }
 

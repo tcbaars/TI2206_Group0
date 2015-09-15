@@ -108,7 +108,7 @@ public class Player extends Entity {
     }
 
     public void moveDown() {
-        if ((topLeftY + movespeed) < _optionsHandler.getHeight() -50) {
+        if ((topLeftY + movespeed) < _optionsHandler.getHeight() - getGlobalEntityHeight()) {
             topLeftY += movespeed;
         }
     }
@@ -120,7 +120,7 @@ public class Player extends Entity {
     }
 
     public void moveRight() {
-        if ((topLeftX + movespeed) < _optionsHandler.getWidth() -120) {
+        if ((topLeftX + movespeed) < _optionsHandler.getWidth() - getGlobalEntityWidth()) {
             topLeftX += movespeed;
         }
     }
@@ -160,7 +160,7 @@ public class Player extends Entity {
         if (food != null){
             numberFishEaten++;
             food.consumedBy(this);
-            currentScale += food.getScaling() * 1000;
+            currentScale += food.getScaling() * 500;
             currentScore = (int) currentScale - 1000;
         }
     }
