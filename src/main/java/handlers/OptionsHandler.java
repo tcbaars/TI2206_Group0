@@ -10,6 +10,7 @@ public class OptionsHandler {
 
     private final static int targetfps = 60;
 
+    private boolean debug;
     private boolean music;
     private boolean sound;
 
@@ -20,6 +21,7 @@ public class OptionsHandler {
         scale = 2;
         music = true;
         sound = true;
+        debug = false;
         minEnemies = 7;
         maxEnemies = 14;
     }
@@ -59,6 +61,10 @@ public class OptionsHandler {
     public boolean soundOn() {
         return sound;
     }
+
+    public boolean getDebug() { return debug; }
+
+    public void toggleDebug() { debug = !debug;}
 
     public void toggleSound() {
         sound = !sound;

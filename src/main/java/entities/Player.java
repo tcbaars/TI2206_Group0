@@ -36,8 +36,8 @@ public class Player extends Entity {
     /*
      * Starting size
      */
-    private final static double initialscale = 100;
-    private final static double targetscale = 1000;
+    private final static double initialscale = 1000;
+    private final static double targetscale = 10000;
 
     /*
      * Player progress information
@@ -108,7 +108,7 @@ public class Player extends Entity {
     }
 
     public void moveDown() {
-        if ((topLeftY + movespeed) < _optionsHandler.getHeight() -50) {
+        if ((topLeftY + movespeed) < _optionsHandler.getHeight() - getGlobalEntityHeight()) {
             topLeftY += movespeed;
         }
     }
@@ -120,7 +120,7 @@ public class Player extends Entity {
     }
 
     public void moveRight() {
-        if ((topLeftX + movespeed) < _optionsHandler.getWidth() -120) {
+        if ((topLeftX + movespeed) < _optionsHandler.getWidth() - getGlobalEntityWidth()) {
             topLeftX += movespeed;
         }
     }
@@ -159,8 +159,9 @@ public class Player extends Entity {
     protected void consume(Entity food) {
         if (food != null){
             numberFishEaten++;
-            currentScore += food.consumedBy(this);
-            currentScale += food.getScaling();
+            food.consumedBy(this);
+            currentScale += food.getScaling() * 500;
+            currentScore = (int) currentScale - 1000;
         }
     }
 

@@ -27,13 +27,13 @@ public abstract class Enemy extends Entity {
     }
 
     protected void spawnLeft() {
-        topLeftX = 0 - getGlobalSpriteWidth();
+        topLeftX = 0 - getGlobalEntityWidth();
         setDirection(Direction.RIGHT);
         setFacingRight(true);
     }
 
     protected void spawnRight() {
-        topLeftX = OptionsHandler.getInstance().getWidth();
+        topLeftX = OptionsHandler.getInstance().getWidth() + getGlobalEntityWidth();
         setDirection(Direction.LEFT);
         setFacingRight(false);
     }
@@ -48,7 +48,7 @@ public abstract class Enemy extends Entity {
     }
 
     protected void setRandomDepth() {
-        topLeftY = generator.nextInt((OptionsHandler.getInstance().getHeight() - getGlobalSpriteHeight()));
+        topLeftY = generator.nextInt((OptionsHandler.getInstance().getHeight() - getGlobalEntityHeight()));
     }
 
     protected void setRandomScale(double minScale, double maxScale) {

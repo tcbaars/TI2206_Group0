@@ -1,14 +1,19 @@
 package entities;
 
+import java.awt.geom.Ellipse2D;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.Shape;
 
 import animations.Animation;
+import handlers.OptionsHandler;
+import util.Geo2D;
 
 /**
  * The entity class represents the rules an in-game object must have.
  */
 public abstract class Entity {
+
+    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
 
     /*
      * Properties of the entity
@@ -115,6 +120,13 @@ public abstract class Entity {
                 }
                 graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(),
                         w, getGlobalSpriteHeight(), null);
+
+                if (_optionsHandler.getDebug()) {
+                    Shape boundingBox = getGlobalEntityBoundingBox();
+                    graphic.draw(boundingBox);
+                    graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());
+                }
+
                 draw(graphic);
             }
         }
@@ -232,19 +244,19 @@ public abstract class Entity {
     /**
      * Global bounding box.
      */
-    public Rectangle getGlobalSpriteBoundingBox() {
-        return new Rectangle(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
+    public Ellipse2D getGlobalSpriteBoundingBox() {
+        return new Ellipse2D.Double(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
                 getGlobalSpriteHeight());
     }
 
     /**
      * Box.
      */
-    public Rectangle getGlobalEntityBoundingBox() {
-        Rectangle globalSprite = getGlobalSpriteBoundingBox();
+    public Ellipse2D getGlobalEntityBoundingBox() {
+        Ellipse2D globalSprite = getGlobalSpriteBoundingBox();
         double centreX = globalSprite.getCenterX();
         double centreY = globalSprite.getCenterY();
-        return new Rectangle(getGlobalEntityX(centreX), getGlobalEntityY(centreY), getGlobalEntityWidth(),
+        return new Ellipse2D.Double(getGlobalEntityX(centreX), getGlobalEntityY(centreY), getGlobalEntityWidth(),
                 getGlobalEntityHeight());
     }
 
@@ -253,9 +265,9 @@ public abstract class Entity {
      */
     public boolean intersects(Entity entity) {
         if (entity != null) {
-            Rectangle thisBox = getGlobalEntityBoundingBox();
-            Rectangle thatBox = entity.getGlobalEntityBoundingBox();
-            return thisBox.intersects(thatBox);
+            Ellipse2D thisBox = getGlobalEntityBoundingBox();
+            Ellipse2D thatBox = entity.getGlobalEntityBoundingBox();
+            return Geo2D.intersection(thisBox, thatBox);
         }
         return false;
     }

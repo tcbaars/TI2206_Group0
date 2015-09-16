@@ -33,8 +33,8 @@ public class PlayerTest extends EntityTest {
         test.initialiseSprite();
         assertEquals(1300, test.spriteWidth, DELTA);
         assertEquals(600, test.spriteHeight, DELTA);
-        assertEquals(100, test.currentScale, DELTA);
-        assertEquals(1000, test.targetScale, DELTA);
+        assertEquals(1000, test.currentScale, DELTA);
+        assertEquals(10000, test.targetScale, DELTA);
     }
 
     @Test
