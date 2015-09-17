@@ -12,6 +12,9 @@ import static org.junit.Assert.assertTrue;
  * Test method for handlers.SinglePlayerGameHandler class.
  */
 public class SinglePlayerGameHandlerTest extends GameHandlerTest {
+    /**
+     * Test the constructor (super())
+     */
     @Test
     public void constructorTest() {
         SinglePlayerGameHandler test = new SinglePlayerGameHandler();
@@ -20,6 +23,9 @@ public class SinglePlayerGameHandlerTest extends GameHandlerTest {
         assertFalse(test.isPaused());
     }
 
+    /**
+     * Test the gameover method by checking if it will pause and it will be gameover
+     */
     @Test
     public void gameOverTest() {
         SinglePlayerGameHandler test = new SinglePlayerGameHandler();
@@ -28,6 +34,9 @@ public class SinglePlayerGameHandlerTest extends GameHandlerTest {
         assertTrue(test.isGameOver());
     }
 
+    /**
+     * Testing the game won and game lost methods.
+     */
     @Test
     public void gameWonLostTest() {
         SinglePlayerGameHandler test = new SinglePlayerGameHandler();
@@ -39,6 +48,9 @@ public class SinglePlayerGameHandlerTest extends GameHandlerTest {
         assertFalse(test.isGameWon());
     }
 
+    /**
+     * Check if the initialscore is 0
+     */
     @Test
     public void getScoreTest() {
         SinglePlayerGameHandler test = new SinglePlayerGameHandler();
@@ -46,6 +58,9 @@ public class SinglePlayerGameHandlerTest extends GameHandlerTest {
         test.move(Direction.UP);
     }
 
+    /**
+     * Test if the update() method is working by running the game 2000 frames and checking if the player dies.
+     */
     @Test
     public void updateTest() {
         SinglePlayerGameHandler test = new SinglePlayerGameHandler();

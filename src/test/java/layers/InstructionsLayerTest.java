@@ -4,7 +4,7 @@ import enumerations.Key;
 import handlers.OptionsHandler;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import static org.junit.Assert.assertEquals;
