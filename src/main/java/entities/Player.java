@@ -43,7 +43,7 @@ public class Player extends Entity {
      * Player progress information
      */
     private int currentScore;
-    private int numberFishEaten;
+    //private int numberFishEaten;
 
     /**
      * Creates a new player.
@@ -51,7 +51,7 @@ public class Player extends Entity {
     public Player() {
         super();
         currentScore = 0;
-        numberFishEaten = 0;
+        //numberFishEaten = 0;
     }
 
     /**

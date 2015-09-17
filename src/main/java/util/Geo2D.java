@@ -137,12 +137,14 @@ public class Geo2D {
             throws NoIntersectionException {
 
         // Create point object if necessary
-        if (pntDst == null)
+        if (pntDst == null) {
             pntDst = new Point2D.Double();
+        }
 
         // Bounds check
-        if (! unbounded && ! unbounded2)
+        if (! unbounded && ! unbounded2) {
             _boundsCheck(any, any2);
+        }
 
         // Segments with coincident endpoints?
         if (! unbounded && ! unbounded2) {
@@ -188,19 +190,22 @@ public class Geo2D {
 
         // Solve equation system
         double d   = vy1 * b2 - vy2 * b1;
-        if (Math.abs(d) <= mEps)
+        if (Math.abs(d) <= mEps) {
             throw new NoIntersectionException("Lines are parallel");
+        }
         double dx  = b1 * c2 - b2 * c1;
         double dy  = c1 * vy2 - c2 * vy1;
         pntDst.setLocation(dx/d, dy/d);
 
         // Do the line segments contain the intersection point?
-        if (! unbounded && ! containment(any, pntDst))
+        if (! unbounded && ! containment(any, pntDst)) {
             throw new NoIntersectionException(
                     "1st line segment doesn't contain intersection point");
-        if (! unbounded2 && ! containment(any2, pntDst))
+        }
+        if (! unbounded2 && ! containment(any2, pntDst)) {
             throw new NoIntersectionException(
                     "2nd line segment doesn't contain intersection point");
+        }
 
         // Return the intersection point
         return pntDst;
@@ -238,37 +243,42 @@ public class Geo2D {
         // P1
         vec.setLocation(lin.getP1(), cub.getP1());
         int ii = _relativePosition(vec1Left, vec);
-        if (ii == 0)
+        if (ii == 0) {
             return 0;
+        }
 
         // P2
         vec.setLocation(lin.getP1(), cub.getP2());
         int i = _relativePosition(vec1Left, vec);
-        if (i == 0 || i + ii == 0)
+        if (i == 0 || i + ii == 0) {
             return 0;
+        }
 
         // CtrlP1
         vec.setLocation(lin.getP1(), cub.getCtrlP1());
         i = _relativePosition(vec1Left, vec);
-        if (i == 0 || i + ii == 0)
+        if (i == 0 || i + ii == 0) {
             return 0;
+        }
 
         // CtrlP2
         vec.setLocation(lin.getP1(), cub.getCtrlP2());
         i = _relativePosition(vec1Left, vec);
-        if (i == 0 || i + ii == 0)
+        if (i == 0 || i + ii == 0) {
             return 0;
+        }
 
         return ii;
     }
     private static int _relativePosition(Vector2D vec1Left, Vector2D vec1Pnt) {
         double signedDist = vec1Left.getScalarProduct(vec1Pnt);
-        if (signedDist < -mEps)
+        if (signedDist < -mEps) {
             return -1;
-        else if (signedDist > +mEps)
+        } else if (signedDist > +mEps) {
             return +1;
-        else
+        } else {
             return 0;
+        }
     }
 
     // Intersection(ellipse, *) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

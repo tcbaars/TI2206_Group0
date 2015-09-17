@@ -257,8 +257,9 @@ public class Vector2D extends Point2D implements Cloneable {
      * @exception NullVectorException if the vector cannot be normalized.
      */
     public Vector2D normalize() throws NullVectorException {
-        if (Geo2D.isNull(this))
+        if (Geo2D.isNull(this)) {
             throw new NullVectorException("Can't normalize a null vector");
+        }
         double len = Geo2D.length(this);
         this.x /= len;
         this.y /= len;
@@ -292,9 +293,10 @@ public class Vector2D extends Point2D implements Cloneable {
      * @exception NullVectorException if this or vec is null.
      */
     public double getAngleCCW(Vector2D vec) throws NullVectorException {
-        if (Geo2D.isNull(this) || Geo2D.isNull(vec))
+        if (Geo2D.isNull(this) || Geo2D.isNull(vec)) {
             throw new NullVectorException(
                     "Can't calculate angle between null vectors");
+        }
 
         double ang1 = Math.atan2(this.getY(), this.getX());
         double ang2 = Math.atan2(vec.getY(), vec.getX());
@@ -315,9 +317,10 @@ public class Vector2D extends Point2D implements Cloneable {
      * @exception NullVectorException if this or vec is null.
      */
     public double getAngleSmallest(Vector2D vec) throws NullVectorException {
-        if (Geo2D.isNull(this) || Geo2D.isNull(vec))
+        if (Geo2D.isNull(this) || Geo2D.isNull(vec)) {
             throw new NullVectorException(
                     "Can't calculate angle between null vectors");
+        }
 
         return Math.acos(this.getScalarProduct(vec) /
                 (Geo2D.length(this) * Geo2D.length(vec)));

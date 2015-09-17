@@ -8,7 +8,8 @@ import org.junit.Test;
 import enumerations.Direction;
 
 /**
- * Created by Adriaan on 11-9-2015. Test method for entities.Player class.
+ * Created by Adriaan on 11-9-2015.
+ * Test method for entities.Player class.
  */
 public class PlayerTest extends EntityTest {
     private static final double DELTA = 1e-15;

@@ -110,25 +110,22 @@ public abstract class Entity {
      * @param graphic the 2-dimensional image.
      */
     public void drawEntity(Graphics2D graphic) {
-        if (isAlive()) {
-            if (isVisible()) {
-                int x = getGlobalSpriteX();
-                int w = getGlobalSpriteWidth();
-                if (facingRight){
-                    x = x + w;
-                    w = -w;
-                }
-                graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(),
-                        w, getGlobalSpriteHeight(), null);
-
-                if (_optionsHandler.getDebug()) {
-                    Shape boundingBox = getGlobalEntityBoundingBox();
-                    graphic.draw(boundingBox);
-                    graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());
-                }
-
-                draw(graphic);
+        if (isAlive() && isVisible()) {
+            int x = getGlobalSpriteX();
+            int w = getGlobalSpriteWidth();
+            if (facingRight){
+                x = x + w;
+                w = -w;
             }
+            graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(), w, getGlobalSpriteHeight(), null);
+
+            if (_optionsHandler.getDebug()) {
+                Shape boundingBox = getGlobalEntityBoundingBox();
+                graphic.draw(boundingBox);
+                graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());
+            }
+
+            draw(graphic);
         }
     }
 
