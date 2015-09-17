@@ -6,6 +6,7 @@ import enumerations.Direction;
 import enumerations.Key;
 import handlers.GameHandler;
 import handlers.SinglePlayerGameHandler;
+import util.Logger;
 
 public class GameLayer extends Layer {
 
@@ -13,6 +14,7 @@ public class GameLayer extends Layer {
     private Boolean keys[] = {false, false, false, false}; // up, left, down, right
 
     public GameLayer() {
+        Logger.info("SinglePlayerGame is starting.");
         game = new SinglePlayerGameHandler();
     }
 
