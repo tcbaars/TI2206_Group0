@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -85,8 +85,7 @@ public final class Logger {
                 Files.write(_file, messageToLog.getBytes("UTF-8"), StandardOpenOption.CREATE,
                         StandardOpenOption.APPEND);
             } catch (IOException e) {
-                // error("Failed to write message to log file. Message: " +
-                // message);
+                Logger.error("Failed to write message to log file.");
             }
         }
     }

@@ -2,7 +2,7 @@ package animations;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by Adriaan on 11-9-2015.
@@ -14,7 +14,7 @@ public class AnimationTest {
     public void constructorTest() {
         Animation test = Animation.createAnimation("Player", "/sprites/Player.png", 12, 1300, 600, 10);
 
-        assertEquals(test.hasLooped(), false);
+        assertFalse(test.hasLooped());
     }
 
     @Test // TODO, THIS DOES NOT YET WORK, THIS IS TEMPORARY, NEED INJECTION

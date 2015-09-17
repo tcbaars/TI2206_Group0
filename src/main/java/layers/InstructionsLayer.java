@@ -4,6 +4,7 @@ import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.ImageHandler;
 import handlers.OptionsHandler;
+import util.Logger;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -56,6 +57,7 @@ public class InstructionsLayer extends Layer {
 
     public InstructionsLayer(){
         super();
+        Logger.info("Opening Instructions Menu");
     }
 
     private void select() {

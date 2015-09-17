@@ -102,8 +102,9 @@ public class RewindablePathIterator implements PathIterator {
     }
     public int currentSegment(float[] coords) {
         Segment _seg = (Segment) mSegments.get(mCurrentIndex);
-        for (int i = 0; i < _seg.mCrds.length; i++)
-            coords[i] = (float)_seg.mCrds[i];
+        for (int i = 0; i < _seg.mCrds.length; i++) {
+            coords[i] = (float) _seg.mCrds[i];
+        }
         return _seg.mSeg;
     }
     public int getWindingRule() {
@@ -113,7 +114,8 @@ public class RewindablePathIterator implements PathIterator {
         return mCurrentIndex >= mSegments.size();
     }
     public void next() {
-        if (! isDone())
+        if (! isDone()) {
             mCurrentIndex++;
+        }
     }
 }

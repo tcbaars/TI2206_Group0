@@ -3,6 +3,7 @@ package layers;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.OptionsHandler;
+import util.Logger;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -57,6 +58,7 @@ public class TitleLayer extends Layer {
      */
     public TitleLayer() {
         selected = 0;
+        Logger.info("Opening Title Menu");
     }
 
     /**
@@ -73,6 +75,7 @@ public class TitleLayer extends Layer {
             removeLayer();
         // if exit
         } else if (selected == 2) {
+            Logger.info("User exited the game in the Title Menu");
             System.exit(0);
         }
     }
@@ -148,6 +151,7 @@ public class TitleLayer extends Layer {
                 break;
             case DEBUG:
                 _optionsHandler.toggleDebug();
+                Logger.info("DEBUG: " + _optionsHandler.getDebug());
                 break;
             default:
                 break;

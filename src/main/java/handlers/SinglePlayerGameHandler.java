@@ -122,13 +122,10 @@ public class SinglePlayerGameHandler extends GameHandler {
                 // Set the game state to game lost
                 gameLost();
             } else {
-                // If the player is alive and reached target size
-                if (player.isFull()) {
-                    // And no enemies are left
-                    if (enemies.getNumberEnemies() == 0) {
-                        // Set the game state to game won
-                        gameWon();
-                    }
+                // If the player is alive and reached target size And no enemies are left
+                if (player.isFull() && enemies.getNumberEnemies() == 0) {
+                    // Set the game state to game won
+                    gameWon();
                 }
             }
 

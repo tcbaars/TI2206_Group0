@@ -52,10 +52,8 @@ public class EnemyHandler {
         updateCount++;
         if (updateCount >= delay) {
             updateCount = 0;
-            if (currentNumber <= desiredNumber()) {
-                if (!player.isFull()) {
-                    spawnEnemy();
-                }
+            if (currentNumber <= desiredNumber() && !player.isFull()) {
+                spawnEnemy();
             }
         }
     }

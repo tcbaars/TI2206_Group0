@@ -1,7 +1,7 @@
 package application;
 
 import gui.MainFrame;
-import utils.Logger;
+import util.Logger;
 
 public class Launcher {
     public static void main(String[] args) {

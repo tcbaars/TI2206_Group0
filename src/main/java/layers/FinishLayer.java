@@ -3,6 +3,7 @@ package layers;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.OptionsHandler;
+import util.Logger;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -66,6 +67,7 @@ public class FinishLayer extends Layer {
             titletext = "YOU LOST";
         }
 
+        Logger.info("Player ended the game, " + titletext);
         text[1] = text[1] + score;
     }
 
