@@ -40,10 +40,11 @@ public class Player extends Entity {
     private final static double targetscale = 10000;
 
     /*
-     * Player progress information
+     * Player information
      */
     private int currentScore;
     private int numberFishEaten;
+    private Bubbles bubbles;
 
     /**
      * Creates a new player.
@@ -78,6 +79,8 @@ public class Player extends Entity {
 
     /**
      * Creates the animation using the specified sprite and animation properties.
+     *
+     * @return the animation.
      */
     @Override
     protected Animation createAnimation() {
@@ -86,10 +89,30 @@ public class Player extends Entity {
     }
 
     /**
+     * Initialises a new set of bubbles to be associated with the player.
+     */
+    private void initBubbles(){
+        bubbles = new Bubbles(this);
+    }
+
+    /**
      * Handles the updates of the player each tick.
      */
     @Override
     protected void update() {
+        /*
+         *If there are no bubbles currently associated with the player
+         *Then associate a new set of bubbles
+         */
+        if(bubbles != null){
+            if(bubbles.hasBubbles()){
+                bubbles.updateBubbles();
+            } else {
+                initBubbles();
+            }
+        } else {
+            initBubbles();
+        }
     }
 
     /**
@@ -99,26 +122,43 @@ public class Player extends Entity {
      */
     @Override
     protected void draw(Graphics2D graphic) {
+        // If the player has bubbles associated with it
+        if(bubbles != null){
+            // Then draw the bubbles
+            bubbles.drawBubbles(graphic);
+        }
     }
 
+    /**
+     * Move the player up.
+     */
     public void moveUp() {
         if ((topLeftY - movespeed) > -10) {
             topLeftY -= movespeed;
         }
     }
 
+    /**
+     * Move the player down.
+     */
     public void moveDown() {
         if ((topLeftY + movespeed) < _optionsHandler.getHeight() - getGlobalEntityHeight()) {
             topLeftY += movespeed;
         }
     }
 
+    /**
+     * Move the player left.
+     */
     public void moveLeft() {
         if ((topLeftX - movespeed) > -10) {
             topLeftX -= movespeed;
         }
     }
 
+    /**
+     * Move the player right.
+     */
     public void moveRight() {
         if ((topLeftX + movespeed) < _optionsHandler.getWidth() - getGlobalEntityWidth()) {
             topLeftX += movespeed;
@@ -128,7 +168,7 @@ public class Player extends Entity {
     /**
      * Move the player in the specified direction.
      *
-     * @param direction the direction of motion desired.
+     * @param direction the desired direction.
      */
     public void move(Direction direction) {
         switch (direction) {
@@ -151,15 +191,17 @@ public class Player extends Entity {
     }
 
     /**
-     * Handles the necessary actions needed to consume the specified entity.
+     * Handles the necessary actions needed to be performed to consume the specified entity.
      *
      * @param food the entity to be eaten.
      */
     @Override
     protected void consume(Entity food) {
         if (food != null){
-            numberFishEaten++;
+            // Notify the food that it has been eaten
             food.consumedBy(this);
+            // Update the player progress information
+            numberFishEaten++;
             currentScale += food.getScaling() * 500;
             currentScore = (int) currentScale - 1000;
         }
@@ -195,4 +237,12 @@ public class Player extends Entity {
         return currentScore;
     }
 
+    /**
+     * Returns the current number of fish eaten.
+     *
+     * @return the number of fish eaten.
+     */
+    public int getFishEaten(){
+        return numberFishEaten;
+    }
 }
