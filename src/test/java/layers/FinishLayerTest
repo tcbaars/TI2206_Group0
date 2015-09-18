@@ -1,0 +1,46 @@
+package layers;
+
+import org.junit.Test;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+/**
+ * Created by Dylan 18-9-2015
+ * Test method for layers.BackgroundLayer class.
+ */
+public class FinishLayerTest extends LayerTest {
+    /**
+     * This method tests the constructor.
+     */
+    @Test
+    public void constructorTest() {
+        FinishLayer test = new FinishLayer();
+        assertNull(test.getPrevious());
+        assertTrue(test.isActive());
+        assertTrue(test.isVisible());
+        test.update();
+    }
+    
+    /**
+     * test the input of the keys.
+     * 
+     */
+    @Test
+    public void KeyInputTest() {
+        FinishLayer test = new FinishLayer();
+        
+        assertEquals(test.selected, 0);
+        test.keyPressed(Key.UP);
+        assertEquals(test.selected, 1);
+        test.keyPressed(Key.DOWN);
+        assertEquals(test.selected, 0);
+         test.keyPressed(Key.ENTER);
+        
+        assertNull(test.getPrevious());
+    }
+}
