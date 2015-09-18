@@ -34,7 +34,12 @@ public class FinishLayerTest extends LayerTest {
     public void KeyInputTest() {
         FinishLayer test = new FinishLayer();
         
-        test.keyPressed(Key.ENTER);
+        assertEquals(test.selected, 0);
+        test.keyPressed(Key.UP);
+        assertEquals(test.selected, 1);
+        test.keyPressed(Key.DOWN);
+        assertEquals(test.selected, 0);
+         test.keyPressed(Key.ENTER);
         
         assertNull(test.getPrevious());
     }
