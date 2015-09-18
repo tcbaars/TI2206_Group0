@@ -27,8 +27,8 @@ public class FinishLayerTest extends LayerTest {
     }
     
     /**
-     *
-     *
+     * test the input of the keys.
+     * 
      */
     @Test
     public void KeyInputTest() {
