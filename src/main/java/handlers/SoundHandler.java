@@ -33,6 +33,8 @@ public class SoundHandler {
                     clip.open(sound);
                     soundLoader.put(soundKey, clip);
                 }
+            } catch (IllegalArgumentException e){
+                e.printStackTrace();
             } catch (LineUnavailableException e) {
                 e.printStackTrace();
             }catch (UnsupportedAudioFileException e) {
