@@ -18,8 +18,8 @@ public class TitleLayer extends Layer {
 
     private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
 
-    private final static String clicksoundurl= "/sounds/click.wav";
-    private final static String clicksoundkey= "click";
+    private final static String clicksoundurl = "/sounds/click.wav";
+    private final static String clicksoundkey = "click";
     /*
      * The selected options index and list of options available
      */
