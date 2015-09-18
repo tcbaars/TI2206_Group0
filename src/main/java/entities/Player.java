@@ -45,6 +45,8 @@ public class Player extends Entity {
     private int currentScore;
     private int numberFishEaten;
 
+    private Bubbles bubbles;
+
     /**
      * Creates a new player.
      */
@@ -85,11 +87,24 @@ public class Player extends Entity {
                 (int) spriteHeight, animationdelay);
     }
 
+    private void initBubbles(){
+        bubbles = new Bubbles(this);
+    }
+
     /**
      * Handles the updates of the player each tick.
      */
     @Override
     protected void update() {
+        if(bubbles != null){
+            if(bubbles.hasBubbles()){
+                bubbles.updateBubbles();
+            } else {
+                initBubbles();
+            }
+        } else {
+            initBubbles();
+        }
     }
 
     /**
@@ -99,6 +114,9 @@ public class Player extends Entity {
      */
     @Override
     protected void draw(Graphics2D graphic) {
+        if(bubbles != null){
+            bubbles.drawBubbles(graphic);
+        }
     }
 
     public void moveUp() {

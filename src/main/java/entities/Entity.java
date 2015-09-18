@@ -100,8 +100,8 @@ public abstract class Entity {
         if (isAlive()) {
             // Then handle the current frame to be displayed
             animation.update();
-            update();
         }
+        update();
     }
 
     /**
@@ -124,9 +124,8 @@ public abstract class Entity {
                 graphic.draw(boundingBox);
                 graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());
             }
-
-            draw(graphic);
         }
+        draw(graphic);
     }
 
     /**

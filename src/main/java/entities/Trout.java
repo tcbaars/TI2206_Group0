@@ -44,6 +44,10 @@ public class Trout extends Enemy {
         setRandomSide();
         setRandomDepth();
         setRandomScale(minscale, maxscale);
+        int rand = generator.nextInt(101);
+        if(rand >= 75){
+            bubbles = new Bubbles(this);
+        }
     }
 
     @Override
@@ -59,10 +63,16 @@ public class Trout extends Enemy {
     @Override
     protected void update() {
         move(movingDirection);
+        if (hasBubbles()){
+            bubbles.updateBubbles();
+        }
     }
 
     @Override
     protected void draw(Graphics2D graphics) {
+        if(hasBubbles()){
+            bubbles.drawBubbles(graphics);
+        }
     }
 
     public double getBaseValue() {
