@@ -3,6 +3,7 @@ package layers;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.OptionsHandler;
+import handlers.SoundHandler;
 import util.Logger;
 
 import java.awt.Color;
@@ -16,6 +17,13 @@ import java.awt.Graphics2D;
 public class TitleLayer extends Layer {
 
     private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
+    private SoundHandler _soundHandler = SoundHandler.getInstance();
+
+    /**
+     * TitleLayer sound resources
+     */
+    private final static String clicksoundurl = "/sounds/click.wav";
+    private final static String clicksoundkey = "click";
 
     /*
      * The selected options index and list of options available
@@ -58,6 +66,8 @@ public class TitleLayer extends Layer {
      */
     public TitleLayer() {
         selected = 0;
+        // Load TitleLayer sound resources
+        _soundHandler.loadSound(clicksoundkey, clicksoundurl);
         Logger.info("Opening Title Menu");
     }
 
@@ -65,6 +75,8 @@ public class TitleLayer extends Layer {
      * Select the currently selected option.
      */
     private void select() {
+        // Play selection sound
+        _soundHandler.playSound(clicksoundkey);
         // if new game
         if (selected == 0) {
             addLayer(new GameLayer());
