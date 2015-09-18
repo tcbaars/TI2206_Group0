@@ -3,6 +3,7 @@ package layers;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.OptionsHandler;
+import handlers.SoundHandler;
 import util.Logger;
 
 import java.awt.Color;
@@ -17,6 +18,8 @@ public class TitleLayer extends Layer {
 
     private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
 
+    private final static String clicksoundurl= "/sounds/click.wav";
+    private final static String clicksoundkey= "click";
     /*
      * The selected options index and list of options available
      */
@@ -58,6 +61,7 @@ public class TitleLayer extends Layer {
      */
     public TitleLayer() {
         selected = 0;
+        SoundHandler.loadSound(clicksoundkey, clicksoundurl);
         Logger.info("Opening Title Menu");
     }
 
@@ -67,6 +71,7 @@ public class TitleLayer extends Layer {
     private void select() {
         // if new game
         if (selected == 0) {
+            SoundHandler.playSound(clicksoundkey);
             addLayer(new GameLayer());
             removeLayer();
         // if instructions
