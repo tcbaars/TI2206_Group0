@@ -11,25 +11,16 @@ public class BackgroundLayer extends Layer {
     private final static String bgkey = "background";
     private final static String bgurl = "/backgrounds/Background.png";
 
+    private final static int iconwidth = 30;
+    private final static int iconheight = 30;
     private final static String soundonkey = "soundOn";
     private final static String soundonurl = "/icons/soundOn.png";
-    private final static int soundonwidth = 24;
-    private final static int soundonheight = 26;
-
     private final static String soundoffkey = "soundOff";
     private final static String soundoffurl = "/icons/soundOff.png";
-    private final static int soundoffwidth = 22;
-    private final static int soundoffheight = 15;
-
     private final static String musiconkey = "musicOn";
     private final static String musiconurl = "/icons/musicOn.png";
-    private final static int musiconwidth = 21;
-    private final static int musiconheight = 25;
-
     private final static String musicoffkey = "musicOff";
     private final static String musicoffurl = "/icons/musicOff.png";
-    private final static int musicoffwidth = 21;
-    private final static int musicoffheight = 25;
 
     /**
      * Background.
@@ -55,18 +46,18 @@ public class BackgroundLayer extends Layer {
         graphics.drawImage(ImageHandler.getInstance().getImage(bgkey), 0, 0, screenWidth, screenHeight, null);
         int startMusicX = 10;
         int startSoundX;
-        int startY = screenHeight - 28;
+        int startY = screenHeight - (iconheight + 10);
         if (OptionsHandler.getInstance().musicOn()) {
-            startSoundX = startMusicX + musiconwidth + 10;
-            graphics.drawImage(ImageHandler.getInstance().getImage(musiconkey), startMusicX, startY, musiconwidth, musiconheight, null);
+            startSoundX = startMusicX + iconwidth + 10;
+            graphics.drawImage(ImageHandler.getInstance().getImage(musiconkey), startMusicX, startY, iconwidth, iconheight, null);
         } else {
-            startSoundX = startMusicX + musicoffwidth + 10;
-            graphics.drawImage(ImageHandler.getInstance().getImage(musicoffkey), startMusicX, startY, musicoffwidth, musicoffheight, null);
+            startSoundX = startMusicX + iconwidth + 10;
+            graphics.drawImage(ImageHandler.getInstance().getImage(musicoffkey), startMusicX, startY, iconwidth, iconheight, null);
         }
         if (OptionsHandler.getInstance().soundOn()) {
-            graphics.drawImage(ImageHandler.getInstance().getImage(soundonkey), startSoundX, startY, soundonwidth, soundonheight, null);
+            graphics.drawImage(ImageHandler.getInstance().getImage(soundonkey), startSoundX, startY, iconwidth, iconheight, null);
         } else {
-            graphics.drawImage(ImageHandler.getInstance().getImage(soundoffkey), startSoundX, startY, soundoffwidth, soundoffheight, null);
+            graphics.drawImage(ImageHandler.getInstance().getImage(soundoffkey), startSoundX, startY, iconwidth, iconheight, null);
         }
         return graphics;
     }
