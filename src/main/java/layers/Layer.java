@@ -7,8 +7,11 @@ import javax.swing.JPanel;
 
 import enumerations.Key;
 import handlers.OptionsHandler;
+import handlers.SoundHandler;
 
 public abstract class Layer extends JPanel {
+
+    protected SoundHandler _soundHandler = SoundHandler.getInstance();
 
     private Layer prev;
     private Layer next;

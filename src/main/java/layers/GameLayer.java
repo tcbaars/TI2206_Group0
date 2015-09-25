@@ -18,6 +18,9 @@ public class GameLayer extends Layer {
         game = new SinglePlayerGameHandler();
     }
 
+    /**
+     * Any layer specific updates that need to be applied to per 'tick'.
+     */
     @Override
     public void update() {
         if (!isActive()) {
@@ -54,12 +57,23 @@ public class GameLayer extends Layer {
         }
     }
 
+    /**
+     * Draws the layer specific graphical elements to the specified 2-Dimensional image
+     *
+     * @param graphic the 2-Dimensional image.
+     * @return the new graphic.
+     */
     @Override
     public Graphics2D draw(Graphics2D graphic) {
         game.draw(graphic);
         return graphic;
     }
 
+    /**
+     * Handles keys pressed by the player.
+     *
+     * @param key the key pressed
+     */
     @Override
     public void keyPressed(Key key) {
         switch (key) {
@@ -80,6 +94,11 @@ public class GameLayer extends Layer {
         }
     }
 
+    /**
+     * Handles keys no longer pressed by the payer.
+     *
+     * @param key the key released
+     */
     @Override
     public void keyReleased(Key key) {
         switch (key) {

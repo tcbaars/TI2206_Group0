@@ -1,41 +1,36 @@
 package layers;
 
+import enumerations.GameFont;
+import enumerations.GameSound;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.GameHandler;
 import handlers.OptionsHandler;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 
+/**
+ * The PauseLayer class represents the pause screen of the game.
+ * From which the game can be resumed and exited.
+ */
 public class PauseLayer extends Layer{
 
+    /*
+     * The game paused
+     */
     private GameHandler game;
+
+    /*
+     * Appearance options of the paused screen to be displayed
+     */
+    private final static String titletext = "PAUSED";
 
     /*
      * The selected options index and list of options available
      */
     private int selected;
     private final String[] options = {"Resume Game", "Title Screen", "Exit"};
-
-    /*
-     * Appearance options of the title to be displayed
-     */
-    private final static String titletext = "PAUSED";
-    private final Color titlefill = Color.WHITE;
-    private final Color titleoutline = Color.BLACK;
-    private final static float titleoutlinesize = 2;
-    private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
-
-    /*
-     * Appearance options of the paused options to be displayed
-     */
-    private final Color optionfill = Color.WHITE;
-    private final Color optionoutline = Color.BLACK;
-    private final Color selectedfill = Color.YELLOW;
-    private final static float optionoutlinesize = 1;
-    private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     /*
      * The coordinates for the title/options
@@ -49,22 +44,60 @@ public class PauseLayer extends Layer{
      */
     public PauseLayer(GameHandler game) {
         this.game = game;
+        // Set the initial selected item
         selected = 0;
+        // Load PauseLayer sound resources
+        _soundHandler.loadSound(GameSound.SELECT);
+        _soundHandler.loadSound(GameSound.NAVIGATE);
     }
 
+    /**
+     * Select the currently selected option.
+     */
     private void select() {
+        // Play selection sound
+        _soundHandler.playSound(GameSound.SELECT);
+
         switch(selected) {
-            case 0: game.resume(); // Resume
-                    break;
-            case 1: addLayer(new TitleLayer()); // Title Screen
-                    removeLayer();
-                    break;
-            case 2: System.exit(0); // Exit
-                    break;
-            default: break;
+            // Resume
+            case 0:
+                game.resume();
+                break;
+            // Title Screen
+            case 1:
+                addLayer(new TitleLayer());
+                removeLayer();
+                break;
+            // Exit
+            case 2:
+                System.exit(0); // Exit
+                break;
+            default:
+                break;
         }
     }
 
+    /**
+     * Changes the currently selected option.
+     *
+     * @param change the change to be applied.
+     */
+    private void navigate(int change){
+        _soundHandler.playSound(GameSound.NAVIGATE);
+        selected = selected + change;
+        if(selected < 0){
+            selected = options.length - 1;
+        } else if(selected >= options.length ){
+            selected = 0;
+        }
+    }
+
+    /**
+     * Draws the layer specific graphical elements to the specified 2-Dimensional image
+     *
+     * @param graphic the 2-Dimensional image.
+     * @return the new graphic.
+     */
     @Override
     protected void update() {
         if (!game.isPaused()) {
@@ -86,17 +119,15 @@ public class PauseLayer extends Layer{
                 50, 50); // Corners
 
         // Draw the title
-        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline, titleoutlinesize, ytitle);
+        FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.TITLE, titletext, ytitle);
 
         // Draw each option
         for(int i = 0; i < options.length; i++){
             // Highlights the option selected
             if (i == selected) {
-                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], selectedfill, optionoutline,
-                        optionoutlinesize, (yoption + (yoptionstep * i)));
+                FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.SELECTED, options[i], (yoption + (yoptionstep * i)));
             } else {
-                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], optionfill, optionoutline,
-                        optionoutlinesize, (yoption + (yoptionstep * i)));
+                FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.OPTION, options[i], (yoption + (yoptionstep * i)));
             }
         }
 
@@ -111,27 +142,13 @@ public class PauseLayer extends Layer{
     @Override
     public void keyPressed(Key key) {
         switch (key) {
-        /*
-         *  Change the current selection according to what directional key is pressed
-         *  Making sure to stay within the bounds of the options available
-         */
             case UP:
             case LEFT:
-                selected = selected - 1;
-                if (selected < 0) {
-                    selected = options.length - 1;
-                }
+                navigate(-1);
                 break;
             case DOWN:
             case RIGHT:
-                selected = (selected + 1) % options.length;
-                break;
-            // Press the Enter to confirm the selected option
-            case ENTER:
-                select();
-                break;
-            case ESC:
-                game.resume();
+                navigate(1);
                 break;
             default:
                 break;
@@ -145,5 +162,15 @@ public class PauseLayer extends Layer{
      */
     @Override
     public void keyReleased(Key key) {
+        switch (key) {
+            case ENTER:
+                select();
+                break;
+            case ESC:
+                game.resume();
+                break;
+            default:
+                break;
+        }
     }
 }
