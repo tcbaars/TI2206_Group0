@@ -1,0 +1,12 @@
+bubble:
+https://freesound.org/people/DuffyBro/sounds/319107/#
+chomp
+https://freesound.org/people/scottemoil/sounds/188440/
+lose
+https://freesound.org/people/fins/sounds/171673/
+navigate
+https://freesound.org/people/satrebor/sounds/113218/
+select
+https://freesound.org/people/dland/sounds/320181/
+win
+https://freesound.org/people/Timbre/sounds/110317/

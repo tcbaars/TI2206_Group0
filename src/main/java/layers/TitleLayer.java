@@ -22,8 +22,8 @@ public class TitleLayer extends Layer {
     /**
      * TitleLayer sound resources
      */
-    private final static String clicksoundurl = "/sounds/click.wav";
-    private final static String clicksoundkey = "click";
+    private final static String selectsoundurl = "/sounds/select.wav";
+    private final static String selectsoundkey = "select";
 
     /*
      * The selected options index and list of options available
@@ -67,7 +67,7 @@ public class TitleLayer extends Layer {
     public TitleLayer() {
         selected = 0;
         // Load TitleLayer sound resources
-        _soundHandler.loadSound(clicksoundkey, clicksoundurl);
+        _soundHandler.loadSound(selectsoundkey, selectsoundurl);
         Logger.info("Opening Title Menu");
     }
 
@@ -76,7 +76,7 @@ public class TitleLayer extends Layer {
      */
     private void select() {
         // Play selection sound
-        _soundHandler.playSound(clicksoundkey);
+        _soundHandler.playSound(selectsoundkey);
         // if new game
         if (selected == 0) {
             addLayer(new GameLayer());
