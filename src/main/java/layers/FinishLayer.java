@@ -9,6 +9,7 @@ import util.Logger;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.Path2D;
 
 /**
  * Created by Adriaan on 11-9-2015.
@@ -19,7 +20,8 @@ public class FinishLayer extends Layer {
     private HighScoresHandler _HighScoresHandler = HighScoresHandler.getInstance();
 
     private int selected;
-    private int score;
+    private String playerName = "AAA";
+    private int score = 0;
     private boolean hasWon; // Currently not used. Waiting for highscore
 
     /*
@@ -47,6 +49,7 @@ public class FinishLayer extends Layer {
     private final static float optionoutlinesize = 1;
     private final String[] options = {"Play Again", "Go To Tile Screen"};
     private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
+    private int selectSize = options.length + playerName.length() * 2;
 
     /*
      * The coordinates for the elements
@@ -56,6 +59,12 @@ public class FinishLayer extends Layer {
     private final static int ytextstep = 50;
     private final static int yoption = 600;
     private final static int yoptionstep = 85;
+
+    private final static int yTriangle = 325;
+    private final static int xTriangle = 568;
+    private final static int triangleSize = 20;
+    private final static int yTriangleDiff = 180;
+    private final static int xTriangleDiff = 72;
 
     /**
      * Constructor for win/lost screen
@@ -72,7 +81,6 @@ public class FinishLayer extends Layer {
 
         Logger.info("Player ended the game, " + titletext);
         text[1] = text[1] + score;
-        _HighScoresHandler.addScore("TEST", score);
     }
 
     /**
@@ -80,10 +88,12 @@ public class FinishLayer extends Layer {
      */
     private void select() {
         switch(selected) {
-            case 0: addLayer(new GameLayer()); // Start new game
+            case 0: _HighScoresHandler.addScore(playerName, score);
+                    addLayer(new GameLayer()); // Start new game
                     removeLayer();
                     break;
-            case 1: addLayer(new TitleLayer()); // Title Screen
+            case 1: _HighScoresHandler.addScore(playerName, score);
+                    addLayer(new TitleLayer()); // Title Screen
                     removeLayer();
                     break;
             default: break;
@@ -117,6 +127,31 @@ public class FinishLayer extends Layer {
                     optionoutlinesize, ytext + ytextstep * i);
         }
 
+        // Name
+        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, playerName, titlefill, titleoutline, titleoutlinesize, 450);
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < playerName.length(); x++) {
+                if (selected == y * 3 + x + 2) {
+                    graphic.setColor(selectedfill);
+                } else {
+                    graphic.setColor(optionfill);
+                }
+
+                int triangleDirection = triangleSize;
+                if (y == 1) {
+                    triangleDirection = -triangleSize;
+                }
+
+                Path2D path = new Path2D.Double();
+                path.moveTo(xTriangle + x * xTriangleDiff, yTriangle + y * yTriangleDiff);
+                path.lineTo(xTriangle + x * xTriangleDiff + triangleSize, yTriangle + y * yTriangleDiff + 2 * triangleDirection);
+                path.lineTo(xTriangle + x * xTriangleDiff - triangleSize, yTriangle + y * yTriangleDiff + 2 * triangleDirection);
+                path.closePath();
+
+                graphic.fill(path);
+            }
+        }
+
         // Draw each option
         for(int i = 0; i < options.length; i++){
             // Highlights the option selected
@@ -145,15 +180,27 @@ public class FinishLayer extends Layer {
          *  Making sure to stay within the bounds of the options available
          */
             case UP:
+                if (selected > 4) {
+                    selected = selected - 3;
+                    break;
+                }
             case LEFT:
                 selected = selected - 1;
                 if (selected < 0) {
-                    selected = options.length - 1;
+                    selected = selectSize - 1;
                 }
                 break;
             case DOWN:
+                if (selected < 5 && selected > 1) {
+                    selected = selected + 3;
+                    break;
+                }
+                if (selected > 4) {
+                    selected = 1;
+                    break;
+                }
             case RIGHT:
-                selected = (selected + 1) % options.length;
+                selected = (selected + 1) % selectSize;
                 break;
             // Press the Enter to confirm the selected option
             case ENTER:
