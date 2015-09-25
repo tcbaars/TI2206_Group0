@@ -6,7 +6,10 @@ import java.util.Random;
 import entities.Enemy;
 import entities.Player;
 import entities.Trout;
-import entities.Trout;
+import entities.Stingray;
+import entities.Shark;
+import entities.Dunkleosteus;
+import entities.Swordfish;
 
 public class EnemyHandler {
 
