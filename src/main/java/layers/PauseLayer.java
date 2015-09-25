@@ -150,6 +150,12 @@ public class PauseLayer extends Layer{
             case RIGHT:
                 navigate(1);
                 break;
+            case ENTER:
+                select();
+                break;
+            case ESC:
+                game.resume();
+                break;
             default:
                 break;
         }
@@ -162,15 +168,5 @@ public class PauseLayer extends Layer{
      */
     @Override
     public void keyReleased(Key key) {
-        switch (key) {
-            case ENTER:
-                select();
-                break;
-            case ESC:
-                game.resume();
-                break;
-            default:
-                break;
-        }
     }
 }

@@ -1,5 +1,7 @@
 package layers;
 
+import enumerations.GameFont;
+import enumerations.GameSound;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.HighScoresHandler;
@@ -7,7 +9,6 @@ import handlers.OptionsHandler;
 import util.Logger;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -23,10 +24,6 @@ public class HighScoreLayer extends Layer {
      * Appearance options of the title to be displayed
      */
     private final static String titletext = "HIGHSCORES";
-    private final Color titlefill = Color.WHITE;
-    private final Color titleoutline = Color.BLACK;
-    private final static float titleoutlinesize = 2;
-    private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
 
     /*
      * The coordinates for the text
@@ -42,24 +39,37 @@ public class HighScoreLayer extends Layer {
      * Appearance options of the options to be displayed
      */
     private final static String optiontext = "BACK";
-    private final Color selectedfill = Color.YELLOW;
-    private final Color optionoutline = Color.BLACK;
-    private final static float optionoutlinesize = 1;
-    private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     public HighScoreLayer(){
         super();
+        // Load sound resources
+        _soundHandler.loadSound(GameSound.SELECT);
+        _soundHandler.loadSound(GameSound.NAVIGATE);
         Logger.info("Opening Highscore Menu");
     }
 
+    /**
+     * Select the currently selected option.
+     */
     private void select() {
+        // Play selection sound
+        _soundHandler.playSound(GameSound.SELECT);
         addLayer(new TitleLayer());
         removeLayer();
     }
 
+    /**
+     * Any layer specific updates that need to be applied to per 'tick'.
+     */
     @Override
     public void update() {}
 
+    /**
+     * Draws the layer specific graphical elements to the specified 2-Dimensional image
+     *
+     * @param graphic the 2-Dimensional image.
+     * @return the new graphic.
+     */
     @Override
     public Graphics2D draw(Graphics2D graphic) {
 
@@ -74,27 +84,28 @@ public class HighScoreLayer extends Layer {
                 50, 50); // Corners
 
         // Title
-        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline,
-                titleoutlinesize, ytitle);
+        FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.TITLE, titletext, ytitle);
 
         // Highscores
         if (currentScores > maxScores) {
             currentScores = maxScores;
         }
         for (int i = 0; i < currentScores; i++) {
-            FontOutlineHandler.drawText(graphic, optionfont, _HighScoresHandler.getHighScores().get(i).getName(),
-                    titlefill, optionoutline, optionoutlinesize, xNameStart, yScoreStart + i * yScoreStep);
-            FontOutlineHandler.drawText(graphic, optionfont, String.valueOf(_HighScoresHandler.getHighScores().get(i).getScore()),
-                    titlefill, optionoutline, optionoutlinesize, xScoreStart, yScoreStart + i * yScoreStep);
+            FontOutlineHandler.drawText(graphic, GameFont.TEXT, _HighScoresHandler.getHighScores().get(i).getName(), xNameStart, yScoreStart + i * yScoreStep);
+            FontOutlineHandler.drawText(graphic, GameFont.TEXT, String.valueOf(_HighScoresHandler.getHighScores().get(i).getScore()), xScoreStart, yScoreStart + i * yScoreStep);
         }
 
         // Back key
-        FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, optiontext, selectedfill, optionoutline,
-                optionoutlinesize, yoption);
+        FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.SELECTED, optiontext, yoption);
 
         return graphic;
     }
 
+    /**
+     * Handles keys pressed by the player.
+     *
+     * @param key the key pressed
+     */
     @Override
     public void keyPressed(Key key) {
         switch (key) {
@@ -107,6 +118,11 @@ public class HighScoreLayer extends Layer {
         }
     }
 
+    /**
+     * Handles keys no longer pressed by the payer.
+     *
+     * @param key the key released
+     */
     @Override
     public void keyReleased(Key key) {
     }
