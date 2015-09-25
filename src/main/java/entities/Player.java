@@ -9,7 +9,7 @@ import handlers.OptionsHandler;
 /**
  * The Player class represents the player controlled entity.
  */
-public class Player extends Entity {
+public class Player extends EntityBase {
 
     /*
      * The current game settings
@@ -196,7 +196,7 @@ public class Player extends Entity {
      * @param food the entity to be eaten.
      */
     @Override
-    protected void consume(Entity food) {
+    public void consume(Entity food) {
         if (food != null){
             // Notify the food that it has been eaten
             food.consumedBy(this);
@@ -214,7 +214,7 @@ public class Player extends Entity {
      * @return the value of the player.
      */
     @Override
-    protected int consumedBy(Entity eater) {
+    public int consumedBy(Entity eater) {
         kill();
         return 0;
     }

@@ -8,7 +8,7 @@ import handlers.OptionsHandler;
 /**
  * The Enemy class outlines the basic attributes an enemy attribute must have.
  */
-public abstract class Enemy extends Entity {
+public abstract class Enemy extends EntityBase {
 
     /*
      * Randomises the enemy's attributes
