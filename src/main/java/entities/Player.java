@@ -36,7 +36,7 @@ public class Player extends EntityBase {
     /*
      * Starting size
      */
-    private final static double initialscale = 2000;
+    private final static double initialscale = 1000;
     private final static double targetscale = 10000;
 
     /*
