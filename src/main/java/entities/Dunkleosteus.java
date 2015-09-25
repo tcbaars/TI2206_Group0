@@ -17,14 +17,14 @@ public class Dunkleosteus extends Enemy {
     private final static double movespeed = 0.15;
     private Direction movingDirection;
     private final static double basevalue = 122;
-    private final static double entitywidth = 129;
-    private final static double entityheight = 38;
+    private final static double entitywidth = 1300;
+    private final static double entityheight = 500;
 
     /*
      * Sprite and animation properties
      */
-    private final static double spritewidth = 128;
-    private final static double spriteheight = 71;
+    private final static double spritewidth = 1300;
+    private final static double spriteheight = 600;
     private final static String animationkey = "Dunkleosteus";
     private final static String animationurl = "/sprites/Dunkleosteus.png";
     private final static int numberframes = 3;
