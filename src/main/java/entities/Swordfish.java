@@ -17,14 +17,14 @@ public class Swordfish extends Enemy {
     private final static double movespeed = 0.35;
     private Direction movingDirection;
     private final static double basevalue = 339;
-    private final static double entitywidth = 91;
-    private final static double entityheight = 37;
+    private final static double entitywidth = 1300;
+    private final static double entityheight = 550;
 
     /*
      * Sprite and animation properties
      */
-    private final static double spritewidth = 91;
-    private final static double spriteheight = 74;
+    private final static double spritewidth = 1300;
+    private final static double spriteheight = 600;
     private final static String animationkey = "Swordfish";
     private final static String animationurl = "/sprites/Swordfish.png";
     private final static int numberframes = 2;
