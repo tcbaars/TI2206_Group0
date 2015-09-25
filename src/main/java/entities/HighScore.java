@@ -3,20 +3,19 @@ package entities;
 import java.io.Serializable;
 
 /**
- * Created by Adriaan on 25-9-2015.
  * This class is a HighScore object that has a name and a score.
  */
 public class HighScore implements Serializable, Comparable<HighScore> {
     private int score;
-    private String naam;
+    private String name;
 
     /**
      * Constructor
-     * @param naam  Player name
+     * @param name  Player name
      * @param score Player score
      */
-    public HighScore(String naam, int score) {
-        this.naam = naam;
+    public HighScore(String name, int score) {
+        this.name = name;
         this.score = score;
     }
 
@@ -32,8 +31,8 @@ public class HighScore implements Serializable, Comparable<HighScore> {
      * Get player name
      * @return name
      */
-    public String getNaam() {
-        return naam;
+    public String getName() {
+        return name;
     }
 
     public int compareTo(HighScore score1) {

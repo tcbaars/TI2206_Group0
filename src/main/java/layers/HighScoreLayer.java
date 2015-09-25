@@ -10,6 +10,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
+/**
+ * This layer draws the highscores
+ */
 public class HighScoreLayer extends Layer {
 
     private HighScoresHandler _HighScoresHandler = HighScoresHandler.getInstance();
@@ -79,7 +82,7 @@ public class HighScoreLayer extends Layer {
             currentScores = maxScores;
         }
         for (int i = 0; i < currentScores; i++) {
-            FontOutlineHandler.drawText(graphic, optionfont, _HighScoresHandler.getHighScores().get(i).getNaam(),
+            FontOutlineHandler.drawText(graphic, optionfont, _HighScoresHandler.getHighScores().get(i).getName(),
                     titlefill, optionoutline, optionoutlinesize, xNameStart, yScoreStart + i * yScoreStep);
             FontOutlineHandler.drawText(graphic, optionfont, String.valueOf(_HighScoresHandler.getHighScores().get(i).getScore()),
                     titlefill, optionoutline, optionoutlinesize, xScoreStart, yScoreStart + i * yScoreStep);

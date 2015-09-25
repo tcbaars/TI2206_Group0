@@ -12,7 +12,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
 
 /**
- * Created by Adriaan on 11-9-2015.
  * This class is responsible for the win/lost screen.
  */
 public class FinishLayer extends Layer {
@@ -22,7 +21,6 @@ public class FinishLayer extends Layer {
     private int selected;
     private String playerName = "AAA";
     private int score = 0;
-    private boolean hasWon; // Currently not used. Waiting for highscore
 
     /*
      * Appearance options of the title to be displayed
@@ -36,7 +34,6 @@ public class FinishLayer extends Layer {
     /*
     * Appearance options of the text to be displayed
     */
-    // private final String[] text = {"Fish Eaten: NaN", "Score: ", "High Score: NaN"};
     private final String[] text = {"", "Score: ", "High Score: "};
     private final Font textfont = new Font("Times New Roman", Font.BOLD, 50);
 
@@ -71,7 +68,6 @@ public class FinishLayer extends Layer {
      */
     public FinishLayer(int score, boolean hasWon) {
         this.score = score;
-        this.hasWon = hasWon;
         selected = 0;
         if (hasWon) {
             titletext = "YOU WIN!";

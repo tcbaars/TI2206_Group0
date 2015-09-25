@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by Adriaan on 25-9-2015.
  * This class is doing everything with the HighScores
  */
 public class HighScoresHandler {
