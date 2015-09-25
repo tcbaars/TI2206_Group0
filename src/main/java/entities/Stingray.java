@@ -16,7 +16,7 @@ public class Stingray extends Enemy {
      */
     private final static double movespeed = 0.3;
     private Direction movingDirection;
-    private final static double basevalue = 262,5;
+    private final static double basevalue = 263;
     private final static double entitywidth = 68;
     private final static double entityheight = 42;
 
