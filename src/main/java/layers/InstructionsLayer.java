@@ -1,5 +1,7 @@
 package layers;
 
+import enumerations.GameFont;
+import enumerations.GameSound;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.ImageHandler;
@@ -7,7 +9,6 @@ import handlers.OptionsHandler;
 import util.Logger;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 
 public class InstructionsLayer extends Layer {
@@ -16,10 +17,6 @@ public class InstructionsLayer extends Layer {
      * Appearance options of the title to be displayed
      */
     private final static String titletext = "INSTRUCTIONS";
-    private final Color titlefill = Color.WHITE;
-    private final Color titleoutline = Color.BLACK;
-    private final static float titleoutlinesize = 2;
-    private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
 
     /*
     * Appearance options of the text to be displayed
@@ -27,7 +24,6 @@ public class InstructionsLayer extends Layer {
     private final String[] text = {"Eat smaller fish to grow bigger.", "Avoid larger fish.",
                             "The larger the fish, the more points", "you receive when eating."};
     private final String[] text2 = {"to move", "to pause the game", "to toggle sound", "to toggle music"};
-    private final Font textfont = new Font("Times New Roman", Font.BOLD, 50);
 
     /*
      * The coordinates for the text
@@ -43,31 +39,46 @@ public class InstructionsLayer extends Layer {
      * Appearance options of the options to be displayed
      */
     private final static String optiontext = "BACK";
-    private final Color selectedfill = Color.YELLOW;
-    private final Color optionoutline = Color.BLACK;
-    private final static float optionoutlinesize = 1;
-    private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     /*
-    * The locations to the icons
+    * The icons
     */
     private final String[] imageKey = {"arrowKey", "escKey", "sKey", "mKey"};
     private final String[] imageUrl = {"/icons/arrowKeys.png", "/icons/escKey.png",
                                         "/icons/sKey.png", "/icons/mKey.png"};
 
+    /**
+     * Creates a new instructions screen.
+     */
     public InstructionsLayer(){
         super();
+        // Load sound resources
+        _soundHandler.loadSound(GameSound.SELECT);
         Logger.info("Opening Instructions Menu");
     }
 
+    /**
+     * Select the currently selected option.
+     */
     private void select() {
+        // Play selection sound
+        _soundHandler.playSound(GameSound.SELECT);
         addLayer(new TitleLayer());
         removeLayer();
     }
 
+    /**
+     * Any layer specific updates that need to be applied to per 'tick'.
+     */
     @Override
     public void update() {}
 
+    /**
+     * Draws the layer specific graphical elements to the specified 2-Dimensional image
+     *
+     * @param graphic the 2-Dimensional image.
+     * @return the new graphic.
+     */
     @Override
     public Graphics2D draw(Graphics2D graphic) {
 
@@ -88,43 +99,49 @@ public class InstructionsLayer extends Layer {
                 50, 50); // Corners
 
         // Title
-        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline,
-                                                titleoutlinesize, ytitle);
+        FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.TITLE, titletext, ytitle);
 
         // Instructions
         for (int i = 0; i < text.length; i++) {
-            FontOutlineHandler.drawTextCenterWidth(graphic, textfont, text[i], titlefill, optionoutline,
-                                                    optionoutlinesize, ytext + ytextstep * i);
+            FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.TEXT, text[i], ytext + ytextstep * i);
         }
 
         // Key explanation
         for (int i = 0; i < text2.length; i++) {
-            FontOutlineHandler.drawTextCenterWidth(graphic, textfont, text2[i], titlefill, optionoutline,
-                                                    optionoutlinesize, ytext2 + ytext2step * i);
+            FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.TEXT, text2[i], ytext2 + ytext2step * i);
             graphic.drawImage(ImageHandler.getInstance().getImage(imageKey[i]), 350, ytext2 + ytext2step * i - 45, 60, 60, null);
         }
 
-        // Back key
-        FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, optiontext, selectedfill, optionoutline,
-                optionoutlinesize, yoption);
+        // Back option
+        FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.SELECTED, optiontext, yoption);
 
         return graphic;
     }
 
+    /**
+     * Handles keys pressed by the player.
+     *
+     * @param key the key pressed
+     */
     @Override
     public void keyPressed(Key key) {
-        switch (key) {
-        case ENTER:
-        case ESC:
-            select();
-            break;
-        default:
-            break;
-        }
     }
 
+    /**
+     * Handles keys no longer pressed by the payer.
+     *
+     * @param key the key released
+     */
     @Override
     public void keyReleased(Key key) {
+        switch (key) {
+            case ENTER:
+            case ESC:
+                select();
+                break;
+            default:
+                break;
+        }
     }
 
 }

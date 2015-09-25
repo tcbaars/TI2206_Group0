@@ -8,22 +8,37 @@ import java.awt.Shape;
 import java.awt.font.GlyphVector;
 import java.awt.geom.Rectangle2D;
 
+import enumerations.GameFont;
+
 /**
  * The FontOutlineHandler class is used to draw text with an outline.
  */
 public class FontOutlineHandler {
 
     /**
-     * Draws the specified text with the specified settings onto the specified 2-dimensional image.
+     * Draws the specified text with the specified settings onto the specified 2-Dimensional image.
      *
-     * @param graphic a 2-dimensional image
-     * @param font the font desired
-     * @param text the text to be displayed
-     * @param fillColor the colour of the text to be displayed
-     * @param outlineColor the colour of the outline to be drawn around the text
-     * @param outlineSize the thickness of the outline
-     * @param startX the x-coordinate from which the text shall start
-     * @param startY the y-coordinate from which the text shall start
+     * @param graphic a 2-Dimensional image.
+     * @param font the font desired.
+     * @param text the text to be displayed.
+     * @param startX the x-coordinate from which the text shall start.
+     * @param startY the y-coordinate from which the text shall start.
+     */
+    public static void drawText(Graphics2D graphic, GameFont font, String text, int startX, int startY){
+        drawText(graphic, font.getFont(), text, font.getFill(), font.getOultineColor(), font.getOutlineSize(), startX, startY);
+    }
+
+    /**
+     * Draws the specified text with the specified settings onto the specified 2-Dimensional image.
+     *
+     * @param graphic a 2-Dimensional image.
+     * @param font the font desired.
+     * @param text the text to be displayed.
+     * @param fillColor the colour of the text to be displayed.
+     * @param outlineColor the colour of the outline to be drawn around the text.
+     * @param outlineSize the thickness of the outline.
+     * @param startX the x-coordinate from which the text shall start.
+     * @param startY the y-coordinate from which the text shall start.
      */
     public static void drawText(Graphics2D graphic, Font font, String text, Color fillColor, Color outlineColor, float outlineSize, int startX, int startY){
         // Splits the specified text into separate letters or 'glyphs'
@@ -49,13 +64,25 @@ public class FontOutlineHandler {
     /**
      * Uses the dimensions specified in the OptionHandler to draw the specified text in the horizontal centre of the screen.
      *
-     * @param graphic a 2-dimensional image
-     * @param font the font desired
-     * @param text the text to be displayed
-     * @param fillColor the colour of the text to be displayed
-     * @param outlineColor the colour of the outline to be drawn around the text
-     * @param outlineSize the thickness of the outline
-     * @param startY the y-coordinate from which the text shall start
+     * @param graphic a 2-Dimensional image.
+     * @param font the font desired.
+     * @param text the text to be displayed.
+     * @param startY the y-coordinate from which the text shall start.
+     */
+    public static void drawTextCenterWidth(Graphics2D graphic, GameFont font, String text,int startY){
+        drawTextCenterWidth(graphic, font.getFont(), text, font.getFill(), font.getOultineColor(), font.getOutlineSize(), startY);
+    }
+
+    /**
+     * Uses the dimensions specified in the OptionHandler to draw the specified text in the horizontal centre of the screen.
+     *
+     * @param graphic a 2-Dimensional image.
+     * @param font the font desired.
+     * @param text the text to be displayed.
+     * @param fillColor the colour of the text to be displayed.
+     * @param outlineColor the colour of the outline to be drawn around the text.
+     * @param outlineSize the thickness of the outline.
+     * @param startY the y-coordinate from which the text shall start.
      */
     public static void drawTextCenterWidth(Graphics2D graphic, Font font, String text, Color fillColor, Color outlineColor, float outlineSize, int startY){
         // Gets the estimated width of the text
@@ -69,10 +96,10 @@ public class FontOutlineHandler {
     /**
      * Returns an approximation of the width of the text given the font desired.
      *
-     * @param graphic a 2-dimensional image
-     * @param font the font desired
-     * @param text the text
-     * @return the width of the string
+     * @param graphic a 2-Dimensional image.
+     * @param font the font desired.
+     * @param text the text.
+     * @return the width of the string.
      */
     private static double getFontWidth(Graphics2D graphic, Font font, String text){
         Rectangle2D fontBox = font.getStringBounds(text, graphic.getFontRenderContext());

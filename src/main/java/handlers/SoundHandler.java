@@ -10,6 +10,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import enumerations.GameSound;
+
 /**
  * The SoundHandler class allows for sound files to be pre-loaded for quicker access time.
  */
@@ -32,6 +34,15 @@ public class SoundHandler {
      */
     public static SoundHandler getInstance(){
         return instance;
+    }
+
+    /**
+     * Loads the specified audio cue.
+     *
+     * @param sound the audio cue.
+     */
+    public void loadSound(GameSound sound){
+        loadSound(sound.getKey(), sound.getURL());
     }
 
     /**
@@ -65,6 +76,17 @@ public class SoundHandler {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Plays the audio cue.
+     * If the sound has been loaded.
+     *
+     * @param sound the audio cue.
+     * @return <code>true</code> if and only if the specified sound was loaded, otherwise <code>false</code>.
+     */
+    public boolean playSound(GameSound sound){
+        return playSound(sound.getKey());
     }
 
     /**
