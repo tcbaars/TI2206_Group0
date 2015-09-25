@@ -6,6 +6,10 @@ import java.util.Random;
 import entities.Enemy;
 import entities.Player;
 import entities.Trout;
+import entities.Stingray;
+import entities.Shark;
+import entities.Dunkleosteus;
+import entities.Swordfish;
 
 public class EnemyHandler {
 
@@ -89,6 +93,20 @@ public class EnemyHandler {
 
     protected Enemy generateEnemy() {
         Enemy enemy = new Trout();
+        Random rn = new Random();
+        int i = rn.nextInt(32)+1;
+        if(16 < i && i <= 20){
+            enemy = new Stingray();
+        }
+        if(20 < i && i <= 25){
+            enemy = new Shark();
+        }
+        if(i == 26){
+            enemy = new Swordfish();
+        }
+        if(26 < i && i <= 32){
+            enemy = new Dunkleosteus();
+        }
         return enemy;
     }
 
