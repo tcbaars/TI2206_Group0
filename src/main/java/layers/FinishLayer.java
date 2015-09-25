@@ -42,7 +42,7 @@ public class FinishLayer extends Layer {
     private final Color selectedfill = Color.YELLOW;
     private final Color optionoutline = Color.BLACK;
     private final static float optionoutlinesize = 1;
-    private final String[] options = {"Play Again", "Go To Tile Screen"};
+    private final String[] options = {"Play Again", "Go To Title Screen"};
     private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     /*

@@ -1,5 +1,7 @@
 package handlers;
 
+import util.Logger;
+
 public class OptionsHandler {
 
     private static OptionsHandler instance = new OptionsHandler();
@@ -56,6 +58,7 @@ public class OptionsHandler {
 
     public void toggleMusic() {
         music = !music;
+        Logger.info("Enable music playback: " + music);
     }
 
     public boolean soundOn() {

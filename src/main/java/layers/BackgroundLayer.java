@@ -5,6 +5,9 @@ import java.awt.Graphics2D;
 import enumerations.Key;
 import handlers.ImageHandler;
 import handlers.OptionsHandler;
+import handlers.MusicHandler;
+import handlers.SoundHandler;
+import util.Logger;
 
 public class BackgroundLayer extends Layer {
 
@@ -22,6 +25,8 @@ public class BackgroundLayer extends Layer {
     private final static String musicoffkey = "musicOff";
     private final static String musicoffurl = "/icons/musicOff.png";
 
+    private MusicHandler _musicHandler = MusicHandler.getInstance();   
+    
     /**
      * Background.
      */
@@ -32,6 +37,9 @@ public class BackgroundLayer extends Layer {
         ImageHandler.getInstance().loadImage(soundoffkey, soundoffurl);
         ImageHandler.getInstance().loadImage(musiconkey, musiconurl);
         ImageHandler.getInstance().loadImage(musicoffkey, musicoffurl);
+        
+        //  prepare music for playback
+        _musicHandler.LoadSong();
         addLayer(new TitleLayer());
     }
 
@@ -70,6 +78,7 @@ public class BackgroundLayer extends Layer {
         switch (key) {
         case MUSIC:
             OptionsHandler.getInstance().toggleMusic();
+            _musicHandler.PlayMusic();
             break;
         case SOUND:
             OptionsHandler.getInstance().toggleSound();

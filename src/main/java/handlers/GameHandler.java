@@ -20,10 +20,12 @@ public abstract class GameHandler {
 
     public void pause() {
         paused = true;
+        MusicHandler.getInstance().StopMusic();
     }
 
     public void resume() {
         paused = false;
+        MusicHandler.getInstance().PlayMusic();
     }
 
     public abstract void update();

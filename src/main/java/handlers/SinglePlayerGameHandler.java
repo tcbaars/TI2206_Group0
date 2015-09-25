@@ -52,6 +52,8 @@ public class SinglePlayerGameHandler extends GameHandler {
         // Set game state to game started
         gameOver = gameWon = false;
         paused = false;
+        MusicHandler.getInstance().Rewind();
+        MusicHandler.getInstance().PlayMusic();
         // Spawn enemies
         enemies = new EnemyHandler();
     }

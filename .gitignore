@@ -6,4 +6,8 @@
 /.settings/
 *.iml
 .idea
+<<<<<<< Updated upstream
 log.txt
+=======
+/TI2206_Group0/nbproject/private/
+>>>>>>> Stashed changes
