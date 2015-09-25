@@ -7,6 +7,7 @@ import entities.Dunkleosteus;
 import entities.Enemy;
 import entities.Player;
 import entities.Shark;
+import entities.Stingray;
 import entities.Swordfish;
 import entities.Trout;
 
@@ -92,7 +93,7 @@ public class EnemyHandler {
 
     protected Enemy generateEnemy() {
         Enemy enemy = null;
-        switch (generator.nextInt(4)) {
+        switch (generator.nextInt(5)) {
         case 0:
             enemy = new Trout();
             break;
@@ -104,6 +105,9 @@ public class EnemyHandler {
             break;
         case 3:
             enemy = new Dunkleosteus();
+            break;
+        case 4:
+            enemy = new Stingray();
             break;
 
         default:
