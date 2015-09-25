@@ -22,7 +22,6 @@ public class HighScoresHandler {
      */
     public HighScoresHandler() {
         highScores = new ArrayList<HighScore>();
-        highScores.add(new HighScore("AAA", 0));
     }
 
     /**

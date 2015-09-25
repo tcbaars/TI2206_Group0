@@ -29,7 +29,7 @@ public class TitleLayer extends Layer {
      * The selected options index and list of options available
      */
     private int selected;
-    private String[] options = { "New Game", "Instructions", "Exit" };
+    private String[] options = { "New Game", "Highscore", "Instructions", "Exit" };
 
     /*
      * Appearance options of the title to be displayed
@@ -81,12 +81,16 @@ public class TitleLayer extends Layer {
         if (selected == 0) {
             addLayer(new GameLayer());
             removeLayer();
-        // if instructions
+        // if Highscore
         } else if (selected == 1) {
+            addLayer(new HighScoreLayer());
+            removeLayer();
+        // if instructions
+        } else if (selected == 2) {
             addLayer(new InstructionsLayer());
             removeLayer();
         // if exit
-        } else if (selected == 2) {
+        } else if (selected == 3) {
             Logger.info("User exited the game in the Title Menu");
             System.exit(0);
         }

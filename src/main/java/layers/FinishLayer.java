@@ -37,7 +37,7 @@ public class FinishLayer extends Layer {
     * Appearance options of the text to be displayed
     */
     // private final String[] text = {"Fish Eaten: NaN", "Score: ", "High Score: NaN"};
-    private final String[] text = {"", "Score: ", "High Score: " + _HighScoresHandler.getHighScores().get(0).getScore()};
+    private final String[] text = {"", "Score: ", "High Score: "};
     private final Font textfont = new Font("Times New Roman", Font.BOLD, 50);
 
     /*
@@ -81,6 +81,12 @@ public class FinishLayer extends Layer {
 
         Logger.info("Player ended the game, " + titletext);
         text[1] = text[1] + score;
+
+        if (_HighScoresHandler.getHighScores().isEmpty()) {
+            text[2] = text[2] + 0;
+        } else {
+            text[2] = text[2] + _HighScoresHandler.getHighScores().get(0).getScore();
+        }
     }
 
     private void updateName() {
@@ -217,7 +223,7 @@ public class FinishLayer extends Layer {
                     break;
                 }
                 if (selected > 4) {
-                    selected = 1;
+                    selected = 0;
                     break;
                 }
             case RIGHT:
