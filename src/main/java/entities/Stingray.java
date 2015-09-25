@@ -84,6 +84,7 @@ public class Stingray extends Enemy {
      *
      * @param direction the desired direction of movement.
      */
+    @Override
     public void setDirection(Direction direction) {
         this.movingDirection = direction;
     }
@@ -118,6 +119,7 @@ public class Stingray extends Enemy {
      *
      * @return the base value.
      */
+    @Override
     public double getBaseValue() {
         return basevalue;
     }
@@ -128,7 +130,7 @@ public class Stingray extends Enemy {
      * @param food the entity to be consumed.
      */
     @Override
-    protected void consume(Entity food) {
+    public void consume(Entity food) {
         food.consumedBy(this);
     }
 
@@ -139,7 +141,7 @@ public class Stingray extends Enemy {
      * @return the value of the stingray adjusted by its current size.
      */
     @Override
-    protected int consumedBy(Entity eater) {
+    public int consumedBy(Entity eater) {
         kill();
         return calculateValue();
     }
