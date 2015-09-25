@@ -86,11 +86,17 @@ public class Bubbles {
                     // Spawn a fish at the mouth location
                     bubbles[numberBubbles] = new Bubble(x, y);
                     numberBubbles++;
+                } else {
+                    maxBubbles = numberBubbles;
                 }
             } else {
                 // Otherwise check if the last bubble still exists
-                if (!bubbles[numberBubbles - 1].isAlive()) {
-                    // If the last bubble has popped then all bubbles have been 'blown'
+                if (numberBubbles > 0) {
+                    if (!bubbles[numberBubbles - 1].isAlive()) {
+                        // If the last bubble has popped then all bubbles have been 'blown'
+                        blown = true;
+                    }
+                } else if (maxBubbles <= 0){
                     blown = true;
                 }
             }
