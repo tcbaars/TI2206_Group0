@@ -92,7 +92,6 @@ public class EnemyHandler {
     }
 
     protected Enemy generateEnemy() {
-        Enemy enemy = new Trout();
         Random rn = new Random();
         int i = rn.nextInt(32)+1;
         if(16 < i && i <= 20){
@@ -107,7 +106,12 @@ public class EnemyHandler {
         if(26 < i && i <= 32){
             Enemy enemy = new Dunkleosteus();
         }
-        return enemy;
+        if(enemy != null){
+            return enemy;
+        }
+        else{
+            return new Trout();
+        }
     }
 
     public Enemy[] getEnemies() {
