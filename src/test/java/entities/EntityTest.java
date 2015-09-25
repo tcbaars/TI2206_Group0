@@ -1,12 +1,13 @@
 package entities;
 
-import animations.Animation;
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Graphics2D;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import org.junit.Test;
+
+import animations.Animation;
 
 
 /**
@@ -14,18 +15,25 @@ import static org.junit.Assert.assertFalse;
  * Test method for entities.Entity class.
  */
 public abstract class EntityTest {
-    Entity test = new Entity() {
+    Entity test = new EntityBase() {
+        @Override
         protected void initialiseEntity() {}
+        @Override
         protected void initialiseSprite() {}
+        @Override
         protected Animation createAnimation() {
             return null;
         }
+        @Override
         protected void update() {
             spriteHeight = 123.0;
         }
+        @Override
         protected void draw(Graphics2D graphic) {}
-        protected void consume(Entity food) {}
-        protected int consumedBy(Entity eater) {
+        @Override
+        public void consume(Entity food) {}
+        @Override
+        public int consumedBy(Entity eater) {
             return 0;
         }
     };
@@ -38,7 +46,7 @@ public abstract class EntityTest {
         assertTrue(test.isFacingRight());
     }*/
 
-/*    @Test
+    /*    @Test
     public void updateEntityTest() {
         assertNotEquals(123.0, test.entityHeight);
         test.updateEntity();

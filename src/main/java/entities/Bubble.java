@@ -8,7 +8,7 @@ import animations.Animation;
 /**
  * The Bubble class represents a bubble entity.
  */
-public class Bubble extends Entity{
+public class Bubble extends EntityBase {
 
     /*
      * Randomise bubble movement
@@ -157,7 +157,7 @@ public class Bubble extends Entity{
      * @param the entity to be consumed.
      */
     @Override
-    protected void consume(Entity food) {
+    public void consume(Entity food) {
     }
 
     /**
@@ -166,7 +166,7 @@ public class Bubble extends Entity{
      * @param the entity that consumed this.
      */
     @Override
-    protected int consumedBy(Entity eater) {
+    public int consumedBy(Entity eater) {
         kill();
         return 0;
     }

@@ -1,229 +1,90 @@
 package entities;
 
-import java.awt.geom.Ellipse2D;
 import java.awt.Graphics2D;
-import java.awt.Shape;
-
-import animations.Animation;
-import handlers.OptionsHandler;
-import util.Geo2D;
+import java.awt.geom.Ellipse2D;
 
 /**
  * The entity class represents the rules an in-game object must have.
  */
-public abstract class Entity {
-
-    /*
-     * The current game settings
-     */
-    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
-
-    /*
-     * Properties of the entity
-     */
-    private boolean consumable;
-    private boolean alive;
-    private boolean visible;
-    private boolean facingRight;
-
-    private Animation animation;
-
-    /*
-     * Sprite dimensions
-     */
-    protected double spriteWidth;
-    protected double spriteHeight;
-
-    /*
-     * Coordinates of top left corner of sprite
-     */
-    protected double topLeftX;
-    protected double topLeftY;
-
-    /*
-     * Entity dimensions
-     */
-    protected double entityWidth;
-    protected double entityHeight;
-
-    /*
-     * Scaling information
-     */
-    protected double targetScale;
-    protected double currentScale;
-
-    /**
-     * Creates a new entity.
-     */
-    public Entity() {
-        consumable = true;
-        alive = true;
-        visible = true;
-        facingRight = false;
-
-        initialiseEntity();
-        initialiseSprite();
-        animation = createAnimation();
-    }
-
-    /**
-     * Applies the entity specific properties.
-     */
-    protected abstract void initialiseEntity();
-
-    /**
-     * Applies the sprite properties.
-     */
-    protected abstract void initialiseSprite();
-
-    /**
-     * Creates a sequence of images that represent the entity's animation.
-     *
-     * @return the entity's animation.
-     */
-    protected abstract Animation createAnimation();
-
+public interface Entity {
     /**
      * Updates the entity.
      */
-    protected abstract void update();
-
-    /**
-     * Draws on the specified 2-dimensional image.
-     *
-     * @param graphic the 2-dimensional image.
-     */
-    protected abstract void draw(Graphics2D graphic);
-
-    /**
-     * Updates the entity.
-     */
-    public void updateEntity() {
-        // If alive
-        if (isAlive()) {
-            // Then handle the current frame to be displayed
-            animation.update();
-        }
-        update();
-    }
+    public void updateEntity();
 
     /**
      * Draws the current frame adjusted by the scaling factor to the specified 2-dimensional image.
      *
      * @param graphic the 2-dimensional image.
      */
-    public void drawEntity(Graphics2D graphic) {
-        if (isAlive() && isVisible()) {
-            int x = getGlobalSpriteX();
-            int w = getGlobalSpriteWidth();
-            // If the entity is facing right
-            if (facingRight){
-                // then horizontally flip the sprite
-                x = x + w;
-                w = -w;
-            }
-            graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(), w, getGlobalSpriteHeight(), null);
-
-            // If in debugging mode
-            if (_optionsHandler.getDebug()) {
-                // then draw bounding boxes
-                Shape boundingBox = getGlobalEntityBoundingBox();
-                graphic.draw(boundingBox);
-                graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());
-            }
-        }
-        draw(graphic);
-    }
+    public void drawEntity(Graphics2D graphic);
 
     /**
      * Returns whether or not the entity can be consumed.
      * @return <code>true</code> if and only if the entity can be consumed, otherwise <code>false</code>.
      */
-    public boolean isConsumable() {
-        return isAlive() && consumable;
-    }
+    public boolean isConsumable();
 
     /**
      * Change whether or not the entity can be consumed.
      * @param consumable if the entity can be consumed.
      */
-    public void setConsumable(boolean consumable) {
-        this.consumable = consumable;
-    }
+    public void setConsumable(boolean consumable);
 
     /**
      * Returns whether or not the entity is alive.
      * @return <code>true</code> if and only if the entity is alive, otherwise <code>false</code>.
      */
-    public boolean isAlive() {
-        return alive;
-    }
+    public boolean isAlive();
 
     /**
      * Kills the entity.
      */
-    public void kill() {
-        alive = false;
-        visible = false;
-    }
+    public void kill();
 
     /**
      * Returns whether or not the entity is visible.
      * @return <code>true</code> if and only if the entity is visible, otherwise <code>false</code>.
      */
-    public boolean isVisible() {
-        return visible;
-    }
+    public boolean isVisible();
 
     /**
      * Set whether or not the entity is visible.
      * @param visible if the entity is visible.
      */
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
+    public void setVisible(boolean visible);
 
     /**
      * Set whether or not the entity is facing right.
      * @param facingRight if the entity is facing right.
      */
-    public void setFacingRight(boolean facingRight) {
-        this.facingRight = facingRight;
-    }
+    public void setFacingRight(boolean facingRight);
 
     /**
      * Returns whether or not the sprite is facing right.
      *
      * @return <code>true</code> if and only if the sprite is facing right, other <code>false</code>.
      */
-    public boolean isFacingRight(){
-        return facingRight;
-    }
+    public boolean isFacingRight();
 
     /**
      * Returns the scaling factor.
      * @return the scaling factor.
      */
-    public double getScaling() {
-        return currentScale / targetScale;
-    }
+    public double getScaling();
 
     /**
      * Returns the top left corner x coordinate.
      * @return top left x coordinate.
      */
-    public int getGlobalSpriteX() {
-        return (int)topLeftX;
-    }
+    public int getGlobalSpriteX();
 
     /**
      * Returns the top left corner y coordinate.
      *
      * @return top left y coordinate.
      */
-    public int getGlobalSpriteY() {
-        return (int) topLeftY;
-    }
+    public int getGlobalSpriteY();
 
     /**
      * Returns the entity's top left corner x coordinate.
@@ -231,9 +92,7 @@ public abstract class Entity {
      * @param centreX the entity's centre x coordinate.
      * @return the entity's top left corner x coordinate.
      */
-    public int getGlobalEntityX(double centreX) {
-        return (int) (centreX - (getGlobalEntityWidth() / 2.0));
-    }
+    public int getGlobalEntityX(double centreX);
 
     /**
      * Returns the entity's top left corner y coordinate.
@@ -241,119 +100,73 @@ public abstract class Entity {
      * @param centreY the entity's centre y coordinate.
      * @return  the entity's top left corner y coordinate.
      */
-    public int getGlobalEntityY(double centreY) {
-        return (int) (centreY - (getGlobalEntityHeight() / 2.0));
-    }
+    public int getGlobalEntityY(double centreY);
 
     /**
      * Returns the sprite width adjusted by the current size.
      * @return the global sprite width.
      */
-    public int getGlobalSpriteWidth() {
-        return (int) (spriteWidth * getScaling());
-    }
+    public int getGlobalSpriteWidth();
 
     /**
      * Returns the sprite height adjusted by the current size.
      * @return the global sprite height.
      */
-    public int getGlobalSpriteHeight() {
-        return (int) (spriteHeight * getScaling());
-    }
+    public int getGlobalSpriteHeight();
 
     /**
      * Returns the entity width adjusted by the current size.
      * @return the global entity width.
      */
-    public int getGlobalEntityWidth() {
-        return (int) (entityWidth * getScaling());
-    }
+    public int getGlobalEntityWidth();
 
     /**
      * Returns the entity height adjusted by the current size.
      * @return the global entity height.
      */
-    public int getGlobalEntityHeight() {
-        return (int) (entityHeight * getScaling());
-    }
+    public int getGlobalEntityHeight();
 
     /**
      * Returns the sprite bounding box adjusted by its size.
      *
      * @return global sprite bounding box.
      */
-    public Ellipse2D getGlobalSpriteBoundingBox() {
-        return new Ellipse2D.Double(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
-                getGlobalSpriteHeight());
-    }
+    public Ellipse2D getGlobalSpriteBoundingBox();
 
     /**
      * Returns the entity bounding box adjusted by its size.
      *
      * @return global entity bounding box.
      */
-    public Ellipse2D getGlobalEntityBoundingBox() {
-        Ellipse2D globalSprite = getGlobalSpriteBoundingBox();
-        double centreX = globalSprite.getCenterX();
-        double centreY = globalSprite.getCenterY();
-        return new Ellipse2D.Double(getGlobalEntityX(centreX), getGlobalEntityY(centreY), getGlobalEntityWidth(),
-                getGlobalEntityHeight());
-    }
+    public Ellipse2D getGlobalEntityBoundingBox();
 
     /**
      * Returns whether or not the two entities intersect.
      *
      * @return <code>true</code> if and only if the two entities intersect, otherwise <code>false</code>.
      */
-    public boolean intersects(Entity entity) {
-        if (entity != null) {
-            Ellipse2D thisBox = getGlobalEntityBoundingBox();
-            Ellipse2D thatBox = entity.getGlobalEntityBoundingBox();
-            return Geo2D.intersection(thisBox, thatBox);
-        }
-        return false;
-    }
+    public boolean intersects(Entity entity);
 
     /**
      * Returns whether or not this entity is larger than the specified entity.
      *
      * @return <code>true</code> if and only if this entity is larger than the specified entity, otherwise <code>false</code>.
      */
-    public boolean isLargerThan(Entity entity) {
-        if (entity != null) {
-            if (getGlobalEntityWidth() < entity.getGlobalEntityWidth()) {
-                return false;
-            }
-            if (getGlobalEntityHeight() < entity.getGlobalEntityHeight()) {
-                return false;
-            }
-        }
-        return true;
-    }
+    public boolean isLargerThan(Entity entity);
 
     /**
      * Handles the collision between this entity and the specified entity.
      *
      * @param entity the specified entity.
      */
-    public void handleCollision(Entity entity) {
-        if (intersects(entity)) {
-            if (isLargerThan(entity)) {
-                if (entity.isConsumable()) {
-                    consume(entity);
-                }
-            } else if (isConsumable()) {
-                entity.consume(this);
-            }
-        }
-    }
+    public void handleCollision(Entity entity);
 
     /**
      * Handles the necessary actions needed to be performed to consume the specified entity.
      *
      * @param food the entity to be eaten.
      */
-    protected abstract void consume(Entity food);
+    public void consume(Entity entity);
 
     /**
      * Handles the necessary actions needed to be performed when consumed by the specified entity.
@@ -361,6 +174,5 @@ public abstract class Entity {
      * @param the entity consuming.
      * @return the value of the entity.
      */
-    protected abstract int consumedBy(Entity eater);
-
+    public int consumedBy(Entity entity);
 }
