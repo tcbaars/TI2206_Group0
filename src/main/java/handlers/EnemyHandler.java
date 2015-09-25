@@ -92,27 +92,22 @@ public class EnemyHandler {
     }
 
     protected Enemy generateEnemy() {
-        Enemy enemy = null;
+        Enemy enemy = new Trout();
         Random rn = new Random();
         int i = rn.nextInt(32)+1;
         if(16 < i && i <= 20){
-            Enemy enemy = new Stingray();
+            enemy = new Stingray();
         }
         if(20 < i && i <= 25){
-            Enemy enemy = new Shark();
+            enemy = new Shark();
         }
         if(i == 26){
-            Enemy enemy = new Swordfish();
+            enemy = new Swordfish();
         }
         if(26 < i && i <= 32){
-            Enemy enemy = new Dunkleosteus();
+            enemy = new Dunkleosteus();
         }
-        if(enemy != null){
-            return enemy;
-        }
-        else{
-            return new Trout();
-        }
+        return enemy;
     }
 
     public Enemy[] getEnemies() {
