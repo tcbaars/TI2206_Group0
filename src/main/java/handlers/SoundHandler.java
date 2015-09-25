@@ -72,10 +72,11 @@ public class SoundHandler {
      * If the sound has been loaded.
      *
      * @param soundKey the specified sound.
+     * @return <code>true</code> if and only if the specified sound was loaded, otherwise <code>false</code>.
      */
-    public void playSound(String soundKey){
-        if (OptionsHandler.getInstance().soundOn()) {
-            if (soundLoader.containsKey(soundKey)) {
+    public boolean playSound(String soundKey){
+        if (soundLoader.containsKey(soundKey)) {
+            if (OptionsHandler.getInstance().soundOn()) {
                 // Rewinds the sound file to the beginning
                 soundLoader.get(soundKey).setFramePosition(0);
                 // The sound should only play once
@@ -83,7 +84,9 @@ public class SoundHandler {
                 // Play the sound
                 soundLoader.get(soundKey).start();
             }
+            return true;
         }
+        return false;
     }
 
 }
