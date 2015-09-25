@@ -88,7 +88,23 @@ public class EnemyHandler {
     }
 
     protected Enemy generateEnemy() {
-        Enemy enemy = new Trout();
+        Random rn = new Random();
+        int i = rn.nextInt(32)+1;
+        if(i <= 16){
+            Enemy enemy = new Trout();
+        }
+        if(16 < i && i <= 20){
+            Enemy enemy = new Stingray();
+        }
+        if(20 < i && i <= 25){
+            Enemy enemy = new Shark();
+        }
+        if(i == 26){
+            Enemy enemy = new Swordfish();
+        }
+        if(26 < i && i <= 32){
+            Enemy enemy = new Dunkleosteus();
+        }
         return enemy;
     }
 
