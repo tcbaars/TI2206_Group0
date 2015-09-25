@@ -17,14 +17,14 @@ public class Shark extends Enemy {
     private final static double movespeed = 0.25;
     private Direction movingDirection;
     private final static double basevalue = 210;
-    private final static double entitywidth = 103;
-    private final static double entityheight = 39;
+    private final static double entitywidth = 1300;
+    private final static double entityheight = 520;
 
     /*
      * Sprite and animation properties
      */
-    private final static double spritewidth = 101;
-    private final static double spriteheight = 71;
+    private final static double spritewidth = 1300;
+    private final static double spriteheight = 600;
     private final static String animationkey = "Shark";
     private final static String animationurl = "/sprites/Shark.png";
     private final static int numberframes = 3;
