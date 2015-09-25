@@ -2,6 +2,7 @@ package layers;
 
 import enumerations.Key;
 import handlers.FontOutlineHandler;
+import handlers.HighScoresHandler;
 import handlers.OptionsHandler;
 import util.Logger;
 
@@ -14,6 +15,8 @@ import java.awt.Graphics2D;
  * This class is responsible for the win/lost screen.
  */
 public class FinishLayer extends Layer {
+
+    private HighScoresHandler _HighScoresHandler = HighScoresHandler.getInstance();
 
     private int selected;
     private int score;
@@ -32,7 +35,7 @@ public class FinishLayer extends Layer {
     * Appearance options of the text to be displayed
     */
     // private final String[] text = {"Fish Eaten: NaN", "Score: ", "High Score: NaN"};
-    private final String[] text = {"", "Score: ", ""};
+    private final String[] text = {"", "Score: ", "High Score: " + _HighScoresHandler.getHighScores().get(0).getScore()};
     private final Font textfont = new Font("Times New Roman", Font.BOLD, 50);
 
     /*
@@ -69,6 +72,7 @@ public class FinishLayer extends Layer {
 
         Logger.info("Player ended the game, " + titletext);
         text[1] = text[1] + score;
+        _HighScoresHandler.addScore("TEST", score);
     }
 
     /**
