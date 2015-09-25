@@ -43,22 +43,25 @@ public class BackgroundLayer extends Layer {
     public Graphics2D draw(Graphics2D graphics) {
         int screenWidth = OptionsHandler.getInstance().getWidth();
         int screenHeight = OptionsHandler.getInstance().getHeight();
+
         graphics.drawImage(ImageHandler.getInstance().getImage(bgkey), 0, 0, screenWidth, screenHeight, null);
+
         int startMusicX = 10;
-        int startSoundX;
+        int startSoundX = startMusicX + iconwidth + 10;
         int startY = screenHeight - (iconheight + 10);
+
         if (OptionsHandler.getInstance().musicOn()) {
-            startSoundX = startMusicX + iconwidth + 10;
             graphics.drawImage(ImageHandler.getInstance().getImage(musiconkey), startMusicX, startY, iconwidth, iconheight, null);
         } else {
-            startSoundX = startMusicX + iconwidth + 10;
             graphics.drawImage(ImageHandler.getInstance().getImage(musicoffkey), startMusicX, startY, iconwidth, iconheight, null);
         }
+
         if (OptionsHandler.getInstance().soundOn()) {
             graphics.drawImage(ImageHandler.getInstance().getImage(soundonkey), startSoundX, startY, iconwidth, iconheight, null);
         } else {
             graphics.drawImage(ImageHandler.getInstance().getImage(soundoffkey), startSoundX, startY, iconwidth, iconheight, null);
         }
+
         return graphics;
     }
 
