@@ -6,6 +6,7 @@ import java.util.Random;
 import entities.Enemy;
 import entities.Player;
 import entities.Trout;
+import entities.Trout;
 
 public class EnemyHandler {
 
