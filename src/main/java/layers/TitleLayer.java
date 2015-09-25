@@ -62,25 +62,6 @@ public class TitleLayer extends Layer {
      */
     private void select() {
         // Play selection sound
-<<<<<<< HEAD
-        _soundHandler.playSound(selectsoundkey);
-        // if new game
-        if (selected == 0) {
-            addLayer(new GameLayer());
-            removeLayer();
-        // if Highscore
-        } else if (selected == 1) {
-            addLayer(new HighScoreLayer());
-            removeLayer();
-        // if instructions
-        } else if (selected == 2) {
-            addLayer(new InstructionsLayer());
-            removeLayer();
-        // if exit
-        } else if (selected == 3) {
-            Logger.info("User exited the game in the Title Menu");
-            System.exit(0);
-=======
         _soundHandler.playSound(GameSound.SELECT);
 
         switch (selected) {
