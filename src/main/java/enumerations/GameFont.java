@@ -6,7 +6,7 @@ import java.awt.Font;
 public enum GameFont {
     TITLE(Color.WHITE, Color.BLACK, 2, new Font("Times New Roman", Font.BOLD, 100)),
     OPTION(Color.WHITE, Color.BLACK, 1, new Font("Times New Roman", Font.BOLD, 85)),
-    SELECTED(Color.WHITE, Color.YELLOW, 1, new Font("Times New Roman", Font.BOLD, 85)),
+    SELECTED(Color.YELLOW, Color.BLACK, 1, new Font("Times New Roman", Font.BOLD, 85)),
     TEXT(Color.WHITE, Color.BLACK, 1, new Font("Times New Roman", Font.BOLD, 50));
 
 
