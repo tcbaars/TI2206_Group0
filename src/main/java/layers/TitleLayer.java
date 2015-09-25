@@ -1,29 +1,22 @@
 package layers;
 
+import enumerations.GameFont;
+import enumerations.GameSound;
 import enumerations.Key;
 import handlers.FontOutlineHandler;
 import handlers.OptionsHandler;
-import handlers.SoundHandler;
 import util.Logger;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
  * The TitleLayer class represents the title screen of the game.
- * From which the option to start a new game, view the instructions, or exit can be selected.
+ * From which the option to start a new game, view the instructions, view the high scores, or exit can be selected.
  */
 public class TitleLayer extends Layer {
 
     private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
-    private SoundHandler _soundHandler = SoundHandler.getInstance();
-
-    /**
-     * TitleLayer sound resources
-     */
-    private final static String selectsoundurl = "/sounds/select.wav";
-    private final static String selectsoundkey = "select";
 
     /*
      * The selected options index and list of options available
@@ -35,10 +28,6 @@ public class TitleLayer extends Layer {
      * Appearance options of the title to be displayed
      */
     private final static String titletext = "FISHY GAME";
-    private final Color titlefill = Color.WHITE;
-    private final Color titleoutline = Color.BLACK;
-    private final static float titleoutlinesize = 2;
-    private final Font titlefont = new Font("Times New Roman", Font.BOLD, 100);
 
     /*
      * The Y-coordinate of the title
@@ -49,10 +38,6 @@ public class TitleLayer extends Layer {
      * Appearance options of the title options to be displayed
      */
     private final Color optionfill = Color.WHITE;
-    private final Color optionoutline = Color.BLACK;
-    private final Color selectedfill = Color.YELLOW;
-    private final static float optionoutlinesize = 1;
-    private final Font optionfont = new Font("Times New Roman", Font.BOLD, 85);
 
     /*
      * The Y-coordinate of the first option
@@ -66,8 +51,9 @@ public class TitleLayer extends Layer {
      */
     public TitleLayer() {
         selected = 0;
-        // Load TitleLayer sound resources
-        _soundHandler.loadSound(selectsoundkey, selectsoundurl);
+        // Load sound resources
+        _soundHandler.loadSound(GameSound.SELECT);
+        _soundHandler.loadSound(GameSound.NAVIGATE);
         Logger.info("Opening Title Menu");
     }
 
@@ -76,6 +62,7 @@ public class TitleLayer extends Layer {
      */
     private void select() {
         // Play selection sound
+<<<<<<< HEAD
         _soundHandler.playSound(selectsoundkey);
         // if new game
         if (selected == 0) {
@@ -93,21 +80,63 @@ public class TitleLayer extends Layer {
         } else if (selected == 3) {
             Logger.info("User exited the game in the Title Menu");
             System.exit(0);
+=======
+        _soundHandler.playSound(GameSound.SELECT);
+
+        switch (selected) {
+            // New game
+            case 0:
+                addLayer(new GameLayer());
+                removeLayer();
+                break;
+            // High Scores
+            case 1:
+                addLayer(new HighScoreLayer());
+                removeLayer();
+               break;
+             // Instructions
+            case 2:
+                addLayer(new InstructionsLayer());
+                removeLayer();
+                break;
+            // Exit
+            case 3:
+                Logger.info("User exited the game in the Title Menu");
+                System.exit(0);
+                break;
+            default:
+                break;
         }
     }
 
     /**
-     * Any special updates that need to be applied to the title screen each 'tick'.
+     * Changes the currently selected option.
+     *
+     * @param change the change to be applied.
+     */
+    private void navigate(int change){
+        _soundHandler.playSound(GameSound.NAVIGATE);
+        selected = selected + change;
+        if(selected < 0){
+            selected = options.length - 1;
+        } else if(selected >= options.length ){
+            selected = 0;
+>>>>>>> 6ecd746c29c9ec1f6cc2281dc9043021d708f2c5
+        }
+    }
+
+    /**
+     * Any layer specific updates that need to be applied to per 'tick'.
      */
     @Override
     public void update() {
     }
 
     /**
-     * Adds the title and options to the specified image, and returns the result.
+     * Draws the layer specific graphical elements to the specified 2-Dimensional image
      *
-     * @param graphic a 2-dimensional image
-     * @return a 2-dimensional image with the added title and options
+     * @param graphic the 2-Dimensional image.
+     * @return the new graphic.
      */
     @Override
     public Graphics2D draw(Graphics2D graphic) {
@@ -123,15 +152,15 @@ public class TitleLayer extends Layer {
                 50, 50); // Corners
 
         // Draw the title
-        FontOutlineHandler.drawTextCenterWidth(graphic, titlefont, titletext, titlefill, titleoutline, titleoutlinesize, ytitle);
+        FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.TITLE, titletext, ytitle);
 
         // Draw each option
         for(int i = 0; i < options.length; i++){
             // Highlights the option selected
             if (i == selected) {
-                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], selectedfill, optionoutline, optionoutlinesize, (yoption + (yoptionstep * i)));
+                FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.SELECTED, options[i], (yoption + (yoptionstep * i)));
             } else {
-                FontOutlineHandler.drawTextCenterWidth(graphic, optionfont, options[i], optionfill, optionoutline, optionoutlinesize, (yoption + (yoptionstep * i)));
+                FontOutlineHandler.drawTextCenterWidth(graphic, GameFont.OPTION, options[i], (yoption + (yoptionstep * i)));
             }
         }
 
@@ -146,22 +175,14 @@ public class TitleLayer extends Layer {
     @Override
     public void keyPressed(Key key) {
         switch (key) {
-        /*
-         *  Change the current selection according to what directional key is pressed
-         *  Making sure to stay within the bounds of the options available
-         */
             case UP:
             case LEFT:
-                selected = selected - 1;
-                if (selected < 0) {
-                    selected = options.length - 1;
-                }
+                navigate(-1);
                 break;
             case DOWN:
             case RIGHT:
-                selected = (selected + 1) % options.length;
+                navigate(1);
                 break;
-            // Press the Enter to confirm the selected option
             case ENTER:
                 select();
                 break;

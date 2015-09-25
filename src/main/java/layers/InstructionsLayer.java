@@ -125,6 +125,17 @@ public class InstructionsLayer extends Layer {
      */
     @Override
     public void keyPressed(Key key) {
+<<<<<<< HEAD
+=======
+        switch (key) {
+            case ENTER:
+            case ESC:
+                select();
+                break;
+            default:
+                break;
+        }
+>>>>>>> 6ecd746c29c9ec1f6cc2281dc9043021d708f2c5
     }
 
     /**

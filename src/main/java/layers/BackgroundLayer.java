@@ -47,12 +47,16 @@ public class BackgroundLayer extends Layer {
         ImageHandler.getInstance().loadImage(soundoffkey, soundoffurl);
         ImageHandler.getInstance().loadImage(musiconkey, musiconurl);
         ImageHandler.getInstance().loadImage(musicoffkey, musicoffurl);
+<<<<<<< HEAD
 
         //  prepare music for playback
         _musicHandler.LoadSong();
 
         // Displays title screen
 
+=======
+        // Displays title screen
+>>>>>>> 6ecd746c29c9ec1f6cc2281dc9043021d708f2c5
         addLayer(new TitleLayer());
     }
 
