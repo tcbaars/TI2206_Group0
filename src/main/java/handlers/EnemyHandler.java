@@ -92,6 +92,7 @@ public class EnemyHandler {
     }
 
     protected Enemy generateEnemy() {
+        Enemy enemy = null;
         Random rn = new Random();
         int i = rn.nextInt(32)+1;
         if(16 < i && i <= 20){
