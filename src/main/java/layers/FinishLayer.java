@@ -83,6 +83,20 @@ public class FinishLayer extends Layer {
         text[1] = text[1] + score;
     }
 
+    private void updateName() {
+        int index = (selected - 2) % 3;
+        char[] playerNameChars = playerName.toCharArray();
+        char current = playerNameChars[index];
+
+        if (selected > 4 && (int) current > 65) {
+            playerNameChars[index] = (char) (current - 1);
+        } else if (selected < 5 && (int) current < 90) {
+            playerNameChars[index] = (char) (current + 1);
+        }
+
+        playerName = String.valueOf(playerNameChars);
+    }
+
     /**
      * Select method to select the right options
      */
@@ -95,6 +109,13 @@ public class FinishLayer extends Layer {
             case 1: _HighScoresHandler.addScore(playerName, score);
                     addLayer(new TitleLayer()); // Title Screen
                     removeLayer();
+                    break;
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7: updateName();
                     break;
             default: break;
         }
