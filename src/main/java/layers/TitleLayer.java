@@ -121,7 +121,6 @@ public class TitleLayer extends Layer {
             selected = options.length - 1;
         } else if(selected >= options.length ){
             selected = 0;
->>>>>>> 6ecd746c29c9ec1f6cc2281dc9043021d708f2c5
         }
     }
 

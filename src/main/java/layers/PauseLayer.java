@@ -149,15 +149,12 @@ public class PauseLayer extends Layer{
             case DOWN:
             case RIGHT:
                 navigate(1);
-<<<<<<< HEAD
-=======
                 break;
             case ENTER:
                 select();
                 break;
             case ESC:
                 game.resume();
->>>>>>> 6ecd746c29c9ec1f6cc2281dc9043021d708f2c5
                 break;
             default:
                 break;
