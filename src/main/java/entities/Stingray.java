@@ -17,14 +17,14 @@ public class Stingray extends Enemy {
     private final static double movespeed = 0.3;
     private Direction movingDirection;
     private final static double basevalue = 263;
-    private final static double entitywidth = 68;
-    private final static double entityheight = 42;
+    private final static double entitywidth = 1300;
+    private final static double entityheight = 580;
 
     /*
      * Sprite and animation properties
      */
-    private final static double spritewidth = 68;
-    private final static double spriteheight = 55;
+    private final static double spritewidth = 1300;
+    private final static double spriteheight = 600;
     private final static String animationkey = "Stingray";
     private final static String animationurl = "/sprites/Stingray.png";
     private final static int numberframes = 6;
