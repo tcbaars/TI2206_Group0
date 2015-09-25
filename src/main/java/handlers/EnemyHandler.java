@@ -92,11 +92,9 @@ public class EnemyHandler {
     }
 
     protected Enemy generateEnemy() {
+        Enemy enemy = new Trout();
         Random rn = new Random();
         int i = rn.nextInt(32)+1;
-        if(i <= 16){
-            Enemy enemy = new Trout();
-        }
         if(16 < i && i <= 20){
             Enemy enemy = new Stingray();
         }
