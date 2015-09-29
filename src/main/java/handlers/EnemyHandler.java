@@ -3,8 +3,12 @@ package handlers;
 import java.awt.Graphics2D;
 import java.util.Random;
 
+import entities.Dunkleosteus;
 import entities.Enemy;
 import entities.Player;
+import entities.Shark;
+import entities.Stingray;
+import entities.Swordfish;
 import entities.Trout;
 
 public class EnemyHandler {
@@ -37,8 +41,8 @@ public class EnemyHandler {
             if (enemies[i] != null) {
                 enemies[i].updateEntity();
                 if (!enemies[i].isAlive()) {
-                    if (currentNumber <= 1) { // If last fish dont check for
-                                              // bubbles
+                    if (currentNumber <= 1) {
+                        // If last fish dont check for bubbles
                         enemies[i] = null;
                         currentNumber--;
                     } else if (!enemies[i].hasBubbles()) {
@@ -88,7 +92,28 @@ public class EnemyHandler {
     }
 
     protected Enemy generateEnemy() {
-        Enemy enemy = new Trout();
+        Enemy enemy = null;
+        switch (generator.nextInt(5)) {
+        case 0:
+            enemy = new Trout();
+            break;
+        case 1:
+            enemy = new Shark();
+            break;
+        case 2:
+            enemy = new Swordfish();
+            break;
+        case 3:
+            enemy = new Dunkleosteus();
+            break;
+        case 4:
+            enemy = new Stingray();
+            break;
+
+        default:
+            break;
+        }
+
         return enemy;
     }
 
