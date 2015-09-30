@@ -517,10 +517,10 @@ _+getInstance(): SoundSettings_
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>4088</x>
+      <x>4096</x>
       <y>824</y>
-      <w>296</w>
-      <h>384</h>
+      <w>576</w>
+      <h>376</h>
     </coordinates>
     <panel_attributes>keys</panel_attributes>
     <additional_attributes/>
@@ -528,56 +528,44 @@ _+getInstance(): SoundSettings_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4096</x>
-      <y>856</y>
-      <w>232</w>
-      <h>152</h>
+      <x>4112</x>
+      <y>984</y>
+      <w>264</w>
+      <h>96</h>
     </coordinates>
-    <panel_attributes>Key
+    <panel_attributes>
 keys::Key
 --
--keycode: int
+-key: GameKeys
 --
 +Key(key: GameKeys)
-+Key(keycode: int)
-+getKeyCode(): int
-_+convertToKey(keyEvent: KeyEvent): Key_
++getGameKey(): GameKeys
+_+convertToKey(keyEvent: KeyEvent): GameKeys_
 +
---
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4104</x>
-      <y>1040</y>
+      <x>4400</x>
+      <y>984</y>
       <w>256</w>
-      <h>152</h>
+      <h>104</h>
     </coordinates>
-    <panel_attributes>TypedKey
-keys::TypedKey
+    <panel_attributes>keys::TypedKey
 --
+-keycode: int
 -value: char
 --
 +Key(keycode: int, value: char)
 +getValue(): char 
 _+convertToKey(keyEvent: KeyEvent): TypedKey_
 +
---
+
 </panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>4192</x>
-      <y>984</y>
-      <w>40</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;56</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1715,8 +1703,8 @@ Random currentSpriteHeight [minHeight, maxHeight]
     <coordinates>
       <x>2056</x>
       <y>1264</y>
-      <w>32</w>
-      <h>320</h>
+      <w>40</w>
+      <h>328</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>24;24;24;312</additional_attributes>
@@ -2114,5 +2102,70 @@ _+getInstance(): BaseMovementSpeedSettings_
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>24;24;24;56;312;56;312;128</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>2696</x>
+      <y>2384</y>
+      <w>752</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>highscores</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>4312</x>
+      <y>848</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+keys::KeyIdentifier
+--
++getKeyCode(): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>4216</x>
+      <y>880</y>
+      <w>176</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>160;24;160;80;24;80;24;104</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>4392</x>
+      <y>880</y>
+      <w>152</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>24;24;24;80;136;80;136;104</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>4104</x>
+      <y>1104</y>
+      <w>248</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;utility&gt;&gt;
+keys::KeyAdapter
+--
++convertKeyPressed(key: keyEvent): Key
++convertKeyReleased(key: KeyEvent): Key
++convertKeyTyped(key: KeyEvent): TypedKey
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
