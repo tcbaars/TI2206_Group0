@@ -172,13 +172,10 @@ BUBBLE
 -animation: GameAnimations
 -minWidth: double
 -maxWidth: double
--minHeight: double
--maxHeight: double
 -isFacingLeft: boolean
 --
 -GameSprites(animation: GameAnimations
 , minWidth: double, maxWidth: double
-, minHeight: double, maxHeight: double
 , isFacingLeft: boolean)</panel_attributes>
     <additional_attributes/>
   </element>
@@ -700,6 +697,7 @@ Handles M, S, X key presses
 +getCurrentFrame(): BufferedImage
 +getFrameWidth(): double
 +getFrameHeight(): double
++getFrameAspectRatio(): double
 +hasLooped(): boolean
 +hasLooped(times: int): boolean
 _+createAnimation(animation: GameAnimations): Animation_
@@ -781,7 +779,6 @@ _, frameWidth: int, frameHeight: int, delay: int): Animation_
 -dX: double
 -dY: double
 -initEntityWidth: double
--initEntityHeight: double
 -subEntities: EntityManager
 --
 +hasSubEntities(): boolean
@@ -1220,29 +1217,29 @@ entities::Entity
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>728</x>
-      <y>32</y>
+      <y>24</y>
       <w>104</w>
-      <h>48</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 displays&gt;</panel_attributes>
-    <additional_attributes>24;32;88;32</additional_attributes>
+    <additional_attributes>24;40;88;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>864</x>
+      <x>856</x>
       <y>88</y>
-      <w>72</w>
+      <w>88</w>
       <h>112</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 displays &gt;</panel_attributes>
-    <additional_attributes>40;24;40;96</additional_attributes>
+    <additional_attributes>48;24;48;96</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
@@ -1610,8 +1607,8 @@ layertools::BackgroundRectangle
     <coordinates>
       <x>1944</x>
       <y>920</y>
-      <w>272</w>
-      <h>176</h>
+      <w>280</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 sprites::Sprite
@@ -1619,13 +1616,10 @@ sprites::Sprite
 +getGlobalSpriteWidth(): double
 +getGlobalSpriteHeight(): double
 +getGlobalSpriteBoundingBox(int x, int y): Ellipse2D
-+getHeightScaling(): double
-+getWidthScaling(): double
++getSpriteAspectRatio(): double
 +getSprite(): BufferedImage
 +isSpriteFacingLeft(): boolean
-+increaseSpriteWidth(scalingFactor: double): void 
-+increaseSpriteHeight(scalingFactor: double): void 
-+increaseSprite(scalingFactor: double): void </panel_attributes>
++increaseSprite(scalingIncreaseFactor: double): void </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1634,7 +1628,7 @@ sprites::Sprite
       <x>1984</x>
       <y>1128</y>
       <w>184</w>
-      <h>160</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract class&gt;&gt;
 /sprites::BaseSprite/
@@ -1644,9 +1638,6 @@ sprites::Sprite
 -minSpriteWidth: double
 -currentSpriteWidth: double
 -maxSpriteWidth: double
--minSpriteHeight: double
--currentSpriteHeight: double
--maxSpriteHeight: double
 --
 </panel_attributes>
     <additional_attributes/>
@@ -1666,7 +1657,6 @@ sprites::Sprite
 +EnemySprite(GameSprites gameSprite)
 --
 Random currentSpriteWidth [minHeight, maxHeight]
-Random currentSpriteHeight [minHeight, maxHeight]
 --</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1674,12 +1664,12 @@ Random currentSpriteHeight [minHeight, maxHeight]
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2048</x>
-      <y>1072</y>
+      <y>1040</y>
       <w>40</w>
-      <h>72</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>24;24;24;56</additional_attributes>
+    <additional_attributes>24;24;24;88</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1702,34 +1692,34 @@ Random currentSpriteHeight [minHeight, maxHeight]
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2056</x>
-      <y>1264</y>
+      <y>1224</y>
       <w>40</w>
-      <h>328</h>
+      <h>368</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;312</additional_attributes>
+    <additional_attributes>24;24;24;352</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2080</x>
-      <y>1264</y>
+      <y>1224</y>
       <w>256</w>
-      <h>216</h>
+      <h>256</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;80;240;80;240;200</additional_attributes>
+    <additional_attributes>24;24;24;120;240;120;240;240</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1776</x>
-      <y>1264</y>
-      <w>288</w>
-      <h>216</h>
+      <y>1224</y>
+      <w>296</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>280;24;280;80;24;80;24;208</additional_attributes>
+    <additional_attributes>280;24;280;120;24;120;24;248</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1840,16 +1830,16 @@ has&gt;</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>640</x>
-      <y>1032</y>
+      <y>1024</y>
       <w>120</w>
-      <h>56</h>
+      <h>74</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=*
 m2=*
 &lt; has
 has&gt;</panel_attributes>
-    <additional_attributes>104;32;24;32</additional_attributes>
+    <additional_attributes>104;40;24;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1938,13 +1928,12 @@ SWORD...
 BUBBLE
 -sprite: GameSprites
 -entityWidth: double
--entityHeight: double
 -moveSpeedScalingFacotr: double
 -consumable: booelan
 -scoreScalingFactor: double
 --
 -GameSprites(sprite: GameSprites
-, entityWidht: double, entityHeight: double
+, entityWidth: double
 , moveSpeedScalingFacotr: double, consumable: boolean
 , scoreScalingFactor: double) </panel_attributes>
     <additional_attributes/>
@@ -1968,13 +1957,13 @@ SWORD...
 BUBBLE
 -key: String
 -url: String
--frameWidth: double
--frameHeight: double
+-frameWidth: int
+-frameHeight: int
 -frames: int
 -delay: int
 --
 -GameAnimations(key: String, url: String
-, frameWidth: double, frameHeight: double
+, frameWidth: int, frameHeight: int
 , frames: int, delay: int)</panel_attributes>
     <additional_attributes/>
   </element>
