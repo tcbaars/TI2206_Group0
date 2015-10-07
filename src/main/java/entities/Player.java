@@ -1,248 +1,200 @@
 package entities;
 
-import java.awt.Graphics2D;
+import java.util.ArrayList;
 
-import animations.Animation;
-import enumerations.Direction;
-import handlers.OptionsHandler;
+import entityspawner.BubbleSpawner;
+import enumerations.Directions;
+import enumerations.GameEntities;
+import settings.ScreenSettings;
+import sprites.PlayerSprite;
+import sprites.Sprite;
 
-/**
- * The Player class represents the player controlled entity.
- */
-public class Player extends EntityBase {
+public abstract class Player extends EntityBase{
 
-    /*
-     * The current game settings
-     */
-    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
-
-    /*
-     * Character properties
-     */
-    private final static double movespeed = 10;
-    private final static double entitywidth = 1280;
-    private final static double entityheight = 560;
-
-    /*
-     * Sprite and animation properties
-     */
-    private final static double spritewidth = 1300;
-    private final static double spriteheight = 600;
-    private final static String animationkey = "Player";
-    private final static String animationurl = "/sprites/Player.png";
-    private final static int numberframes = 12;
-    private final static int animationdelay = 10;
-
-    /*
-     * Starting size
-     */
-    private final static double initialscale = 1000;
-    private final static double targetscale = 10000;
-
-    /*
-     * Player information
-     */
-    private int currentScore;
+    private PlayerSprite sprite;
+    private double localEntityWidth;
+    private double localEntityHeight;
+    private double scoreIncrementScalingFactor;
+    private double movementSpeedScalingFactor;
+    private BubbleSpawner bubbles;
+    private boolean consumable;
+    private int score;
     private int numberFishEaten;
-    private Bubbles bubbles;
 
-    /**
-     * Creates a new player.
-     */
-    public Player() {
+    public Player(GameEntities entity){
         super();
-        currentScore = 0;
+        sprite = new PlayerSprite(entity.getSprite());
+        localEntityWidth =  GameEntities.GUPPY.getEntityWidth();
+        localEntityHeight  =  GameEntities.GUPPY.getEntityHeight();
+        scoreIncrementScalingFactor = GameEntities.GUPPY.getScoreScalingFactor();
+        movementSpeedScalingFactor = GameEntities.GUPPY.getMovementSpeedScalingFactor();
+        double screenWidth = ScreenSettings.getInstance().getWidth();
+        double centreX = (screenWidth / 2) - (getEntityWidth() / 2);
+        double screenHeight = ScreenSettings.getInstance().getHeight();
+        double centreY = (screenHeight / 2) - (getEntityHeight() / 2);
+        sprite.setSpriteX(centreX);
+        sprite.setSpriteY(centreY);
+        consumable = entity.isConsumable();
+        score = 0;
         numberFishEaten = 0;
+        bubbles = new BubbleSpawner(this);
     }
 
-    /**
-     * Applies the character properties.
-     */
-    @Override
-    protected void initialiseEntity() {
-        entityWidth = entitywidth;
-        entityHeight = entityheight;
+    public boolean isConsumable() {
+        return consumable;
     }
 
-    /**
-     * Applies the sprite and animation properties.
-     */
-    @Override
-    protected void initialiseSprite() {
-        topLeftX = OptionsHandler.getInstance().getWidth() / 2.0;
-        topLeftY = OptionsHandler.getInstance().getHeight() / 2.0;
-        spriteWidth = spritewidth;
-        spriteHeight = spriteheight;
-        currentScale = initialscale;
-        targetScale = targetscale;
-    }
-
-    /**
-     * Creates the animation using the specified sprite and animation properties.
-     *
-     * @return the animation.
-     */
-    @Override
-    protected Animation createAnimation() {
-        return Animation.createAnimation(animationkey, animationurl, numberframes, (int) spriteWidth,
-                (int) spriteHeight, animationdelay);
-    }
-
-    /**
-     * Initialises a new set of bubbles to be associated with the player.
-     */
-    private void initBubbles(){
-        bubbles = new Bubbles(this);
-    }
-
-    /**
-     * Handles the updates of the player each tick.
-     */
-    @Override
-    protected void update() {
-        /*
-         *If there are no bubbles currently associated with the player
-         *Then associate a new set of bubbles
-         */
-        if(bubbles != null){
-            if(bubbles.hasBubbles()){
-                bubbles.updateBubbles();
-            } else {
-                initBubbles();
-            }
-        } else {
-            initBubbles();
+    private void moveUp(){
+        double dY = (-1) * getMovementSpeed();
+        double y = getEntityY();
+        if ((y + dY) < 0) {
+            dY = (0 - y);
         }
+        translateSpriteY(dY);
     }
-
-    /**
-     * Draws any necessary player specific graphics on the specified 2-dimensional image.
-     *
-     * @param graphic the 2-dimensional image.
-     */
-    @Override
-    protected void draw(Graphics2D graphic) {
-        // If the player has bubbles associated with it
-        if(bubbles != null){
-            // Then draw the bubbles
-            bubbles.drawBubbles(graphic);
+    private void moveDown(){
+        double dY = getMovementSpeed();
+        double y = getEntityY();
+        double screenHeight = ScreenSettings.getInstance().getHeight();
+        double height = getEntityHeight();
+        if ((y + dY) > (screenHeight - height)) {
+            dY = (screenHeight - height) - y;
         }
+        translateSpriteY(dY);
     }
-
-    /**
-     * Move the player up.
-     */
-    public void moveUp() {
-        if ((topLeftY - movespeed) > -10) {
-            topLeftY -= movespeed;
+    private void moveLeft(){
+        if (!isEntityFacingLeft()) {
+            flipHorizontally();
         }
-    }
-
-    /**
-     * Move the player down.
-     */
-    public void moveDown() {
-        if ((topLeftY + movespeed) < _optionsHandler.getHeight() - getGlobalEntityHeight()) {
-            topLeftY += movespeed;
+        double dX = (-1) * getMovementSpeed();
+        double x = getEntityX();
+        if ((x + dX) < 0) {
+            dX = (0 - x);
         }
+        translateSpriteX(dX);
     }
-
-    /**
-     * Move the player left.
-     */
-    public void moveLeft() {
-        if ((topLeftX - movespeed) > -10) {
-            topLeftX -= movespeed;
+    private void moveRight(){
+        if (isEntityFacingLeft()) {
+            flipHorizontally();
         }
-    }
-
-    /**
-     * Move the player right.
-     */
-    public void moveRight() {
-        if ((topLeftX + movespeed) < _optionsHandler.getWidth() - getGlobalEntityWidth()) {
-            topLeftX += movespeed;
+        double dX = getMovementSpeed();
+        double x = getEntityX();
+        double screenWidth = ScreenSettings.getInstance().getWidth();
+        double width = getEntityWidth();
+        if ((x + dX) > (screenWidth - width)) {
+            dX = (screenWidth - width) - x;
         }
+        translateSpriteX(dX);
     }
 
-    /**
-     * Move the player in the specified direction.
-     *
-     * @param direction the desired direction.
-     */
-    public void move(Direction direction) {
+    public void move(Directions direction) {
         switch (direction) {
-        case UP:
-            moveUp();
-            break;
-        case DOWN:
-            moveDown();
-            break;
-        case LEFT:
-            setFacingRight(false);
-            moveLeft();
-            break;
-        case RIGHT:
-            setFacingRight(true);
-            moveRight();
-            break;
-        default:
+            case UP:
+                moveUp();
+                break;
+            case DOWN:
+                moveDown();
+                break;
+            case LEFT:
+                moveLeft();
+                break;
+            case RIGHT:
+                moveRight();
+                break;
+            default:
+                break;
         }
     }
 
-    /**
-     * Handles the necessary actions needed to be performed to consume the specified entity.
-     *
-     * @param food the entity to be eaten.
-     */
+    public boolean hasSubEntities() {
+        if (bubbles != null) {
+            return bubbles.isActive();
+        }
+        return false;
+    }
+
     @Override
-    public void consume(Entity food) {
-        if (food != null){
-            // Notify the food that it has been eaten
-            food.consumedBy(this);
-            // Update the player progress information
-            numberFishEaten++;
-            currentScale += food.getScaling() * 500;
-            currentScore = (int) currentScale - 1000;
+    public Sprite getSprite() {
+        return sprite;
+    }
+    protected void setBubbles(BubbleSpawner bubbles){
+        this.bubbles = bubbles;
+    }
+    public ArrayList<Entity> getSubEntities() {
+        if (bubbles != null) {
+            return bubbles.getEntities();
+        }
+        return null;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (bubbles != null) {
+            if (!bubbles.isActive()) {
+                bubbles = new BubbleSpawner(this);
+            } else {
+                bubbles.update();
+            }
         }
     }
 
-    /**
-     * Handles the necessary actions that need to be performed when the player is consumed.
-     *
-     * @param eater the entity consuming the player.
-     * @return the value of the player.
-     */
-    @Override
-    public int consumedBy(Entity eater) {
-        kill();
-        return 0;
+    public int getCurrentScore(){
+        return score;
     }
 
-    /**
-     * Returns whether or not the player has reached the target size.
-     *
-     * @return <code>true</code> if and only if the current size of the player is equal to or greater than the target size, otherwise <code>false</code>.
-     */
-    public boolean isFull() {
-        return currentScale >= targetScale;
-    }
-
-    /**
-     * Returns the current score achieved by the player.
-     *
-     * @return the current score.
-     */
-    public int getScore() {
-        return currentScore;
-    }
-
-    /**
-     * Returns the current number of fish eaten.
-     *
-     * @return the number of fish eaten.
-     */
-    public int getFishEaten(){
+    public int getNumberFishEaten(){
         return numberFishEaten;
+    }
+    @Override
+    public double getScoreScalingFactor() {
+        return scoreIncrementScalingFactor;
+    }
+
+    @Override
+    public double getMovementSpeedScalingFactor() {
+        return movementSpeedScalingFactor;
+    }
+
+    @Override
+    protected double getLocalEntityWidth() {
+        return localEntityWidth;
+    }
+
+    @Override
+    protected double getLocalEntityHeight() {
+        return localEntityHeight;
+    }
+
+    private void increaseScore(int scoreIncrement){
+        score += scoreIncrement;
+    }
+    private void increaseSize(double sizeIncrement){
+        sprite.incrementSprite(sizeIncrement);
+    }
+    public boolean consume(Entity entity) {
+        if (isAlive()) {
+            if (entity != null) {
+                if (entity.isAlive()) {
+                    if (entity.isConsumable()) {
+                        if (intersects(entity)) {
+                            if (isLargerThan(entity)) {
+                                entity.consumedBy(this);
+                                double sizeIncrement = entity.getSizeIncrement();
+                                double scoreincrement = entity.getScoreIncrement();
+                                increaseSize(sizeIncrement);
+                                increaseScore((int)scoreincrement);
+                                numberFishEaten++;
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public boolean isFull(){
+        return sprite.isFull();
     }
 }

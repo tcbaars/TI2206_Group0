@@ -1,162 +1,194 @@
 package entities;
 
-import java.util.Random;
+import java.util.ArrayList;
 
-import enumerations.Direction;
-import handlers.OptionsHandler;
+import entityspawner.BubbleSpawner;
+import enumerations.Directions;
+import enumerations.GameEntities;
+import settings.ScreenSettings;
+import sprites.EnemySprite;
+import sprites.Sprite;
+import tools.entitytools.Generator;
 
-/**
- * The Enemy class outlines the basic attributes an enemy attribute must have.
- */
-public abstract class Enemy extends EntityBase {
+public abstract class Enemy extends EntityBase{
 
-    /*
-     * Randomises the enemy's attributes
-     */
-    protected Random generator;
+    private Sprite sprite;
+    private BubbleSpawner bubbles;
+    private boolean consumable;
+    private double localEntityWidth;
+    private double localEntityHeight;
+    private double scoreIncrementScalingFactor;
+    private double movementSpeedScalingFactor;
+    private Directions direction;
 
-    /*
-     * Enemy properties
-     */
-    protected double moveSpeed;
-    protected Bubbles bubbles;
-
-    /**
-     * Creates a new enemy entity.
-     */
-    public Enemy() {
-        super();
+    public Enemy(GameEntities entity){
+        sprite = new EnemySprite(entity.getSprite());
+        localEntityWidth = entity.getEntityWidth();
+        localEntityHeight = entity.getEntityHeight();
+        scoreIncrementScalingFactor = entity.getScoreScalingFactor();
+        movementSpeedScalingFactor = entity.getMovementSpeedScalingFactor();
+        spawn();
+        consumable = entity.isConsumable();
     }
 
-    /**
-     * Spawn the enemy on the left side of the playing field.
-     */
-    protected void spawnLeft() {
-        topLeftX = 0 - getGlobalEntityWidth();
-        setDirection(Direction.RIGHT);
-        setFacingRight(true);
+    public double getScoreScalingFactor() {
+        return scoreIncrementScalingFactor;
     }
 
-    /**
-     * Spawn the enemy on the right side of the playing field.
-     */
-    protected void spawnRight() {
-        topLeftX = OptionsHandler.getInstance().getWidth() + getGlobalEntityWidth();
-        setDirection(Direction.LEFT);
-        setFacingRight(false);
+    @Override
+    public double getMovementSpeedScalingFactor() {
+        return movementSpeedScalingFactor;
+    }
+    @Override
+    public void update() {
+        super.update();
+        move(direction);
+        if (bubbles != null){
+            bubbles.update();
+        }
     }
 
-    /**
-     * Spawn the enemy on either side of the playing field.
-     */
-    protected void setRandomSide() {
-        int side = generator.nextInt(2);
-        if (side == 0) {
+    protected double getLocalEntityWidth() {
+        return localEntityWidth;
+    }
+
+    protected double getLocalEntityHeight() {
+        return localEntityHeight;
+    }
+    protected void spawn(){
+        if (Generator.generateBoolean(10)) {
+            bubbles  = new BubbleSpawner(this);
+        }
+        double screenHeight = ScreenSettings.getInstance().getHeight();
+        double height = getEntityHeight();
+        int y = Generator.generateInteger((int)(screenHeight - (height + 10)));
+        sprite.setSpriteY(y);
+        boolean spawnLeft = Generator.generateBoolean();
+        if (spawnLeft) {
             spawnLeft();
         } else {
             spawnRight();
         }
     }
 
-    /**
-     * Spawn the enemy at a random depth within the playing field.
-     */
-    protected void setRandomDepth() {
-        topLeftY = generator.nextInt((OptionsHandler.getInstance().getHeight() - getGlobalEntityHeight()));
+    protected void spawnLeft(){
+        if (!isEntityFacingLeft()) {
+            flipHorizontally();
+        }
+        double width = getEntityWidth();
+        double x = 0 - width;
+        sprite.setSpriteX(x);
+        direction = Directions.RIGHT;
     }
 
-    /**
-     * Randomly assign the enemy a random size, within the specified range
-     *
-     * @param minScale the minimum size.
-     * @param maxScale the maximum size.
-     */
-    protected void setRandomScale(double minScale, double maxScale) {
-        int rand = generator.nextInt((int) (maxScale - minScale));
-        currentScale = rand + minScale;
+    protected void spawnRight(){
+        if (isEntityFacingLeft()) {
+            flipHorizontally();
+        }
+        double screenWidth = ScreenSettings.getInstance().getWidth();
+        double x = screenWidth;
+        sprite.setSpriteX(x);
+        direction = Directions.LEFT;
     }
 
-    /**
-     * Return the enemy's move speed proportional to its current size.
-     *
-     * @return the move speed adjusted by the current size.
-     */
-    private double getGlobalMoveSpeed(){
-        return moveSpeed / getScaling();
+    public boolean isConsumable() {
+        return consumable;
     }
-
-    /**
-     * Moves the enemy to the left of the playing field.
-     */
-    private void moveLeft() {
-        topLeftX = topLeftX - getGlobalMoveSpeed();
-        // If off-screen kill it
-        if (topLeftX < (0 - getGlobalSpriteWidth())) {
+    private void moveUp(){
+        double dY = (-1) * getMovementSpeed();
+        double y = getEntityY();
+        double height = getEntityHeight();
+        if (((y - height) + dY) < 0) {
             kill();
         }
+        translateSpriteY(dY);
     }
-
-    /**
-     * Moves the enemy to the right of the playing field.
-     */
-    private void moveRight() {
-        topLeftX = topLeftX + getGlobalMoveSpeed();
-        // If off-screen kill it
-        if (topLeftX > OptionsHandler.getInstance().getWidth()) {
+    private void moveDown(){
+        double dY = getMovementSpeed();
+        double y = getEntityY();
+        double screenHeight = ScreenSettings.getInstance().getHeight();
+        if ((y + dY) > screenHeight ) {
             kill();
         }
+        translateSpriteY(dY);
+    }
+    private void moveLeft(){
+        if (!isEntityFacingLeft()) {
+            flipHorizontally();
+        }
+        double dX = (-1) * getMovementSpeed();
+        double x = getEntityX();
+        double width = getEntityWidth();
+        if (((x + dX) + width) < 0) {
+            kill();
+        }
+        translateSpriteX(dX);
+    }
+    private void moveRight(){
+        if (isEntityFacingLeft()) {
+            flipHorizontally();
+        }
+        double dX = getMovementSpeed();
+        double x = getEntityX();
+        double screenWidth = ScreenSettings.getInstance().getWidth();
+        if ((x + dX) > screenWidth) {
+            kill();
+        }
+        translateSpriteX(dX);
     }
 
-    /**
-     * Move the enemy in the specified direction.
-     *
-     * @param direction the desired direction.
-     */
-    public void move(Direction direction) {
+    public void move(Directions direction) {
         switch (direction) {
-        case LEFT:
-            moveLeft();
-            break;
-        case RIGHT:
-            moveRight();
-            break;
-        default:
+            case UP:
+                moveUp();
+                break;
+            case DOWN:
+                moveDown();
+                break;
+            case LEFT:
+                moveLeft();
+                break;
+            case RIGHT:
+                moveRight();
+                break;
+            default:
+                break;
         }
     }
 
-    /**
-     * Returns the value of the enemy proportional to its current size.
-     *
-     * @return the value adjusted by the current size.
-     */
-    public int calculateValue() {
-        return (int) (getScaling() * getBaseValue());
-    }
-
-    /**
-     * Sets the direction of movement.
-     *
-     * @param direction the desired direction.
-     */
-    public abstract void setDirection(Direction direction);
-
-    /**
-     * Returns the base value of the enemy.
-     *
-     * @return the base value.
-     */
-    public abstract double getBaseValue();
-
-    /**
-     * Returns whether or not the enemy still has bubbles associated with it.
-     *
-     * @return <code>true</code> if and only if the enemy still has bubbles, otherwise <code>false</code>.
-     */
-    public boolean hasBubbles() {
-        if(bubbles != null){
-            return bubbles.hasBubbles();
+    public boolean hasSubEntities() {
+        if (bubbles != null) {
+            return bubbles.isActive();
         }
         return false;
     }
 
+    public ArrayList<Entity> getSubEntities() {
+        if (bubbles != null) {
+            return bubbles.getEntities();
+        }
+        return null;
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return sprite;
+    }
+    public boolean consume(Entity entity) {
+        if (isAlive()) {
+            if (entity != null) {
+                if (entity.isAlive()) {
+                    if (entity.isConsumable()) {
+                        if (intersects(entity)) {
+                            if (isLargerThan(entity)) {
+                                entity.consumedBy(this);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
