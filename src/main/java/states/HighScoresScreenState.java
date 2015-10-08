@@ -14,8 +14,8 @@ public class HighScoresScreenState extends ScreenState{
 
     private HighScoresLayer highScoresLayer;
 
-    public HighScoresScreenState(StateManager gameStateManager) {
-        super(gameStateManager);
+    public HighScoresScreenState(StateManager stateManager) {
+        super(stateManager);
         highScoresLayer = new HighScoresLayer();
         SoundLoader.getInstance().loadSound(GameSounds.SELECT);
     }

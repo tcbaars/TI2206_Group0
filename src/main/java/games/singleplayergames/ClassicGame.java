@@ -1,4 +1,4 @@
-package game.singleplayergames;
+package games.singleplayergames;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,7 +6,7 @@ import java.util.Iterator;
 import entities.Entity;
 import entityspawner.EnemySpawner;
 import enumerations.GameSounds;
-import game.SinglePlayerGameBase;
+import games.SinglePlayerGameBase;
 import states.gamestates.GameState;
 import states.gamestates.singleplayergamestates.ClassicGameState;
 import states.gamestates.singleplayergamestates.GameLostState;

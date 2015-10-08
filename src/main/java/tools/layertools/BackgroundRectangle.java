@@ -59,8 +59,4 @@ public class BackgroundRectangle {
         startY -= 35;
         return drawRectangle(screen, startX, startY, width, height);
     }
-
-    public static boolean drawCenteredRectangle(Graphics2D screen){
-        return true;
-    }
 }

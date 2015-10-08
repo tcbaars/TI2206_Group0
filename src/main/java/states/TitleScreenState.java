@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import enumerations.GameSounds;
 import enumerations.States;
-import game.singleplayergames.ClassicGame;
+import games.singleplayergames.ClassicGame;
 import keys.Key;
 import layers.TitleLayer;
 import statemanagers.StateManager;
@@ -15,8 +15,8 @@ public class TitleScreenState extends ScreenState{
 
     private TitleLayer titleLayer;
 
-    public TitleScreenState(StateManager gameStateManager){
-        super(gameStateManager);
+    public TitleScreenState(StateManager stateManager){
+        super(stateManager);
         titleLayer = new TitleLayer();
         SoundLoader.getInstance().loadSound(GameSounds.NAVIGATE);
         SoundLoader.getInstance().loadSound(GameSounds.SELECT);

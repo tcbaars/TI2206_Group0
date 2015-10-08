@@ -1,4 +1,4 @@
-package game;
+package games;
 
 import entities.Player;
 import entities.players.Guppy;

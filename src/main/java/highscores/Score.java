@@ -59,6 +59,18 @@ public class Score implements Comparable<Score>{
      * and a value greater than 0 if the score achieved is greater than that of the score achieved by the player in the specified score.
      */
     public int compareTo(Score score){
-        return Integer.valueOf(getScore()).compareTo(Integer.valueOf(score.getScore()));
+        if (score !=  null) {
+            return Integer.valueOf(getScore()).compareTo(Integer.valueOf(score.getScore()));
+        }
+        return 1;
+    }
+
+    public boolean equals(Score score){
+        if (score != null){
+            boolean nameEqual = getName().equals(score.getName());
+            boolean scoreEqual = compareTo(score) == 0;
+            return nameEqual && scoreEqual;
+        }
+        return false;
     }
 }

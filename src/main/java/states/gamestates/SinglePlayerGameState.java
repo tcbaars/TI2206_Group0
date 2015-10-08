@@ -1,14 +1,14 @@
 package states.gamestates;
 
 import enumerations.Directions;
-import game.SinglePlayerGameBase;
+import games.SinglePlayerGameBase;
 import keys.Key;
 
-public abstract class SinglePlayerGameBaseState extends GameState{
+public abstract class SinglePlayerGameState extends GameState{
 
     private SinglePlayerGameBase game;
 
-    public SinglePlayerGameBaseState(SinglePlayerGameBase game) {
+    public SinglePlayerGameState(SinglePlayerGameBase game) {
         super();
         this.game = game;
     }

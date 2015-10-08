@@ -3,7 +3,7 @@ package statemanagers;
 import java.awt.Graphics2D;
 
 import enumerations.States;
-import game.Game;
+import games.Game;
 import keys.Key;
 import keys.TypedKey;
 import states.ExitScreenState;

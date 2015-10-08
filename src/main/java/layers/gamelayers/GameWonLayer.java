@@ -1,6 +1,6 @@
 package layers.gamelayers;
 
-import game.SinglePlayerGame;
+import games.SinglePlayerGame;
 
 public class GameWonLayer extends GameOverLayer{
 

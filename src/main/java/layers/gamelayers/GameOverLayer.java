@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import enumerations.Directions;
 import enumerations.GameFonts;
 import enumerations.MenuItems;
-import game.SinglePlayerGame;
+import games.SinglePlayerGame;
 import highscores.HighScores;
 import layers.BackgroundLayer;
 import menus.HorizontalMenu;

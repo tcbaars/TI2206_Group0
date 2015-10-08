@@ -3,7 +3,7 @@ package layers.gamelayers.singleplayergamelayers;
 import java.util.Iterator;
 
 import entities.Entity;
-import game.singleplayergames.ClassicGame;
+import games.singleplayergames.ClassicGame;
 import layers.gamelayers.SinglePlayerGameLayer;
 
 public class ClassicGameLayer extends SinglePlayerGameLayer{

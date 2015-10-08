@@ -2,7 +2,7 @@ package states;
 
 import java.awt.Graphics2D;
 
-import game.Game;
+import games.Game;
 import keys.Key;
 import keys.TypedKey;
 import statemanagers.StateManager;

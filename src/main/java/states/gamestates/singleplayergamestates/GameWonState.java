@@ -1,7 +1,7 @@
 package states.gamestates.singleplayergamestates;
 
 import enumerations.GameSounds;
-import game.SinglePlayerGame;
+import games.SinglePlayerGame;
 import layers.gamelayers.GameOverLayer;
 import layers.gamelayers.GameWonLayer;
 import tools.resourcetools.SoundPlayer;

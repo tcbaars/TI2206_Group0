@@ -9,8 +9,8 @@ import statemanagers.StateManager;
 
 public class ExitScreenState extends ScreenState{
 
-    public ExitScreenState(StateManager gameStateManager){
-        super(gameStateManager);
+    public ExitScreenState(StateManager stateManager){
+        super(stateManager);
     }
 
     public void drawToScreen(Graphics2D screen) {

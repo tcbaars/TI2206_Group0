@@ -14,8 +14,8 @@ public class InstructionsScreenState extends ScreenState{
 
     private InstructionsLayer instructionsLayer;
 
-    public InstructionsScreenState(StateManager gameStateManager) {
-        super(gameStateManager);
+    public InstructionsScreenState(StateManager stateManager) {
+        super(stateManager);
         instructionsLayer = new InstructionsLayer();
         SoundLoader.getInstance().loadSound(GameSounds.SELECT);
     }

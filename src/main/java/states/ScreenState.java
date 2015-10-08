@@ -1,7 +1,7 @@
 package states;
 
 import enumerations.States;
-import game.Game;
+import games.Game;
 import keys.Key;
 import keys.TypedKey;
 import settings.DebugSettings;

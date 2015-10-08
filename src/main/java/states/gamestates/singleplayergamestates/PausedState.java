@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import enumerations.GameSounds;
 import enumerations.States;
-import game.Game;
+import games.Game;
 import keys.Key;
 import layers.gamelayers.PauseLayer;
 import states.gamestates.GameState;
