@@ -14,13 +14,13 @@ package enumerations;
  * In other words, the more the score scaling factor is increased the more points the entity will be worth compared to other entities of the same size.
  */
 public enum GameEntities {
-    GUPPY(GameSprites.GUPPY, 1280, 558, 1000, true, 0.9),
-    TROUT (GameSprites.TROUT, 1280, 518, 200, true, 0.2),
-    DUNKLEOSTEUS(GameSprites.DUNKLEOSTEUS, 1200, 400, 200, true, 0.5),
-    SWORDFISH(GameSprites.SWORDFISH, 1200, 330, 200, true, 0.8),
-    STINGRAY(GameSprites.STINGRAY, 1075, 155, 200, true, 0.4),
-    SHARK(GameSprites.SHARK, 1190, 452, 200, true, 0.9),
-    BUBBLE(GameSprites.BUBBLE, 1000, 1000, 100, false, 0.01);
+    GUPPY(GameSprites.GUPPY, 1280, 558, 1, true, 0.9),
+    TROUT (GameSprites.TROUT, 1280, 518, 0.1, true, 0.2),
+    DUNKLEOSTEUS(GameSprites.DUNKLEOSTEUS, 1200, 400, 0.1, true, 0.5),
+    SWORDFISH(GameSprites.SWORDFISH, 1200, 330, 0.1, true, 0.8),
+    STINGRAY(GameSprites.STINGRAY, 1075, 155, 0.1, true, 0.4),
+    SHARK(GameSprites.SHARK, 1190, 452, 0.1, true, 0.9),
+    BUBBLE(GameSprites.BUBBLE, 1000, 1000, 0.1, false, 0.01);
 
     private GameSprites sprite;
     private double entityWidth;

@@ -70,7 +70,7 @@ public abstract class EntityBase implements Entity{
     public double getEntityY() {
         double centerY = getSprite().getSpriteBoundingBox().getCenterY();
         double y = centerY - (getEntityHeight() / 2);
-        return getSprite().getSpriteY();
+        return y;
     }
 
     public void translateSpriteX(double dX) {
@@ -163,7 +163,7 @@ public abstract class EntityBase implements Entity{
     public double getMovementSpeed(){
         double baseMovingSpeed = BaseMovementSpeedSettings.getInstance().getBaseMovementSpeed();
         double movementSpeedScalingFactor = getMovementSpeedScalingFactor();
-        double areaScaling = getArea();
+        double areaScaling = getArea() / 10;
         return baseMovingSpeed * movementSpeedScalingFactor * (1/areaScaling);
     }
 }

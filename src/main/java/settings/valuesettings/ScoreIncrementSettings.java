@@ -17,8 +17,7 @@ public class ScoreIncrementSettings extends ValueIncrementSettings{
     }
 
     public double getBaseScoreIncrement(){
-        double score = desiredScore / numberIncrements;
-        score = score / getAverageScoreScalingFactor();
+        double score = (double)desiredScore / (double)numberIncrements;
         score = score / getAverageArea();
         return score;
     }

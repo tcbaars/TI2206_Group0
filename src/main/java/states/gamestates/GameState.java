@@ -13,9 +13,7 @@ import tools.resourcetools.MusicPlayer;
 
 public abstract class GameState implements State{
     private StateManager stateManager;
-    private Game game;
-    public GameState(Game game){
-        this.game = game;
+    public GameState(){
     }
     public void setStateManager(StateManager stateManager){
         this.stateManager = stateManager;

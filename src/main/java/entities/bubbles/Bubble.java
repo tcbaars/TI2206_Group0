@@ -15,7 +15,6 @@ import tools.resourcetools.SoundPlayer;
 
 public class Bubble extends EntityBase{
 
-    private Entity entity;
     private double localEntityWidth;
     private double localEntityHeight;
     private BubbleSprite sprite;
@@ -31,7 +30,6 @@ public class Bubble extends EntityBase{
     public Bubble(Entity entity){
         super();
         SoundLoader.getInstance().loadSound(GameSounds.BUBBLE_POP);
-        this.entity = entity;
         localEntityWidth = GameEntities.BUBBLE.getEntityWidth();
         localEntityHeight  = GameEntities.BUBBLE.getEntityHeight();
         sprite = new BubbleSprite(GameEntities.BUBBLE.getSprite());

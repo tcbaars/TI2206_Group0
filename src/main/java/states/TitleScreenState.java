@@ -50,6 +50,7 @@ public class TitleScreenState extends ScreenState{
                 break;
             case EXIT:
                 exit();
+                break;
             default:
                 break;
         }

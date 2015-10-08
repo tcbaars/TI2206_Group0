@@ -7,7 +7,7 @@ public class ScaleIncrementSettings extends ValueIncrementSettings{
 
     private ScaleIncrementSettings(){
         super();
-        numberIncrements = 10000;
+        numberIncrements = 2000;
     }
 
     public static ScaleIncrementSettings getInstance(){

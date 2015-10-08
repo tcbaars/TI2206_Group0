@@ -9,7 +9,7 @@ public abstract class SinglePlayerGameBaseState extends GameState{
     private SinglePlayerGameBase game;
 
     public SinglePlayerGameBaseState(SinglePlayerGameBase game) {
-        super(game);
+        super();
         this.game = game;
     }
     private void moveUp(){

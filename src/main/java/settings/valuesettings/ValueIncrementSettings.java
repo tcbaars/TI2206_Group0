@@ -13,8 +13,6 @@ public abstract class ValueIncrementSettings {
     private double averageMinArea;
     private double averageMaxArea;
     private double averageArea;
-    private double averageScoreScalingFactor;
-    private double averageMovementSpeedScalingFactor;
 
     public ValueIncrementSettings(){
         initialise();
@@ -30,22 +28,16 @@ public abstract class ValueIncrementSettings {
         double sumMinArea = 0;
         double sumMaxArea = 0;
         double sumAverageArea = 0;
-        double sumScoreScalingFactor = 0;
-        double sumMovementSpeedScalingFactor = 0;
         for (GameEntities entity : GameEntities.values()){
             minArea = Area(entity.getMinEntityWidth(), entity.getMinEntityHeight());
             maxArea = Area(entity.getMaxEntityWidth(), entity.getMaxEntityHeight());
             sumMinArea += minArea;
             sumMaxArea += maxArea;
             sumAverageArea += (maxArea + minArea) / 2;
-            sumScoreScalingFactor += entity.getScoreScalingFactor();
-            sumMovementSpeedScalingFactor += entity.getMovementSpeedScalingFactor();
         }
         averageMinArea = sumMinArea / numberEntities;
         averageMaxArea = sumMaxArea / numberEntities;
         averageArea = sumAverageArea / numberEntities;
-        averageScoreScalingFactor = sumScoreScalingFactor / numberEntities;
-        averageMovementSpeedScalingFactor = sumMovementSpeedScalingFactor / numberEntities;
     }
 
     public double getAverageMinArea(){
@@ -56,11 +48,5 @@ public abstract class ValueIncrementSettings {
     }
     public double getAverageArea(){
         return averageArea;
-    }
-    public double getAverageScoreScalingFactor(){
-        return averageScoreScalingFactor;
-    }
-    public double getAverageMovementSpeedScalingFactor(){
-        return averageMovementSpeedScalingFactor;
     }
 }

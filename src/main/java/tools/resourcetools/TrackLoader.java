@@ -58,11 +58,8 @@ public class TrackLoader {
                 // Load the audio track into memory
                 nextTrack = AudioSystem.getClip();
                 nextTrack.open(musicStream);
-
-                if (nextTrack != null) {
-                    nextTrack.setFramePosition(0);
-                    return true;
-                }
+                nextTrack.setFramePosition(0);
+                return true;
             } catch (UnsupportedAudioFileException e){
                 e.printStackTrace();
             } catch (LineUnavailableException e){

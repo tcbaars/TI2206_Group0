@@ -12,7 +12,7 @@ public class BaseMovementSpeedSettings extends ValueIncrementSettings{
 
     private BaseMovementSpeedSettings(){
         super();
-        numberIncrements = 100;
+        numberIncrements = 1000;
     }
 
     public static BaseMovementSpeedSettings getInstance(){
@@ -23,8 +23,6 @@ public class BaseMovementSpeedSettings extends ValueIncrementSettings{
         double screenWidth = ScreenSettings.getInstance().getWidth();
         double speed = screenWidth / numberIncrements;
         speed = speed * getAverageMinArea();
-        speed = speed / getAverageMovementSpeedScalingFactor();
-        //System.out.println("Speed: " + speed);
         return speed;
     }
 }

@@ -16,7 +16,7 @@ public class PausedState  extends GameState{
     private Game game;
     private PauseLayer pauseLayer;
     public PausedState(Game game) {
-        super(game);
+        super();
         this.game = game;
         pauseLayer = new PauseLayer();
         SoundLoader.getInstance().loadSound(GameSounds.NAVIGATE);

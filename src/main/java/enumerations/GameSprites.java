@@ -6,12 +6,12 @@ package enumerations;
  * The dimensions of the sprite are used to scale the frame width and frame height to a more appropriate size for the screen dimensions.
  */
 public enum GameSprites {
-    GUPPY(GameAnimations.GUPPY, 250, 350),
-    TROUT(GameAnimations.TROUT, 100, 500),
-    DUNKLEOSTEUS(GameAnimations.DUNKLEOSTEUS, 100, 450),
-    SWORDFISH(GameAnimations.SWORDFISH, 100, 450),
+    GUPPY(GameAnimations.GUPPY, 125, 350),
+    TROUT(GameAnimations.TROUT, 50, 600),
+    DUNKLEOSTEUS(GameAnimations.DUNKLEOSTEUS, 45, 400),
+    SWORDFISH(GameAnimations.SWORDFISH, 200, 450),
     STINGRAY(GameAnimations.STINGRAY, 100, 450),
-    SHARK(GameAnimations.SHARK, 100, 450),
+    SHARK(GameAnimations.SHARK, 300, 450),
     BUBBLE(GameAnimations.BUBBLE, 20, 50);
 
     private GameAnimations animation;

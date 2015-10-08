@@ -22,7 +22,7 @@ public class GameOverState extends GameState{
     private GameOverLayer gameOverLayer;
 
     public GameOverState(SinglePlayerGame game) {
-        super(game);
+        super();
         this.game = game;
         SoundLoader.getInstance().loadSound(GameSounds.NAVIGATE);
         SoundLoader.getInstance().loadSound(GameSounds.SELECT);
