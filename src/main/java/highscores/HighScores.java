@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import util.Logger;
+
 /**
  * The HighScores class is responsible for handling the global leaderboard.
  * The leaderboard is a sorted list of scores, starting with the highest score at index 0.
@@ -88,6 +90,7 @@ public class HighScores {
         int lastScoreIndex = getLastScoreIndex();
         // If the last score on the leaderboard is less than the specified score
         if ((leaderboard[lastScoreIndex].compareTo(score)) < 0) {
+            Logger.info("Added new high score.");
             // Add the score to the end of the leaderboard
             leaderboard[lastScoreIndex] = score;
             // And sort the leaderboard

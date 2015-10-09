@@ -12,6 +12,7 @@ import states.HighScoresScreenState;
 import states.InstructionsScreenState;
 import states.State;
 import states.TitleScreenState;
+import util.Logger;
 
 public class StateManager {
 
@@ -19,10 +20,12 @@ public class StateManager {
     private State currentState;
 
     public StateManager(){
+        Logger.info("The state manager has been started.");
         setCurrentState(States.TITLE_SCREEN);
     }
 
     public void setCurrentState(States state){
+        Logger.info("The state has been changed to: " + state.getDescription() + ".");
         switch (state) {
             case TITLE_SCREEN:
                 currentState = new TitleScreenState(this);
@@ -39,10 +42,13 @@ public class StateManager {
             case EXIT_SCREEN:
                 currentState = new ExitScreenState(this);
                 break;
+            default:
+                break;
         }
     }
 
     public void launchNewGame(Game game){
+        Logger.info("A new game has been launched.");
         this.game = game;
         game.restart();
         setCurrentState(States.GAME_SCREEN);

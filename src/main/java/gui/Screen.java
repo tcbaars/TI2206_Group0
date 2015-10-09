@@ -13,6 +13,7 @@ import enumerations.States;
 import keys.KeyAdapter;
 import settings.ScreenSettings;
 import statemanagers.StateManager;
+import util.Logger;
 
 public class Screen extends JPanel implements Runnable, KeyListener{
 
@@ -41,6 +42,7 @@ public class Screen extends JPanel implements Runnable, KeyListener{
         screenImage = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_RGB);
         screen = (Graphics2D)screenImage.getGraphics();
         running = true;
+        Logger.info("The screen has been started.");
     }
 
     public void addNotify(){
@@ -65,6 +67,7 @@ public class Screen extends JPanel implements Runnable, KeyListener{
     }
 
     public void windowClosing(){
+        Logger.info("The user has pressed the 'Close' button.");
         gameStateManager.setCurrentState(States.EXIT_SCREEN);
     }
 
@@ -107,5 +110,6 @@ public class Screen extends JPanel implements Runnable, KeyListener{
 
     protected void exit(){
         running = false;
+        Logger.info("The screen has been exited.");
     }
 }

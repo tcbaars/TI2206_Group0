@@ -65,11 +65,14 @@ public class Score implements Comparable<Score>{
         return 1;
     }
 
-    public boolean equals(Score score){
-        if (score != null){
-            boolean nameEqual = getName().equals(score.getName());
-            boolean scoreEqual = compareTo(score) == 0;
-            return nameEqual && scoreEqual;
+    public boolean equals(Object object){
+        if (object != null) {
+            if (object instanceof Score) {
+                Score score = (Score) object;
+                boolean nameEqual = getName().equals(score.getName());
+                boolean scoreEqual = compareTo(score) == 0;
+                return nameEqual && scoreEqual;
+            }
         }
         return false;
     }

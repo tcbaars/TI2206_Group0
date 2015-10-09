@@ -1,6 +1,7 @@
 package games;
 
 import states.gamestates.GameState;
+import util.Logger;
 
 public abstract class GameBase implements Game{
 
@@ -14,6 +15,7 @@ public abstract class GameBase implements Game{
     public void restart(){
         gameOver = false;
         resume();
+        Logger.info("The game has been restarted.");
     }
 
     abstract protected GameState runningGameState();
@@ -23,11 +25,13 @@ public abstract class GameBase implements Game{
     public void pause(){
         paused = true;
         setCurrentState(pausedGameState());
+        Logger.info("The game has been paused.");
     }
 
     public void resume(){
         paused = false;
         setCurrentState(runningGameState());
+        Logger.info("The game has been resumed.");
     }
 
     public boolean isPaused(){
@@ -38,6 +42,7 @@ public abstract class GameBase implements Game{
         gameOver = true;
         pause();
         setCurrentState(gameOverGameState());
+        Logger.info("The game is over.");
     }
 
     public boolean isGameOver(){

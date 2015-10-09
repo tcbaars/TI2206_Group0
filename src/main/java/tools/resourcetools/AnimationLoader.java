@@ -1,12 +1,17 @@
 package tools.resourcetools;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.RasterFormatException;
 import java.io.IOException;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
 import enumerations.GameAnimations;
+import exceptions.AnimationLoaderException;
+import exceptions.GameException;
+import gui.DialogBox;
+import util.Logger;
 
 /**
  * The AnimationLoader class is responsible for loading commonly used sprite sheets to allow quick access.
@@ -33,27 +38,21 @@ public class AnimationLoader {
 
     /**
      * Loads the specified animation.
-     * The returned boolean is used to indicate if something went wrong with loading the animation,
-     * or if the animation was already loaded, which means the animation does not have to be read again.
      * @param animation the animation.
-     * @return <code>true</code> if and only if the animation was read (and loaded), otherwise <code>false</code>.
      */
-    public boolean loadAnimation(GameAnimations animation){
-        return loadAnimation(animation.getAnimationkey(), animation.getAnimationUrl(), animation.getNumberFrames(), animation.getFrameWidth(), animation.getFrameHeight());
+    public void loadAnimation(GameAnimations animation){
+        loadAnimation(animation.getAnimationkey(), animation.getAnimationUrl(), animation.getNumberFrames(), animation.getFrameWidth(), animation.getFrameHeight());
     }
 
     /**
      * Loads the specified animation
-     * The returned boolean is used to indicate if something went wrong with loading the animation,
-     * or if the animation was already loaded, which means the animation does not have to be read again.
      * @param animationKey a unique identifier for the animation.
      * @param animationUrl the resource path of the animation.
      * @param numberFrames the number of frames.
      * @param frameWidth the frame width.
      * @param frameHeight the frame height.
-     * @return <code>true</code> if and only if the animation was read (and loaded), otherwise <code>false</code>.
      */
-    public boolean loadAnimation(String animationKey, String animationUrl, int numberFrames, int frameWidth, int frameHeight){
+    public void loadAnimation(String animationKey, String animationUrl, int numberFrames, int frameWidth, int frameHeight){
         if (!animationLoader.containsKey(animationKey)) {
             try {
                 BufferedImage spritesheet = ImageIO.read(AnimationLoader.class.getResourceAsStream(animationUrl));
@@ -65,12 +64,37 @@ public class AnimationLoader {
                     frames[i] = spritesheet.getSubimage(startX, 0, frameWidth, frameHeight);
                 }
                 animationLoader.put(animationKey, frames);
-                return true;
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                String desciption = "An error occured while trying to find " + animationKey + " sprite sheet at: " + animationUrl + ".";
+                String message = "IllegalArgumentException occured while trying to located the sprite sheet at : " + animationUrl + ".";
+                GameException exception = new AnimationLoaderException(desciption, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayError(exception);
             } catch (IOException e){
                 e.printStackTrace();
+                String desciption = "An error occured while reading the specified sprite sheet at: " + animationUrl + ".";
+                String message = "IOException occured while reading: (" + animationKey + ", " + animationUrl + ").";
+                GameException exception = new AnimationLoaderException(desciption, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayError(exception);
+            }  catch (NullPointerException e) {
+                e.printStackTrace();
+                String desciption = "An error occured while subdividing the specified sprite sheet.";
+                String message = "NullPointerException occured while subdividing the sprite sheet: (" + animationKey + ", " + animationUrl + ").";
+                GameException exception = new AnimationLoaderException(desciption, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayError(exception);
+            } catch (RasterFormatException e){
+                e.printStackTrace();
+                String desciption = "An error occured while subdividing the specified sprite sheet. The specified dimensions are incorrect.";
+                String message = "RasterFormatException occured while subdividing the sprite sheet: (" + animationKey + ", " + animationUrl + ").";
+                message += " The specified dimensions: (" + (frameWidth * numberFrames) + ", " + frameHeight + ").";
+                GameException exception = new AnimationLoaderException(desciption, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayError(exception);
             }
         }
-        return false;
     }
 
     /**
@@ -90,7 +114,15 @@ public class AnimationLoader {
      * @return the animation.
      */
     public BufferedImage[] getAnimation(String animationKey){
-        return animationLoader.get(animationKey);
+        BufferedImage[] animation = animationLoader.get(animationKey);
+        if (animation == null) {
+            String desciption = "The specified animation " + animationKey + " has not been loaded.";
+            String message = "Error occured while getting the specified animation: " + animationKey + ".";
+            GameException exception = new AnimationLoaderException(desciption, message);
+            Logger.error("GameException Occured: " + exception.getMessage());
+            DialogBox.displayError(exception);
+        }
+        return animation;
     }
 
 }

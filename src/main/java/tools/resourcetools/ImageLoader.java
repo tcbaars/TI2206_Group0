@@ -7,6 +7,10 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import enumerations.GameImages;
+import exceptions.GameException;
+import exceptions.ImageLoaderException;
+import gui.DialogBox;
+import util.Logger;
 
 /**
  * The ImageLoader class is responsible for loading commonly used images for quick access.
@@ -33,34 +37,31 @@ public class ImageLoader {
 
     /**
      * Loads the specified image.
-     * The returned boolean is used to indicate if something went wrong with loading the image,
-     * or if the image was already loaded, which means the image does not have to be read again.
      * @param image the image.
-     * @return <code>true</code> if and only if the image was read (and loaded), otherwise <code>false</code>.
      */
-    public boolean loadImage(GameImages image){
-        return loadImage(image.getKey(), image.getUrl());
+    public void loadImage(GameImages image){
+        loadImage(image.getKey(), image.getUrl());
     }
 
     /**
      * Loads the specified image.
-     * The returned boolean is used to indicate if something went wrong with loading the image,
-     * or if the image was already loaded, which means the image does not have to be read again.
      * @param imageKey a unique identifier of the image.
      * @param imageUrl the resource path of the image.
-     * @return <code>true</code> if and only if the image was read (and loaded), otherwise <code>false</code>.
      */
-    public boolean loadImage(String imageKey, String imageUrl){
+    public void loadImage(String imageKey, String imageUrl){
         if (!imageLoader.containsKey(imageKey)) {
             try {
                 BufferedImage image = ImageIO.read(ImageLoader.class.getResourceAsStream(imageUrl));
                 imageLoader.put(imageKey, image);
-                return true;
             } catch(IOException e){
+                String desciption = "The specified image " + imageKey + " could not been loaded.";
+                String message = "IOException occurred while reading the specified image: " + imageKey + " at " + imageUrl + ".";
+                GameException exception = new ImageLoaderException(desciption, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayError(exception);
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
     /**
@@ -80,6 +81,14 @@ public class ImageLoader {
      * @return the specified image if the image has been loaded, otherwise <code>null</code>.
      */
     public BufferedImage getImage(String imageKey){
+        BufferedImage image = imageLoader.get(imageKey);
+        if (image == null) {
+            String desciption = "The specified image " + imageKey + " has not been loaded.";
+            String message = "An error occurred while getting the specified image: " + imageKey + ".";
+            GameException exception = new ImageLoaderException(desciption, message);
+            Logger.error("GameException Occured: " + exception.getMessage());
+            DialogBox.displayError(exception);
+        }
         return imageLoader.get(imageKey);
     }
 }
