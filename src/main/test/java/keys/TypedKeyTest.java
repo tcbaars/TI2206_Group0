@@ -15,7 +15,10 @@ public class TypedKeyTest {
     @Test
     public void testgetValue() {
       TypedKey key = 'a';
-      assertEquals('a', key.getKey());
+      TypedKey mock = mock(TypedKey.class);
+      assertEquals('a', key.getValue());
+      when(mock.getValue()).thenReturn('a');
+      assertEquals('a', mock.getValue());
     }
     
     /**
