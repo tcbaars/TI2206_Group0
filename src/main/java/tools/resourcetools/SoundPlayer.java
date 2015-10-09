@@ -3,7 +3,11 @@ package tools.resourcetools;
 import javax.sound.sampled.Clip;
 
 import enumerations.GameSounds;
+import exceptions.GameException;
+import exceptions.SoundPlayerException;
+import gui.DialogBox;
 import settings.SoundSettings;
+import util.Logger;
 
 /**
  * The SoundPlayer class is responsible for playing sounds.
@@ -29,18 +33,16 @@ public class SoundPlayer {
     /**
      * Plays the specified sound.
      * @param sound the sound.
-     * @return <code>true</code> if and only if the specified sound was played, otherwise <code>false</code>.
      */
-    public boolean playSound(GameSounds sound){
-        return playSound(sound.getSoundKey());
+    public void playSound(GameSounds sound){
+        playSound(sound.getSoundKey());
     }
 
     /**
      * Plays the specified sound.
      * @param soundKey the sound identifier.
-     * @return <code>true</code> if and only if the specified sound was played, otherwise <code>false</code>.
      */
-    public boolean playSound(String soundKey){
+    public void playSound(String soundKey){
         if (SoundSettings.getInstance().isSoundOn()) {
             Clip sound = SoundLoader.getInstance().getSound(soundKey);
             if (sound != null) {
@@ -50,9 +52,15 @@ public class SoundPlayer {
                 sound.loop(0);
                 // Play the sound
                 sound.start();
-                return true;
+            } else {
+                String description = "There was an error while trying to play the sound " + soundKey + ".";
+                description += ". The sound has not been loaded.";
+                String message = "An error occurred while trying to play the specified sound.";
+                message += ". The sound has not been loaded.";
+                GameException exception = new SoundPlayerException(description, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayWarning(exception);
             }
         }
-        return false;
     }
 }

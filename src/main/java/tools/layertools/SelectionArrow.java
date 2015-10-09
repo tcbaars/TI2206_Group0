@@ -87,7 +87,7 @@ public class SelectionArrow {
                 return null;
         }
     }
-    public static boolean drawSelectionArrow(Graphics2D screen, int startX, int startY, int width, Directions direction, boolean selected){
+    public static void drawSelectionArrow(Graphics2D screen, int startX, int startY, int width, Directions direction, boolean selected){
         Polygon triangles[] = getSelectionArrow(width, direction);
         Color tempColor = screen.getColor();
         Color outlineColor = Color.BLACK;
@@ -102,7 +102,6 @@ public class SelectionArrow {
         screen.fill(triangles[1]);
         screen.translate((-1) * startX, (-1) * startY);
         screen.setColor(tempColor);
-        return true;
     }
 
 }

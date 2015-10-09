@@ -26,7 +26,7 @@ public class BackgroundRectangle {
      * @param height the desired rectangle height.
      * @return <code>true</code> if the rectangle was successfully drawn to the screen, otherwise <code>false</code>.
      */
-    public static boolean drawRectangle(Graphics2D screen, int startX, int startY, int width, int height){
+    public static void drawRectangle(Graphics2D screen, int startX, int startY, int width, int height){
         if (screen != null){
             // Get the current colour
             Color tempColor = screen.getColor();
@@ -36,9 +36,7 @@ public class BackgroundRectangle {
             screen.fillRoundRect(startX, startY, width, height, arcWidth, arcHeight);
             // Restore the previous current colour
             screen.setColor(tempColor);
-            return true;
         }
-        return false;
     }
 
     /**
@@ -47,9 +45,8 @@ public class BackgroundRectangle {
      * @param screen the screen.
      * @param width the desired rectangle width.
      * @param height the desired rectangle height.
-     * @return <code>true</code> if the rectangle was successfully drawn to the screen, otherwise <code>false</code>.
      */
-    public static boolean drawCenteredRectangle(Graphics2D screen, int width, int height){
+    public static void drawCenteredRectangle(Graphics2D screen, int width, int height){
         // Get the centre of the screen
         double centerX = ScreenSettings.getInstance().getWidth() / 2.0;
         double centerY = ScreenSettings.getInstance().getHeight() / 2.0;
@@ -57,6 +54,6 @@ public class BackgroundRectangle {
         int startX = (int)(centerX - (width / 2.0));
         int startY = (int)(centerY - (height / 2.0));
         startY -= 35;
-        return drawRectangle(screen, startX, startY, width, height);
+        drawRectangle(screen, startX, startY, width, height);
     }
 }

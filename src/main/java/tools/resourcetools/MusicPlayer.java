@@ -2,7 +2,11 @@ package tools.resourcetools;
 
 import javax.sound.sampled.Clip;
 
+import exceptions.GameException;
+import exceptions.MusicPlayerException;
+import gui.DialogBox;
 import settings.MusicSettings;
+import util.Logger;
 
 /**
  * The MusicPlayer is responsible for playing background music.
@@ -41,6 +45,12 @@ public class MusicPlayer {
             } else {
                 currentTrack.stop();
             }
+        } else {
+            String description = "The current music track has not been loaded.";
+            String message = "An error occurred while playing the current music track.";
+            GameException exception = new MusicPlayerException(description, message);
+            Logger.error("GameException Occured: " + exception.getMessage());
+            DialogBox.displayWarning(exception);
         }
     }
 

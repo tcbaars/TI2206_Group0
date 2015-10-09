@@ -83,9 +83,9 @@ public class ImageLoader {
     public BufferedImage getImage(String imageKey){
         BufferedImage image = imageLoader.get(imageKey);
         if (image == null) {
-            String desciption = "The specified image " + imageKey + " has not been loaded.";
+            String description = "The specified image " + imageKey + " has not been loaded.";
             String message = "An error occurred while getting the specified image: " + imageKey + ".";
-            GameException exception = new ImageLoaderException(desciption, message);
+            GameException exception = new ImageLoaderException(description, message);
             Logger.error("GameException Occured: " + exception.getMessage());
             DialogBox.displayError(exception);
         }

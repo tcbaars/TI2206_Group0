@@ -1,15 +1,19 @@
 package tools.resourcetools;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import enumerations.GameSounds;
+import exceptions.GameException;
+import exceptions.SoundLoaderException;
+import gui.DialogBox;
+import util.Logger;
 
 /**
  * The SoundLoader class is responsible for loading the commonly used audio cues.
@@ -39,10 +43,9 @@ public class SoundLoader {
      * The returned boolean is used to indicate if something went wrong with loading the sound,
      * or if the sound was already loaded, which means the sound does not have to be read again.
      * @param sound the sound.
-     * @return <code>true</code> if and only if the sound was read (and loaded), otherwise <code>false</code>.
      */
-    public boolean loadSound(GameSounds sound){
-        return loadSound(sound.getSoundKey(), sound.getSoundUrl());
+    public void loadSound(GameSounds sound){
+        loadSound(sound.getSoundKey(), sound.getSoundUrl());
     }
 
     /**
@@ -51,9 +54,8 @@ public class SoundLoader {
      * or if the sound was already loaded, which means the sound does not have to be read again.
      * @param soundKey a unique identifier of the sound.
      * @param soundUrl the resource path of the sound.
-     * @return
      */
-    public boolean loadSound(String soundKey, String soundUrl){
+    public void loadSound(String soundKey, String soundUrl){
         if (!soundLoader.containsKey(soundKey)) {
             try{
              // Get the audio input stream
@@ -64,16 +66,40 @@ public class SoundLoader {
                 Clip clip = AudioSystem.getClip();
                 clip.open(soundStream);
                 soundLoader.put(soundKey, clip);
-                return true;
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+                String description = "The sound location was not specified.";
+                String message = "An error occurred while loading the specified sound: " + soundKey;
+                message += ". No location specified.";
+                GameException exception = new SoundLoaderException(description, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayWarning(exception);
             } catch (UnsupportedAudioFileException e){
                 e.printStackTrace();
-            } catch (LineUnavailableException e) {
+                String description = "The sound " + soundKey + " specified is not a valid audio file.";
+                String message = "An UnsupportedAudioFileException error occurred while loading the specified sound: " + soundKey;
+                message += " at " + soundUrl + ".";
+                GameException exception = new SoundLoaderException(description, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayWarning(exception);
+            } catch (IOException e) {
                 e.printStackTrace();
+                String description = "There was an error while reading the sound " + soundKey + ".";
+                String message = "An IOException error occurred while reading the specified sound: " + soundKey;
+                message += " at " + soundUrl + ".";
+                GameException exception = new SoundLoaderException(description, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayWarning(exception);
             } catch (Exception e){
                 e.printStackTrace();
+                String description = "There was an error while loading the sound " + soundKey + " due to system restrictions.";
+                String message = "An error occurred while loading the specified sound: " + soundKey;
+                message += " at " + soundUrl + ". Due to system restrictions.";
+                GameException exception = new SoundLoaderException(description, message);
+                Logger.error("GameException Occured: " + exception.getMessage());
+                DialogBox.displayWarning(exception);
             }
         }
-        return false;
     }
 
     /**
