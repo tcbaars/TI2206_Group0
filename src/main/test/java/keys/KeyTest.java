@@ -1,8 +1,10 @@
 package keys;
 
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by Dylan 9-10-2015
@@ -15,7 +17,10 @@ public class KeyTest {
     @Test
     public void testgetKey() {
       Key key = GameKeys.UP;
+      Key mock = Mockito.mock(Key.class);
+      when(mock.getKey()).thenReturn(GameKeys.UP);
       assertEquals(GameKeys.UP, key.getKey());
+      assertEquals(GameKeys.UP, mock.getKey());
     }
     
     /**
