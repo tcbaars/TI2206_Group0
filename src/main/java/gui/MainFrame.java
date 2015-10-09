@@ -2,32 +2,42 @@ package gui;
 
 import javax.swing.JFrame;
 
-import layers.HeadLayer;
+import util.Logger;
 
-public class MainFrame extends JFrame {
-
-    private static MainFrame instance = new MainFrame();
+/**
+ * The MainFrame class
+ */
+public class MainFrame extends JFrame{
+    private static final MainFrame instance = new MainFrame();
     private boolean displayed;
-
-    private MainFrame() {
+    private Screen gameScreen;
+    private MainFrame(){
         super("Fishy Game");
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         displayed = false;
     }
-
-    public static MainFrame getInstance() {
+    public static MainFrame getInstance(){
         return instance;
     }
 
-    /**
-     * display frame.
-     */
-    public void display() {
+    public void display(){
         if (!displayed) {
-            add(new HeadLayer());
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gameScreen = new Screen();
+            add(gameScreen);
             setResizable(false);
             pack();
+            setLocationRelativeTo(null);
             setVisible(true);
+            addWindowListener(new ScreenWindowAdapter(gameScreen));
+            displayed = true;
+            Logger.info("Main frame is displayed.");
         }
     }
+
+    public void exit(){
+        gameScreen.exit();
+        dispose();
+        Logger.info("Main frame has been exited.");
+    }
+
 }

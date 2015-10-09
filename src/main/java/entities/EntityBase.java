@@ -1,366 +1,169 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-import animations.Animation;
-import handlers.OptionsHandler;
+import settings.DebugSettings;
+import settings.valuesettings.BaseMovementSpeedSettings;
+import settings.valuesettings.ScaleIncrementSettings;
+import settings.valuesettings.ScoreIncrementSettings;
+import sprites.Sprite;
 import util.Geo2D;
 
-/**
- * The entity class represents the rules an in-game object must have.
- */
-public abstract class EntityBase implements Entity {
+public abstract class EntityBase implements Entity{
 
-    /*
-     * The current game settings
-     */
-    private OptionsHandler _optionsHandler = OptionsHandler.getInstance();
+    private boolean isAlive;
 
-    /*
-     * Properties of the entity
-     */
-    private boolean consumable;
-    private boolean alive;
-    private boolean visible;
-    private boolean facingRight;
-
-    private Animation animation;
-
-    /*
-     * Sprite dimensions
-     */
-    protected double spriteWidth;
-    protected double spriteHeight;
-
-    /*
-     * Coordinates of top left corner of sprite
-     */
-    protected double topLeftX;
-    protected double topLeftY;
-
-    /*
-     * Entity dimensions
-     */
-    protected double entityWidth;
-    protected double entityHeight;
-
-    /*
-     * Scaling information
-     */
-    protected double targetScale;
-    protected double currentScale;
-
-    /**
-     * Creates a new entity.
-     */
-    public EntityBase() {
-        consumable = true;
-        alive = true;
-        visible = true;
-        facingRight = false;
-
-        initialiseEntity();
-        initialiseSprite();
-        animation = createAnimation();
+    public EntityBase(){
+        isAlive = true;
     }
-
-    /**
-     * Applies the entity specific properties.
-     */
-    protected abstract void initialiseEntity();
-
-    /**
-     * Applies the sprite properties.
-     */
-    protected abstract void initialiseSprite();
-
-    /**
-     * Creates a sequence of images that represent the entity's animation.
-     *
-     * @return the entity's animation.
-     */
-    protected abstract Animation createAnimation();
-
-    /**
-     * Updates the entity.
-     */
-    protected abstract void update();
-
-    /**
-     * Draws on the specified 2-dimensional image.
-     *
-     * @param graphic the 2-dimensional image.
-     */
-    protected abstract void draw(Graphics2D graphic);
-
-    /**
-     * Updates the entity.
-     */
-    public void updateEntity() {
-        // If alive
-        if (isAlive()) {
-            // Then handle the current frame to be displayed
-            animation.update();
-        }
-        update();
-    }
-
-    /**
-     * Draws the current frame adjusted by the scaling factor to the specified 2-dimensional image.
-     *
-     * @param graphic the 2-dimensional image.
-     */
-    public void drawEntity(Graphics2D graphic) {
-        if (isAlive() && isVisible()) {
-            int x = getGlobalSpriteX();
-            int w = getGlobalSpriteWidth();
-            // If the entity is facing right
-            if (facingRight){
-                // then horizontally flip the sprite
-                x = x + w;
-                w = -w;
-            }
-            graphic.drawImage(animation.getCurrentFrame(), x, getGlobalSpriteY(), w, getGlobalSpriteHeight(), null);
-
-            // If in debugging mode
-            if (_optionsHandler.getDebug()) {
-                // then draw bounding boxes
-                Shape boundingBox = getGlobalEntityBoundingBox();
-                graphic.draw(boundingBox);
-                graphic.drawString(String.valueOf((int) currentScale), (int) boundingBox.getBounds2D().getX(), (int) boundingBox.getBounds2D().getY());
-            }
-        }
-        draw(graphic);
-    }
-
-    /**
-     * Returns whether or not the entity can be consumed.
-     * @return <code>true</code> if and only if the entity can be consumed, otherwise <code>false</code>.
-     */
-    public boolean isConsumable() {
-        return isAlive() && consumable;
-    }
-
-    /**
-     * Change whether or not the entity can be consumed.
-     * @param consumable if the entity can be consumed.
-     */
-    public void setConsumable(boolean consumable) {
-        this.consumable = consumable;
-    }
-
-    /**
-     * Returns whether or not the entity is alive.
-     * @return <code>true</code> if and only if the entity is alive, otherwise <code>false</code>.
-     */
     public boolean isAlive() {
-        return alive;
+        return isAlive;
     }
 
-    /**
-     * Kills the entity.
-     */
     public void kill() {
-        alive = false;
-        visible = false;
+        isAlive = false;
     }
 
-    /**
-     * Returns whether or not the entity is visible.
-     * @return <code>true</code> if and only if the entity is visible, otherwise <code>false</code>.
-     */
-    public boolean isVisible() {
-        return visible;
+    abstract public Sprite getSprite();
+
+    abstract protected ArrayList<Entity> getSubEntities();
+
+    public void update() {
+        getSprite().update();
     }
 
-    /**
-     * Set whether or not the entity is visible.
-     * @param visible if the entity is visible.
-     */
-    public void setVisible(boolean visible) {
-        this.visible = visible;
+    public void drawSubEntities(Graphics2D screen) {
+        if (hasSubEntities()){
+            Iterator<Entity> subEntites = getSubEntities().iterator();
+            while (subEntites.hasNext()) {
+                Entity entity = subEntites.next();
+                if (entity != null) {
+                    entity.drawEntityToScreen(screen);
+                }
+            }
+        }
     }
 
-    /**
-     * Set whether or not the entity is facing right.
-     * @param facingRight if the entity is facing right.
-     */
-    public void setFacingRight(boolean facingRight) {
-        this.facingRight = facingRight;
+    public void drawEntityToScreen(Graphics2D screen) {
+        if (isAlive()) {
+            getSprite().drawSpriteToScreen(screen);
+            if(DebugSettings.getInstance().isDebugModeOn()) {
+                screen.setPaint(Color.BLACK);
+                Shape boundingBox = getEntityBoundingBox();
+                screen.draw(boundingBox);
+            }
+        }
+        drawSubEntities(screen);
     }
 
-    /**
-     * Returns whether or not the sprite is facing right.
-     *
-     * @return <code>true</code> if and only if the sprite is facing right, other <code>false</code>.
-     */
-    public boolean isFacingRight(){
-        return facingRight;
+    public double getEntityX() {
+        double centerX = getSprite().getSpriteBoundingBox().getCenterX();
+        double x = centerX - (getEntityWidth() / 2);
+        return x;
     }
 
-    /**
-     * Returns the scaling factor.
-     * @return the scaling factor.
-     */
-    public double getScaling() {
-        return currentScale / targetScale;
+    public double getEntityY() {
+        double centerY = getSprite().getSpriteBoundingBox().getCenterY();
+        double y = centerY - (getEntityHeight() / 2);
+        return y;
     }
 
-    /**
-     * Returns the top left corner x coordinate.
-     * @return top left x coordinate.
-     */
-    public int getGlobalSpriteX() {
-        return (int)topLeftX;
+    public void translateSpriteX(double dX) {
+        getSprite().translateSpriteX(dX);
     }
 
-    /**
-     * Returns the top left corner y coordinate.
-     *
-     * @return top left y coordinate.
-     */
-    public int getGlobalSpriteY() {
-        return (int) topLeftY;
+    public void translateSpriteY(double dY) {
+        getSprite().translateSpriteY(dY);
     }
 
-    /**
-     * Returns the entity's top left corner x coordinate.
-     *
-     * @param centreX the entity's centre x coordinate.
-     * @return the entity's top left corner x coordinate.
-     */
-    public int getGlobalEntityX(double centreX) {
-        return (int) (centreX - (getGlobalEntityWidth() / 2.0));
+    abstract protected double getLocalEntityWidth();
+
+    public double getEntityWidth() {
+        return getLocalEntityWidth() * getSprite().getSpriteScalingFactor();
     }
 
-    /**
-     * Returns the entity's top left corner y coordinate.
-     *
-     * @param centreY the entity's centre y coordinate.
-     * @return  the entity's top left corner y coordinate.
-     */
-    public int getGlobalEntityY(double centreY) {
-        return (int) (centreY - (getGlobalEntityHeight() / 2.0));
+    abstract protected double getLocalEntityHeight();
+
+    public double getEntityHeight() {
+        return getLocalEntityHeight() * getSprite().getSpriteScalingFactor();
     }
 
-    /**
-     * Returns the sprite width adjusted by the current size.
-     * @return the global sprite width.
-     */
-    public int getGlobalSpriteWidth() {
-        return (int) (spriteWidth * getScaling());
+    public boolean isEntityFacingLeft(){
+        if (getSprite().isSpriteFacingLeft()){
+            if (getSprite().isFlippedHorizontally()) {
+                return false;
+            }
+            return true;
+        } else {
+            if (getSprite().isFlippedHorizontally()) {
+                return true;
+            }
+            return false;
+        }
     }
 
-    /**
-     * Returns the sprite height adjusted by the current size.
-     * @return the global sprite height.
-     */
-    public int getGlobalSpriteHeight() {
-        return (int) (spriteHeight * getScaling());
+    public void flipHorizontally() {
+        getSprite().flipHorizontally();
     }
 
-    /**
-     * Returns the entity width adjusted by the current size.
-     * @return the global entity width.
-     */
-    public int getGlobalEntityWidth() {
-        return (int) (entityWidth * getScaling());
+    public Ellipse2D getEntityBoundingBox() {
+        return new Ellipse2D.Double((int)getEntityX(), (int)getEntityY(), (int)getEntityWidth(), (int)getEntityHeight());
     }
 
-    /**
-     * Returns the entity height adjusted by the current size.
-     * @return the global entity height.
-     */
-    public int getGlobalEntityHeight() {
-        return (int) (entityHeight * getScaling());
-    }
-
-    /**
-     * Returns the sprite bounding box adjusted by its size.
-     *
-     * @return global sprite bounding box.
-     */
-    public Ellipse2D getGlobalSpriteBoundingBox() {
-        return new Ellipse2D.Double(getGlobalSpriteX(), getGlobalSpriteY(), getGlobalSpriteWidth(),
-                getGlobalSpriteHeight());
-    }
-
-    /**
-     * Returns the entity bounding box adjusted by its size.
-     *
-     * @return global entity bounding box.
-     */
-    public Ellipse2D getGlobalEntityBoundingBox() {
-        Ellipse2D globalSprite = getGlobalSpriteBoundingBox();
-        double centreX = globalSprite.getCenterX();
-        double centreY = globalSprite.getCenterY();
-        return new Ellipse2D.Double(getGlobalEntityX(centreX), getGlobalEntityY(centreY), getGlobalEntityWidth(),
-                getGlobalEntityHeight());
-    }
-
-    /**
-     * Returns whether or not the two entities intersect.
-     *
-     * @return <code>true</code> if and only if the two entities intersect, otherwise <code>false</code>.
-     */
     public boolean intersects(Entity entity) {
         if (entity != null) {
-            Ellipse2D thisBox = getGlobalEntityBoundingBox();
-            Ellipse2D thatBox = entity.getGlobalEntityBoundingBox();
+            Ellipse2D thisBox = getEntityBoundingBox();
+            Ellipse2D thatBox = entity.getEntityBoundingBox();
             return Geo2D.intersection(thisBox, thatBox);
         }
         return false;
     }
 
-    /**
-     * Returns whether or not this entity is larger than the specified entity.
-     *
-     * @return <code>true</code> if and only if this entity is larger than the specified entity, otherwise <code>false</code>.
-     */
     public boolean isLargerThan(Entity entity) {
         if (entity != null) {
-            if (getGlobalEntityWidth() < entity.getGlobalEntityWidth()) {
-                return false;
-            }
-            if (getGlobalEntityHeight() < entity.getGlobalEntityHeight()) {
+            if (getArea() < entity.getArea()) {
                 return false;
             }
         }
         return true;
     }
 
-    /**
-     * Handles the collision between this entity and the specified entity.
-     *
-     * @param entity the specified entity.
-     */
-    public void handleCollision(Entity entity) {
-        if (intersects(entity)) {
-            if (isLargerThan(entity)) {
-                if (entity.isConsumable()) {
-                    consume(entity);
-                }
-            } else if (isConsumable()) {
-                entity.consume(this);
-            }
+    public void consumedBy(Entity entity) {
+        if (entity != null) {
+            kill();
         }
     }
 
-    /**
-     * Handles the necessary actions needed to be performed to consume the specified entity.
-     *
-     * @param food the entity to be eaten.
-     */
-    public abstract void consume(Entity food);
+    public double getArea(){
+        return Math.PI * getEntityWidth() * getEntityHeight();
+    }
 
-    /**
-     * Handles the necessary actions needed to be performed when consumed by the specified entity.
-     *
-     * @param the entity consuming.
-     * @return the value of the entity.
-     */
-    public abstract int consumedBy(Entity eater);
+    abstract public double getScoreScalingFactor();
 
+    public double getScoreIncrement() {
+        double baseScoreIncrement = ScoreIncrementSettings.getInstance().getBaseScoreIncrement();
+        double scoreScalingFactor = getScoreScalingFactor();
+        double areaScaling = getArea();
+        return baseScoreIncrement * scoreScalingFactor * areaScaling;
+    }
+
+    public double getSizeIncrement() {
+        double baseSizeIncrement = ScaleIncrementSettings.getInstance().getBaseScaleIncrement();
+        double areaScaling = getArea();
+        return baseSizeIncrement * areaScaling;
+    }
+
+    abstract public double getMovementSpeedScalingFactor();
+
+    public double getMovementSpeed(){
+        double baseMovingSpeed = BaseMovementSpeedSettings.getInstance().getBaseMovementSpeed();
+        double movementSpeedScalingFactor = getMovementSpeedScalingFactor();
+        double areaScaling = getArea() / 10;
+        return baseMovingSpeed * movementSpeedScalingFactor * (1/areaScaling);
+    }
 }
