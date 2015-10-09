@@ -28,3 +28,4 @@ public class KeyTest {
       Key ans = Key.convertToKey(key);
       assertEquals(GameKeys.UP ,ans.getKey());
     }
+}
