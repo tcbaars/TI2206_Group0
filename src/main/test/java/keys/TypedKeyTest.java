@@ -2,6 +2,8 @@ package keys;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by Dylan 9-10-2015
  * Test method for keys.TypedKey class.
