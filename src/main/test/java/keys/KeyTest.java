@@ -13,7 +13,7 @@ public class KeyTest {
     @Test
     public void testgetKey() {
       Key key = GameKeys.UP;
-      assertEquals(GameKeys.UP, Key.getKey());
+      assertEquals(GameKeys.UP, key.getKey());
     }
     
     /**
