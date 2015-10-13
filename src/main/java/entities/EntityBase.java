@@ -14,10 +14,16 @@ import settings.valuesettings.ScoreIncrementSettings;
 import sprites.Sprite;
 import util.Geo2D;
 
+/**
+ * The EntityBase class represents the default entity.
+ */
 public abstract class EntityBase implements Entity{
 
     private boolean isAlive;
 
+    /**
+     * 
+     */
     public EntityBase(){
         isAlive = true;
     }
@@ -29,14 +35,26 @@ public abstract class EntityBase implements Entity{
         isAlive = false;
     }
 
+    /**
+     * 
+     * @return
+     */
     abstract public Sprite getSprite();
 
+    /**
+     * 
+     * @return
+     */
     abstract protected ArrayList<Entity> getSubEntities();
 
     public void update() {
         getSprite().update();
     }
 
+    /**
+     * 
+     * @param screen
+     */
     public void drawSubEntities(Graphics2D screen) {
         if (hasSubEntities()){
             Iterator<Entity> subEntites = getSubEntities().iterator();
@@ -81,12 +99,20 @@ public abstract class EntityBase implements Entity{
         getSprite().translateSpriteY(dY);
     }
 
+    /**
+     * 
+     * @return
+     */
     abstract protected double getLocalEntityWidth();
 
     public double getEntityWidth() {
         return getLocalEntityWidth() * getSprite().getSpriteScalingFactor();
     }
 
+    /**
+     * 
+     * @return
+     */
     abstract protected double getLocalEntityHeight();
 
     public double getEntityHeight() {
@@ -143,6 +169,10 @@ public abstract class EntityBase implements Entity{
         return Math.PI * getEntityWidth() * getEntityHeight();
     }
 
+    /**
+     * 
+     * @return
+     */
     abstract public double getScoreScalingFactor();
 
     public double getScoreIncrement() {
@@ -158,6 +188,10 @@ public abstract class EntityBase implements Entity{
         return baseSizeIncrement * areaScaling;
     }
 
+    /**
+     * 
+     * @return
+     */
     abstract public double getMovementSpeedScalingFactor();
 
     public double getMovementSpeed(){
