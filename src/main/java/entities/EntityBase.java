@@ -14,13 +14,20 @@ import settings.valuesettings.ScoreIncrementSettings;
 import sprites.Sprite;
 import util.Geo2D;
 
+/**
+ * The EntityBase class represents the default entity.
+ */
 public abstract class EntityBase implements Entity{
 
     private boolean isAlive;
 
+    /**
+     * Initialises the default entity.
+     */
     public EntityBase(){
         isAlive = true;
     }
+
     public boolean isAlive() {
         return isAlive;
     }
@@ -29,14 +36,27 @@ public abstract class EntityBase implements Entity{
         isAlive = false;
     }
 
+    /**
+     * Returns the in-game entity's sprite information.
+     * @return the entity's sprite.
+     */
     abstract public Sprite getSprite();
 
+    /**
+     * Returns all the entities attached to the entity.
+     * Returns <code>null</code> if the entity has no sub-entities.
+     * @return the sub-entities.
+     */
     abstract protected ArrayList<Entity> getSubEntities();
 
     public void update() {
         getSprite().update();
     }
 
+    /**
+     * Draws all the entities attached to the entity, to the specified screen.
+     * @param screen the screen.
+     */
     public void drawSubEntities(Graphics2D screen) {
         if (hasSubEntities()){
             Iterator<Entity> subEntites = getSubEntities().iterator();
@@ -81,12 +101,24 @@ public abstract class EntityBase implements Entity{
         getSprite().translateSpriteY(dY);
     }
 
+    /**
+     * Returns the width of entity as it appears in the sprite sheet.
+     * This is different from the width of the in-game entity,
+     * as it is not scaled in anyway.
+     * @return the width of the entity in the sprite sheet.
+     */
     abstract protected double getLocalEntityWidth();
 
     public double getEntityWidth() {
         return getLocalEntityWidth() * getSprite().getSpriteScalingFactor();
     }
 
+    /**
+     * Returns the height of the entity as it appears in the sprite sheet.
+     * This is different from the height of the in-game entity,
+     * as it is not scaled in anyway.
+     * @return the height of the entity in the sprite sheet.
+     */
     abstract protected double getLocalEntityHeight();
 
     public double getEntityHeight() {
@@ -143,6 +175,11 @@ public abstract class EntityBase implements Entity{
         return Math.PI * getEntityWidth() * getEntityHeight();
     }
 
+    /**
+     * Returns the score increment scaling factor of the entity.
+     * This scales the base score increment by the specified value.
+     * @return the scale increment scaling factor.
+     */
     abstract public double getScoreScalingFactor();
 
     public double getScoreIncrement() {
@@ -158,6 +195,11 @@ public abstract class EntityBase implements Entity{
         return baseSizeIncrement * areaScaling;
     }
 
+    /**
+     * Returns the movement speed scaling factor of the entity.
+     * This scales the base movement speed by the specified value.
+     * @return the movement speed scaling factor.
+     */
     abstract public double getMovementSpeedScalingFactor();
 
     public double getMovementSpeed(){
