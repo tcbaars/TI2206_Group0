@@ -22,18 +22,7 @@ public abstract class BaseSprite implements Sprite{
         spriteX = 0;
         spriteY = 0;
     }
-    public double getSpriteX(){
-        return spriteX;
-    }
-    public double getSpriteY(){
-        return spriteY;
-    }
-    public void setSpriteX(double x){
-        this.spriteX = x;
-    }
-    public void setSpriteY(double y){
-        this.spriteY = y;
-    }
+
     public void translateSpriteX(double dX){
         this.spriteX += dX;
     }
@@ -43,11 +32,15 @@ public abstract class BaseSprite implements Sprite{
     public Ellipse2D getSpriteBoundingBox(){
         return new Ellipse2D.Double(spriteX, spriteY, getSpriteWidth(), getSpriteHeight());
     }
-    public double getFrameWidth(){
+    private double getFrameWidth(){
         return animation.getFrameWidth();
     }
-    public double getFrameHeight(){
+    private double getFrameHeight(){
         return animation.getFrameHeight();
+    }
+    abstract protected double getSpriteWidth();
+    private double getSpriteHeight(){
+        return getFrameHeight() * getSpriteScalingFactor();
     }
     public double getSpriteScalingFactor(){
         return getSpriteWidth() / getFrameWidth();
@@ -57,8 +50,8 @@ public abstract class BaseSprite implements Sprite{
     }
     public void drawSpriteToScreen(Graphics2D screen){
         BufferedImage currentFrame = animation.getCurrentFrame();
-        double x = getSpriteX();
-        double y = getSpriteY();
+        double x = spriteX;
+        double y = spriteY;
         double width = getSpriteWidth();
         if (isFlippedHorizontally()) {
             x += width;

@@ -62,7 +62,7 @@ public abstract class Enemy extends EntityBase{
         double screenHeight = ScreenSettings.getInstance().getHeight();
         double height = getEntityHeight();
         int y = Generator.generateInteger((int)(screenHeight - (height + 10)));
-        sprite.setSpriteY(y);
+        sprite.translateSpriteY(y);
         boolean spawnLeft = Generator.generateBoolean();
         if (spawnLeft) {
             spawnLeft();
@@ -77,7 +77,7 @@ public abstract class Enemy extends EntityBase{
         }
         double width = getEntityWidth();
         double x = 0 - width;
-        sprite.setSpriteX(x);
+        sprite.translateSpriteX(x);
         direction = Directions.RIGHT;
     }
 
@@ -87,7 +87,7 @@ public abstract class Enemy extends EntityBase{
         }
         double screenWidth = ScreenSettings.getInstance().getWidth();
         double x = screenWidth;
-        sprite.setSpriteX(x);
+        sprite.translateSpriteX(x);
         direction = Directions.LEFT;
     }
 

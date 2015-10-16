@@ -32,8 +32,8 @@ public abstract class Player extends EntityBase{
         double centreX = (screenWidth / 2) - (getEntityWidth() / 2);
         double screenHeight = ScreenSettings.getInstance().getHeight();
         double centreY = (screenHeight / 2) - (getEntityHeight() / 2);
-        sprite.setSpriteX(centreX);
-        sprite.setSpriteY(centreY);
+        sprite.translateSpriteX(centreX);
+        sprite.translateSpriteY(centreY);
         consumable = entity.isConsumable();
         score = 0;
         numberFishEaten = 0;
