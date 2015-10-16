@@ -15,25 +15,29 @@ public class BubbleSprite extends BaseSprite{
         currentSpriteWidth = maxSpriteWidth;
     }
 
-    public double getSpriteWidth() {
+    protected double getSpriteWidth() {
         return currentSpriteWidth;
     }
 
-    public double getSpriteHeight() {
-        return getFrameHeight() * getSpriteScalingFactor();
-    }
-
     public void incrementSprite(double incrementValue) {
-        currentSpriteWidth += incrementValue;
-        if (currentSpriteWidth > maxSpriteWidth) {
-            currentSpriteWidth = maxSpriteWidth;
+        if (incrementValue >= 0) {
+            currentSpriteWidth += incrementValue;
+            if (currentSpriteWidth > maxSpriteWidth) {
+                currentSpriteWidth = maxSpriteWidth;
+            }
+        } else {
+            decrementSprite((-1) * incrementValue);
         }
     }
 
     public void decrementSprite(double decrementValue) {
-        currentSpriteWidth -= decrementValue;
-        if (currentSpriteWidth < minSpriteWidth) {
-            currentSpriteWidth = minSpriteWidth;
+        if (decrementValue >= 0) {
+            currentSpriteWidth -= decrementValue;
+            if (currentSpriteWidth < minSpriteWidth) {
+                currentSpriteWidth = minSpriteWidth;
+            }
+        } else {
+            incrementSprite((-1) * decrementValue);
         }
     }
 

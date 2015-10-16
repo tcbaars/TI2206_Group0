@@ -1,6 +1,8 @@
 package settings.valuesettings;
 
-public class ScaleIncrementSettings extends ValueIncrementSettings{
+import tools.entitytools.AverageEntityValues;
+
+public class ScaleIncrementSettings{
 
     private static final ScaleIncrementSettings instance = new ScaleIncrementSettings();
     private int numberIncrements;
@@ -15,10 +17,10 @@ public class ScaleIncrementSettings extends ValueIncrementSettings{
     }
 
     public double getBaseScaleIncrement(){
-        double maxArea = getAverageMaxArea();
-        double minArea = getAverageMinArea();
+        double maxArea = AverageEntityValues.getInstance().getAverageMaxArea();
+        double minArea = AverageEntityValues.getInstance().getAverageMinArea();
         double scaleIncrement = (maxArea - minArea) / numberIncrements;
-        scaleIncrement = scaleIncrement / getAverageArea();
+        scaleIncrement = scaleIncrement / AverageEntityValues.getInstance().getAverageArea();
         return scaleIncrement;
     }
 }

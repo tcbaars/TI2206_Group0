@@ -1,27 +1,16 @@
-package settings.valuesettings;
+package tools.entitytools;
 
 import enumerations.GameEntities;
 
-/**
- * Looks at Entiy maxWidthHeight and minWidthHeight for minArea and MaxArea
- * For testing, make sure entity-end values fall in a reasonable range for all entities.
- * I.e no movement speed = 100
- */
-public abstract class ValueIncrementSettings {
+public class AverageEntityValues {
 
+    private static final AverageEntityValues instance = new AverageEntityValues();
     private int numberEntities;
     private double averageMinArea;
     private double averageMaxArea;
     private double averageArea;
 
-    public ValueIncrementSettings(){
-        initialise();
-    }
-
-    private double Area(double width, double height){
-        return Math.PI * width * height;
-    }
-    private void initialise(){
+    private AverageEntityValues(){
         numberEntities = GameEntities.values().length;
         double minArea = 0;
         double maxArea = 0;
@@ -38,6 +27,14 @@ public abstract class ValueIncrementSettings {
         averageMinArea = sumMinArea / numberEntities;
         averageMaxArea = sumMaxArea / numberEntities;
         averageArea = sumAverageArea / numberEntities;
+    }
+
+    public static AverageEntityValues getInstance(){
+        return instance;
+    }
+
+    private double Area(double width, double height){
+        return Math.PI * width * height;
     }
 
     public double getAverageMinArea(){

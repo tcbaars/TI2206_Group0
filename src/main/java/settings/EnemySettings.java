@@ -7,16 +7,14 @@ public class EnemySettings {
 
     private static final EnemySettings instance = new EnemySettings();
     private int spawnRate;
-    private int minEnemies;
-    private int maxEnemies;
+    private static final int minEnemies = 10;
+    private static final int maxEnemies = 14;
 
     /**
      * Creates an instance of the global enemy settings.
      */
     private EnemySettings(){
         spawnRate = 100;
-        minEnemies = 10;
-        maxEnemies = 14;
     }
 
     /**
@@ -54,29 +52,4 @@ public class EnemySettings {
     public int getMaxEnemies(){
         return maxEnemies;
     }
-
-    /**
-     * Updates the spawn rate.
-     * @param spawnRate the spawn rate.
-     */
-    public void setSpawnRate(int spawnRate){
-        this.spawnRate = spawnRate;
-    }
-
-    /**
-     * Updates the minimum number of enemies.
-     * @param minEnemies minimum number of enemies
-     */
-    public void setMinEnemies(int minEnemies){
-        this.minEnemies = minEnemies;
-    }
-
-    /**
-     * Updates the maximum number of enemies.
-     * @param maxEnemies maximum number of enemies.
-     */
-    public void setMaxEnemies(int maxEnemies){
-        this.maxEnemies = maxEnemies;
-    }
-
 }

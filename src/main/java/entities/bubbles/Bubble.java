@@ -41,8 +41,8 @@ public class Bubble extends EntityBase{
         } else {
             x = centreX + (entity.getEntityWidth() / 2);
         }
-        sprite.setSpriteX(x);
-        sprite.setSpriteY(centreY);
+        sprite.translateSpriteX(x);
+        sprite.translateSpriteY(centreY);
         consumable = GameEntities.BUBBLE.isConsumable();
         scoreIncrementScalingFactor = GameEntities.BUBBLE.getScoreScalingFactor();
         movementSpeedScalingFactor = GameEntities.BUBBLE.getMovementSpeedScalingFactor();
