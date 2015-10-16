@@ -7,16 +7,14 @@ public class EnemySettings {
 
     private static final EnemySettings instance = new EnemySettings();
     private int spawnRate;
-    private int minEnemies;
-    private int maxEnemies;
+    private static final int minEnemies = 10;
+    private static final int maxEnemies = 14;
 
     /**
      * Creates an instance of the global enemy settings.
      */
     private EnemySettings(){
         spawnRate = 100;
-        minEnemies = 10;
-        maxEnemies = 14;
     }
 
     /**
