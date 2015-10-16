@@ -22,11 +22,12 @@ public abstract class EntityBase implements Entity{
     private boolean isAlive;
 
     /**
-     * 
+     * Initialises the default entity.
      */
     public EntityBase(){
         isAlive = true;
     }
+
     public boolean isAlive() {
         return isAlive;
     }
@@ -36,14 +37,15 @@ public abstract class EntityBase implements Entity{
     }
 
     /**
-     * 
-     * @return
+     * Returns the in-game entity's sprite information.
+     * @return the entity's sprite.
      */
     abstract public Sprite getSprite();
 
     /**
-     * 
-     * @return
+     * Returns all the entities attached to the entity.
+     * Returns <code>null</code> if the entity has no sub-entities.
+     * @return the sub-entities.
      */
     abstract protected ArrayList<Entity> getSubEntities();
 
@@ -52,8 +54,8 @@ public abstract class EntityBase implements Entity{
     }
 
     /**
-     * 
-     * @param screen
+     * Draws all the entities attached to the entity, to the specified screen.
+     * @param screen the screen.
      */
     public void drawSubEntities(Graphics2D screen) {
         if (hasSubEntities()){
@@ -100,8 +102,10 @@ public abstract class EntityBase implements Entity{
     }
 
     /**
-     * 
-     * @return
+     * Returns the width of entity as it appears in the sprite sheet.
+     * This is different from the width of the in-game entity,
+     * as it is not scaled in anyway.
+     * @return the width of the entity in the sprite sheet.
      */
     abstract protected double getLocalEntityWidth();
 
@@ -110,8 +114,10 @@ public abstract class EntityBase implements Entity{
     }
 
     /**
-     * 
-     * @return
+     * Returns the height of the entity as it appears in the sprite sheet.
+     * This is different from the height of the in-game entity,
+     * as it is not scaled in anyway.
+     * @return the height of the entity in the sprite sheet.
      */
     abstract protected double getLocalEntityHeight();
 
@@ -170,8 +176,9 @@ public abstract class EntityBase implements Entity{
     }
 
     /**
-     * 
-     * @return
+     * Returns the score increment scaling factor of the entity.
+     * This scales the base score increment by the specified value.
+     * @return the scale increment scaling factor.
      */
     abstract public double getScoreScalingFactor();
 
@@ -189,8 +196,9 @@ public abstract class EntityBase implements Entity{
     }
 
     /**
-     * 
-     * @return
+     * Returns the movement speed scaling factor of the entity.
+     * This scales the base movement speed by the specified value.
+     * @return the movement speed scaling factor.
      */
     abstract public double getMovementSpeedScalingFactor();
 
