@@ -1,6 +1,8 @@
 package settings.valuesettings;
 
-public class ScoreIncrementSettings extends ValueIncrementSettings{
+import tools.entitytools.AverageEntityValues;
+
+public class ScoreIncrementSettings{
 
     private static final ScoreIncrementSettings instance = new ScoreIncrementSettings();
     private int desiredScore;
@@ -18,7 +20,7 @@ public class ScoreIncrementSettings extends ValueIncrementSettings{
 
     public double getBaseScoreIncrement(){
         double score = (double)desiredScore / (double)numberIncrements;
-        score = score / getAverageArea();
+        score = score / AverageEntityValues.getInstance().getAverageArea();
         return score;
     }
 

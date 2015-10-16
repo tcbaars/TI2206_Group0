@@ -54,29 +54,4 @@ public class EnemySettings {
     public int getMaxEnemies(){
         return maxEnemies;
     }
-
-    /**
-     * Updates the spawn rate.
-     * @param spawnRate the spawn rate.
-     */
-    public void setSpawnRate(int spawnRate){
-        this.spawnRate = spawnRate;
-    }
-
-    /**
-     * Updates the minimum number of enemies.
-     * @param minEnemies minimum number of enemies
-     */
-    public void setMinEnemies(int minEnemies){
-        this.minEnemies = minEnemies;
-    }
-
-    /**
-     * Updates the maximum number of enemies.
-     * @param maxEnemies maximum number of enemies.
-     */
-    public void setMaxEnemies(int maxEnemies){
-        this.maxEnemies = maxEnemies;
-    }
-
 }

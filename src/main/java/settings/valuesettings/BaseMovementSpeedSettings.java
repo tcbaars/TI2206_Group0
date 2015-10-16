@@ -1,11 +1,12 @@
 package settings.valuesettings;
 
 import settings.ScreenSettings;
+import tools.entitytools.AverageEntityValues;
 
 /**
  * Base on screen width. ie. the number increments necessary to cross
  */
-public class BaseMovementSpeedSettings extends ValueIncrementSettings{
+public class BaseMovementSpeedSettings{
 
     private static final BaseMovementSpeedSettings instance = new BaseMovementSpeedSettings();
     private int numberIncrements;
@@ -22,7 +23,7 @@ public class BaseMovementSpeedSettings extends ValueIncrementSettings{
     public double getBaseMovementSpeed(){
         double screenWidth = ScreenSettings.getInstance().getWidth();
         double speed = screenWidth / numberIncrements;
-        speed = speed * getAverageMinArea();
+        speed = speed * AverageEntityValues.getInstance().getAverageMinArea();
         return speed;
     }
 }
