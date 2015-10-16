@@ -55,40 +55,4 @@ public class EnemySettingsTest {
     public void a_defaultValueMaxEnemiesTest() {
         assertEquals(14, enemySettings.getMaxEnemies());
     }
-
-    /**
-     * Check if values put in setSpawnRate are stored.
-     */
-    @Test
-    public void setSpawnRateTest() {
-        int value = random.nextInt();
-
-        enemySettings.setSpawnRate(value);
-
-        assertEquals(value, enemySettings.getSpawnRate());
-    }
-
-    /**
-     * Check if values put in setMinEnemies are stored.
-     */
-    @Test
-    public void setMinEnemiesTest() {
-        int value = random.nextInt();
-
-        enemySettings.setMinEnemies(value);
-
-        assertEquals(value, enemySettings.getMinEnemies());
-    }
-
-    /**
-     * Check if values put in setMaxEnemies are stored.
-     */
-    @Test
-    public void setMaxEnemiesTest() {
-        int value = random.nextInt();
-
-        enemySettings.setMaxEnemies(value);
-
-        assertEquals(value, enemySettings.getMaxEnemies());
-    }
 }
