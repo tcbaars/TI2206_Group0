@@ -54,7 +54,7 @@ public class Timer {
     /**
      * Returns the desired number of ticks that is needed to occur,
      * for the timer to be considered complete.
-     * @return
+     * @return the current goal
      */
     public int getGoal(){
         return goal;

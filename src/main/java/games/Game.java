@@ -5,6 +5,9 @@ import java.util.Iterator;
 import entities.Entity;
 import states.gamestates.GameState;
 
+/**
+ * Interface for a generic Game class
+ */
 public interface Game {
     void restart();
     void pause();

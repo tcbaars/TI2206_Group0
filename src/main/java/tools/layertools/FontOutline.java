@@ -25,7 +25,7 @@ public class FontOutline {
      * @param text the text to be displayed.
      * @param startX the X coordinate of the starting position of the text.
      * @param startY the Y coordinate of the starting position of the text
-     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false<code>.
+     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false</code>.
      */
     public static boolean drawText(Graphics2D screen, GameFonts font, String text, int startX, int startY){
         return drawText(screen, font.getFont(), font.getFill(), font.getOutlineColor(), font.getOutlineSize(), text, startX, startY);
@@ -42,7 +42,7 @@ public class FontOutline {
      * @param text the text to be displayed.
      * @param startX the X coordinate of the starting position of the text.
      * @param startY the Y coordinate of the starting position of the text.
-     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false<code>.
+     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false</code>.
      */
     public static boolean drawText(Graphics2D screen, Font font, Color fill, Color outlineColor, float outlineSize, String text, int startX, int startY){
        if (screen != null &&
@@ -81,7 +81,7 @@ public class FontOutline {
      * @param font the font style.
      * @param text the text to be displayed.
      * @param startY the Y coordinate of the starting position of the text.
-     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false<code>.
+     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false</code>.
      */
     public static boolean drawTextHorizontallyCentered(Graphics2D screen, GameFonts font, String text, int startY){
         return drawTextHorizontallyCentered(screen, font.getFont(), font.getFill(), font.getOutlineColor(), font.getOutlineSize(), text, startY);
@@ -97,7 +97,7 @@ public class FontOutline {
      * @param outlineSize the thickness of the outline.
      * @param text the text to be displayed.
      * @param startY the Y coordinate of the starting position of the text.
-     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false<code>.
+     * @return <code>true</code> if the text was successfully drawn, otherwise <code>false</code>.
      */
     public static boolean drawTextHorizontallyCentered(Graphics2D screen, Font font, Color fill, Color outlineColor, float outlineSize, String text, int startY){
         if (screen != null && font != null && text != null){
@@ -113,7 +113,6 @@ public class FontOutline {
 
     /**
      * Returns an approximation of the width of the text, given the specified font style.
-     * @param screen the screen.
      * @param font the font style.
      * @param text the text to be displayed.
      * @return the width of the text.
@@ -127,7 +126,6 @@ public class FontOutline {
 
     /**
      * Returns an approximation of the height of the text, given the specified font style.
-     * @param screen the screen.
      * @param font the font style.
      * @param text the text to be displayed.
      * @return the height of the text.

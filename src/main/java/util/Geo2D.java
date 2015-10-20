@@ -39,8 +39,7 @@ import java.util.Set;
 /**
  * Supplies methods for geometric calculations in 2D coordinate space. To reuse
  * the geometric data types from the package java.awt.geom all methods are
- * static.<br/>
- * <br/>
+ * static.
  * The supported geometric types are
  *     {@link Vector2D},
  *     {@link Point2D},
@@ -48,14 +47,11 @@ import java.util.Set;
  *     {@link Ellipse2D},
  *     {@link Arc2D},
  *     {@link QuadCurve2D} and
- *     {@link CubicCurve2D}.<br/>
- * <br/>
+ *     {@link CubicCurve2D}.
  * Length and null properties can be calculated. Geometric calculations are
  * intersection points, equality, parallelism, perpendicularity and
- * containment.<br/>
- * <br/>
+ * containment.
  * The accuracy of calculations can be controlled by an epsilon value.
- *
  * @author Berthold Firmenich
  * @version $Revision: 1.10 $, $Author: cvs-firmenic $
  * @version $Date: 2007/06/20 17:18:51 $

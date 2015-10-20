@@ -4,6 +4,7 @@ package enumerations;
  * The MenuItems enumeration is used as a way to easily reference the possible menu options that a menu can have.
  * The properties are structured in such a way that the menu option can easily be displayed.
  * The available menu options:
+ * <ul>
  * <li>{@link #CLASSIC}</li>
  * <li>{@link #INSTRUCTIONS}</li>
  * <li>{@link #HIGH_SCORES}</li>
@@ -15,6 +16,7 @@ package enumerations;
  * <li>{@link #DECREMENT}</li>
  * <li>{@link #TITLE_SCREEN}</li>
  * <li>{@link #EXIT}</li>
+ * </ul>
  */
 public enum MenuItems {
     /**

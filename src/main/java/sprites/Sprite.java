@@ -3,6 +3,9 @@ package sprites;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * Interface for a generic Sprite
+ */
 public interface Sprite {
 
     /**

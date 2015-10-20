@@ -32,7 +32,8 @@ public class GameOverLayer extends BackgroundLayer implements VerticalMenu, Hori
 
     /**
      * Initialise game over screen.
-     * @param title
+     * @param title Title of the screen
+     * @param singlePlayerGame The current game
      */
     public GameOverLayer(String title, SinglePlayerGame singlePlayerGame){
         // Initialise background layer

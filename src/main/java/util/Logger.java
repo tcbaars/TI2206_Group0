@@ -116,6 +116,7 @@ public final class Logger {
 
     /**
      * Get console output level.
+     * @return Current Console Output Level
      */
     public static _outputLevel getConsoleOutputLevel() {
         return _consoleOutputLevel;
@@ -133,6 +134,7 @@ public final class Logger {
 
     /**
      * Get log file output level.
+     * @return Current Log File Level
      */
     public static _outputLevel getLogFileOutputLevel() {
         return _logFileOutputLevel;

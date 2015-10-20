@@ -107,6 +107,7 @@ public class Vector2D extends Point2D implements Cloneable {
     /**
      * Constructs a vector from pnt1 to pnt2.
      * @param pnt1 the point
+     * @param pnt2 the second point
      */
     public Vector2D(Point2D pnt1, Point2D pnt2) {
         this.x = pnt2.getX() - pnt1.getX();
@@ -274,6 +275,7 @@ public class Vector2D extends Point2D implements Cloneable {
      * Calculates the scalar product between this and the vec
      * <code>Vector2D</code>.
      * @param vec the vector
+     * @return Scalar Product
      */
     public double getScalarProduct(Vector2D vec) {
         return this.x * vec.x + this.y * vec.y;
@@ -282,14 +284,14 @@ public class Vector2D extends Point2D implements Cloneable {
     /**
      * Calculates the angle from this <code>Vector2D</code> to the vec
      * <code>Vector2D</code>. The angle is measured in a counter clockwise
-     * direction.<br/>
-     * <b>Example:</b><br/><dl>
+     * direction.
+     * <b>Example:</b><dl>
      *   <dd>X_UNIT.angleCCW(Y_UNIT) = 0.5 * Math.PI</dd>
      *   <dd>Y_UNIT.angleCCW(X_UNIT) = 1.5 * Math.PI</dd>
      *   <dd>X_UNIT.angleCCW(X_UNIT) = 0</dd>
      * </dl>
      * @param vec the vector
-     * @return the angle in the range 0 <= angle < 2 * Math.PI
+     * @return the angle in the range 0 smaller or equal angle smaller 2 * Math.PI
      * @exception NullVectorException if this or vec is null.
      */
     public double getAngleCCW(Vector2D vec) throws NullVectorException {
@@ -306,14 +308,14 @@ public class Vector2D extends Point2D implements Cloneable {
 
     /**
      * Calculates the smallest angle between this <code>Vector2D</code> and the
-     * vec <code>Vector2D</code>.<br/>
-     * <b>Example:</b><br/><dl>
+     * vec <code>Vector2D</code>.
+     * <b>Example:</b><dl>
      *   <dd>X_UNIT.smallestAngle(Y_UNIT) = 0.5 * Math.PI</dd>
      *   <dd>Y_UNIT.smallestAngle(X_UNIT) = 0.5 * Math.PI</dd>
      *   <dd>X_UNIT.smallestAngle(X_UNIT) = 0</dd>
      * </dl>
      * @param vec the vector
-     * @return the angle in the range 0 <= angle < Math.PI
+     * @return the angle in the range 0 smaller or equal angle smaller Math.PI
      * @exception NullVectorException if this or vec is null.
      */
     public double getAngleSmallest(Vector2D vec) throws NullVectorException {
