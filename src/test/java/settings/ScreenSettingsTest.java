@@ -19,7 +19,7 @@ public class ScreenSettingsTest {
      * Initialize an instance of ScreenSettings and Random.
      */
     @BeforeClass
-    public static void setup() {
+    public static void setUp() {
         screenSettings = ScreenSettings.getInstance();
         random = new Random();
     }

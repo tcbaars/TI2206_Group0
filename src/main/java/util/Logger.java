@@ -18,6 +18,7 @@ public final class Logger {
     private static final String _info = "[INFO] ";
     private static final String _warning = "[WARNING] ";
     private static final String _error = "[ERROR] ";
+    private static final String _MSG = " Message: ";
 
     /**
      * Enum to define log levels.
@@ -147,7 +148,7 @@ public final class Logger {
         String messageToLog = _debug;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.DEBUG);
     }
@@ -162,7 +163,7 @@ public final class Logger {
         String messageToLog = _info;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.INFO);
     }
@@ -177,7 +178,7 @@ public final class Logger {
         String messageToLog = _warning;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.WARNING);
     }
@@ -192,7 +193,7 @@ public final class Logger {
         String messageToLog = _error;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.ERROR);
     }

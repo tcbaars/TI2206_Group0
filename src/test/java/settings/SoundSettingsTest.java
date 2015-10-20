@@ -1,6 +1,7 @@
 package settings;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
@@ -16,7 +17,7 @@ public class SoundSettingsTest {
      * Initialize an instance of SoundSettings.
      */
     @BeforeClass
-    public static void setup() {
+    public static void setUp() {
         soundSettings = SoundSettings.getInstance();
     }
 
@@ -45,7 +46,7 @@ public class SoundSettingsTest {
     public void toggleSoundModeTest() {
         boolean value = soundSettings.isSoundOn();
         soundSettings.toggleSound();
-        assertTrue(value != soundSettings.isSoundOn());
+        assertNotSame(value, soundSettings.isSoundOn());
     }
 
     /**

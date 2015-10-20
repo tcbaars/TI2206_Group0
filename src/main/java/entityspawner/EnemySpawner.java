@@ -44,10 +44,8 @@ public class EnemySpawner implements EntitySpawner{
         spawnDelay.tick();
         if (spawnDelay.hasCompleted()) {
             spawnDelay.reset();
-            if (!finalStage) {
-                if (currentNumber < getDesiredNumber()) {
-                    spawnEnemy();
-                }
+            if (!finalStage && currentNumber < getDesiredNumber()) {
+                spawnEnemy();
             }
         }
     }

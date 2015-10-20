@@ -316,8 +316,9 @@ public class Geo2D {
         final int nPnts = _intersection(cub1, cub2, pnts, 0);
 
         // Provide results
-        if (nPnts == 0)
+        if (nPnts == 0) {
             throw new NoIntersectionException();
+        }
         return new PointIterator(pnts, nPnts);
     }
 
@@ -333,8 +334,9 @@ public class Geo2D {
             return mIndex < mPnts.length;
         }
         public Object next() {
-            if (mIndex >= mPnts.length)
+            if (mIndex >= mPnts.length) {
                 throw new NoSuchElementException();
+            }
             return mPnts[mIndex++];
         }
         public void remove() {
@@ -345,12 +347,14 @@ public class Geo2D {
                                      Point2D[] pnts, int nPnts) {
 
         // Maximum number of intersection points reached?
-        if (nPnts >= 9)
+        if (nPnts >= 9) {
             return nPnts;
+        }
 
         // Intersection possible?
-        if (! _collision(cub1, cub2))
+        if (! _collision(cub1, cub2)) {
             return nPnts;
+        }
 
         // Both curves approximately straight?
         boolean isFlat1 = cub1.getFlatnessSq() < mEpsSqr;
@@ -365,8 +369,9 @@ public class Geo2D {
 
                 // Store point if not already stored?
                 for (int i = 0; i < nPnts; i++) {
-                    if (equality(pnts[i], p))
+                    if (equality(pnts[i], p)) {
                         return nPnts;
+                    }
                 }
                 pnts[nPnts++] = p;
             }
@@ -378,8 +383,9 @@ public class Geo2D {
         else if (isFlat1) {
             // Curve 2 left or right of line 1?
             Line2D l1 = new Line2D.Double(cub1.getP1(), cub1.getP2());
-            if (_relativePosition(l1, cub2) != 0)
+            if (_relativePosition(l1, cub2) != 0) {
                 return nPnts;
+            }
 
             // Subdivide curve 2
             CubicCurve2D left2 = new CubicCurve2D.Double();
@@ -392,8 +398,9 @@ public class Geo2D {
         else if (isFlat2) {
             // Curve 1 left or right of line 2?
             Line2D l2 = new Line2D.Double(cub2.getP1(), cub2.getP2());
-            if (_relativePosition(l2, cub1) != 0)
+            if (_relativePosition(l2, cub1) != 0) {
                 return nPnts;
+            }
 
             // Subdivide curve 1
             CubicCurve2D left1 = new CubicCurve2D.Double();
@@ -483,8 +490,9 @@ public class Geo2D {
                 default :
                     throw new Error("Unexpected segment type");
             }
-            if (seg1 == null)
+            if (seg1 == null) {
                 continue;
+            }
 
             // Second curve
             Shape seg2;
@@ -548,8 +556,9 @@ public class Geo2D {
                 }
             }
         }
-        if (pntSet.isEmpty())
+        if (pntSet.isEmpty()) {
             throw new NoIntersectionException();
+        }
         return pntSet.iterator();
     }
 
@@ -557,9 +566,10 @@ public class Geo2D {
 
     private static void _boundsCheck(Shape shp1, Shape shp2)
             throws NoIntersectionException {
-        if (! _collision(shp1, shp2))
+        if (! _collision(shp1, shp2)) {
             throw new NoIntersectionException(
                     "Bounds check: Shapes don't intersect");
+        }
     }
 
     private static boolean _collision(Shape shp1, Shape shp2) {
@@ -580,8 +590,9 @@ public class Geo2D {
     }
 
     private static CubicCurve2D _toCubicCurve(Shape seg, CubicCurve2D cub) {
-        if (cub == null)
+        if (cub == null) {
             cub = new CubicCurve2D.Double();
+        }
         if (seg instanceof Line2D) {
             Line2D src = (Line2D)seg;
             cub.setCurve(src.getX1(), src.getY1(), src.getX1(), src.getY1(),
