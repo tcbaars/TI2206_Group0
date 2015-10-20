@@ -74,4 +74,14 @@ public class Score implements Comparable<Score>{
         }
         return false;
     }
+
+    /**
+     * Recommended hashCode implementation from FindBugs
+     * @return 42
+     */
+    @Override
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42; // any arbitrary constant will do
+    }
 }

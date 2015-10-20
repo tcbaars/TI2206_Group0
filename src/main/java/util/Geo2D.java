@@ -618,8 +618,9 @@ public class Geo2D {
     private static boolean _addPoint(Set set, Point2D pnt) {
         for (Object aSet : set) {
             Point2D _pnt = (Point2D) aSet;
-            if (equality(pnt, _pnt))
+            if (equality(pnt, _pnt)) {
                 return false;
+            }
         }
         set.add(pnt);
         return true;

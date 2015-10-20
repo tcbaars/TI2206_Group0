@@ -228,6 +228,8 @@
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>3.0.2</version>
 				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
 					<xmlOutput>true</xmlOutput>
 					<includeTests>true</includeTests>
 				</configuration>

@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,11 +38,6 @@ public final class Logger {
     private static Path _file;
 
     /**
-     * The date format to use for logging.
-     */
-    private static DateFormat _dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss ");
-
-    /**
      * The static logger instance.
      */
     @SuppressWarnings("unused")
@@ -73,7 +67,7 @@ public final class Logger {
     private static void log(String message, _outputLevel logLevel) {
         Date date = new Date();
 
-        final String messageToLog = _dateFormat.format(date) + message + "\n";
+        final String messageToLog = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss ").format(date) + message + "\n";
 
         // Log to console
         if (_consoleOutputLevel.compareTo(logLevel) <= 0) {
