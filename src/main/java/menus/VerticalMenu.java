@@ -10,11 +10,11 @@ public interface VerticalMenu extends Menu{
     /**
      * Select the menu item in negative vertical direction.
      */
-    public void navigateUp();
+    void navigateUp();
 
     /**
      * Select the menu item in positive vertical direction.
      */
-    public void navigateDown();
+    void navigateDown();
 
 }

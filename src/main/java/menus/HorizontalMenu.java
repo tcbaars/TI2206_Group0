@@ -10,11 +10,11 @@ public interface HorizontalMenu extends Menu{
     /**
      * Select the menu item in negative horizontal direction.
      */
-    public void navigateLeft();
+    void navigateLeft();
 
     /**
      * Select the menu item in positive horizontal direction.
      */
-    public void navigateRight();
+    void navigateRight();
 
 }

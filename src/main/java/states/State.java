@@ -7,9 +7,9 @@ import keys.TypedKey;
 
 public interface State {
 
-    public void drawToScreen(Graphics2D screen);
-    public void update();
-    public void handleKeyPressed(Key key);
-    public void handleKeyReleased(Key key);
-    public void handleKeyTyped(TypedKey key);
+    void drawToScreen(Graphics2D screen);
+    void update();
+    void handleKeyPressed(Key key);
+    void handleKeyReleased(Key key);
+    void handleKeyTyped(TypedKey key);
 }

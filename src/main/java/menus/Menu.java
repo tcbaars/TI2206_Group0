@@ -13,6 +13,6 @@ public interface Menu {
      * If the user has selected an available menu item.
      * @return the selected menu item if the user has selected a menu item, otherwise <code>null</code>.
      */
-    public MenuItems getSelection();
+    MenuItems getSelection();
 
 }

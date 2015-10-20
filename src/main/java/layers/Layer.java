@@ -14,6 +14,6 @@ public interface Layer {
      * Draws the layer to the specified screen.
      * @param screen the screen.
      */
-    public void drawToScreen(Graphics2D screen);
+    void drawToScreen(Graphics2D screen);
 
 }
