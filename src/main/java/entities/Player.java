@@ -173,24 +173,19 @@ public abstract class Player extends EntityBase{
         sprite.incrementSprite(sizeIncrement);
     }
     public boolean consume(Entity entity) {
-        if (isAlive()) {
-            if (entity != null) {
-                if (entity.isAlive()) {
-                    if (entity.isConsumable()) {
-                        if (intersects(entity)) {
-                            if (isLargerThan(entity)) {
-                                entity.consumedBy(this);
-                                double sizeIncrement = entity.getSizeIncrement();
-                                double scoreincrement = entity.getScoreIncrement();
-                                increaseSize(sizeIncrement);
-                                increaseScore((int)scoreincrement);
-                                numberFishEaten++;
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+        if (isAlive() &&
+                entity != null &&
+                entity.isAlive() &&
+                entity.isConsumable() &&
+                intersects(entity) &&
+                isLargerThan(entity)) {
+                    entity.consumedBy(this);
+                    double sizeIncrement = entity.getSizeIncrement();
+                    double scoreincrement = entity.getScoreIncrement();
+                    increaseSize(sizeIncrement);
+                    increaseScore((int)scoreincrement);
+                    numberFishEaten++;
+                    return true;
         }
         return false;
     }

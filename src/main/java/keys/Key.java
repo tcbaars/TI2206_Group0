@@ -37,16 +37,14 @@ public class Key {
      * @return the key object if the key pressed or released is an identifiable key, otherwise <code>null</code>.
      */
     public static Key convertToKey(KeyEvent keyEvent){
-        if (keyEvent != null) {
-            // Check if the key event is not a typed key event
-            if (keyEvent.getID() != KeyEvent.KEY_TYPED) {
-                int keyEventCode = keyEvent.getKeyCode();
-                // Check if the key is identifiable
-                for (GameKeys gameKey : GameKeys.values()) {
-                    if (gameKey.getKeyCode() == keyEventCode) {
-                        // Create a key object if the key is identifiable
-                        return new Key(gameKey);
-                    }
+        // Check if the key event is not a typed key event
+        if (keyEvent != null && keyEvent.getID() != KeyEvent.KEY_TYPED) {
+            int keyEventCode = keyEvent.getKeyCode();
+            // Check if the key is identifiable
+            for (GameKeys gameKey : GameKeys.values()) {
+                if (gameKey.getKeyCode() == keyEventCode) {
+                    // Create a key object if the key is identifiable
+                    return new Key(gameKey);
                 }
             }
         }

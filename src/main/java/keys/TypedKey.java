@@ -35,9 +35,9 @@ public class TypedKey {
      * @return typed key if the key's value is valid, otherwise <code>null</code>.
      */
     public static TypedKey convertToTypedKey(KeyEvent keyEvent){
-        if (keyEvent != null) {
-            if (keyEvent.getID() == KeyEvent.KEY_TYPED) {
-                if (keyEvent.getKeyChar() != KeyEvent.CHAR_UNDEFINED) {
+        if (keyEvent != null &&
+                keyEvent.getID() == KeyEvent.KEY_TYPED &&
+                keyEvent.getKeyChar() != KeyEvent.CHAR_UNDEFINED) {
                     // Get the Unicode value of the key event
                     char keyEventValue = keyEvent.getKeyChar();
                     // Check if the value is alphanumeric
@@ -48,8 +48,6 @@ public class TypedKey {
                         // Create a new typed key object if the value is numeric.
                         return new TypedKey(keyEventValue);
                     }
-                }
-            }
         }
         return null;
     }

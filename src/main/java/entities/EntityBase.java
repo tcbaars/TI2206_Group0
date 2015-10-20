@@ -157,10 +157,8 @@ public abstract class EntityBase implements Entity{
     }
 
     public boolean isLargerThan(Entity entity) {
-        if (entity != null) {
-            if (getArea() < entity.getArea()) {
-                return false;
-            }
+        if (entity != null && getArea() < entity.getArea()) {
+            return false;
         }
         return true;
     }

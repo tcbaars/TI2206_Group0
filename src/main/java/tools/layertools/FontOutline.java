@@ -45,35 +45,31 @@ public class FontOutline {
      * @return <code>true</code> if the text was successfully drawn, otherwise <code>false<code>.
      */
     public static boolean drawText(Graphics2D screen, Font font, Color fill, Color outlineColor, float outlineSize, String text, int startX, int startY){
-       if (screen != null) {
-           if (font != null) {
-               if (fill != null) {
-                   if (outlineColor != null) {
-                       if (text != null) {
-                           // Splits the specified text into separate letters or 'glyphs'
-                           GlyphVector gv = font.createGlyphVector(screen.getFontRenderContext(), text);
+       if (screen != null &&
+               font != null &&
+               fill != null &&
+               outlineColor != null &&
+               text != null) {
+                    // Splits the specified text into separate letters or 'glyphs'
+                    GlyphVector gv = font.createGlyphVector(screen.getFontRenderContext(), text);
 
-                           // Sets the origin which the location of the text drawn shall be relative to
-                           screen.translate(startX, startY);
-                           screen.setStroke(new BasicStroke(outlineSize));
+                    // Sets the origin which the location of the text drawn shall be relative to
+                    screen.translate(startX, startY);
+                    screen.setStroke(new BasicStroke(outlineSize));
 
-                           // Draw the letter and outline for every letter in the specified text
-                           for(int i = 0; i < text.length(); i++){
-                               Shape shape = gv.getGlyphOutline(i);
-                               screen.setPaint(fill);
-                               screen.fill(shape);
-                               screen.setPaint(outlineColor);
-                               screen.draw(shape);
-                           }
+                    // Draw the letter and outline for every letter in the specified text
+                    for(int i = 0; i < text.length(); i++){
+                        Shape shape = gv.getGlyphOutline(i);
+                        screen.setPaint(fill);
+                        screen.fill(shape);
+                        screen.setPaint(outlineColor);
+                        screen.draw(shape);
+                    }
 
-                           // Reset the origin
-                           screen.translate((-1 * startX),(-1 * startY));
+                    // Reset the origin
+                    screen.translate((-1 * startX),(-1 * startY));
 
-                           return true;
-                       }
-                   }
-               }
-           }
+                    return true;
        }
        return false;
     }
@@ -104,17 +100,13 @@ public class FontOutline {
      * @return <code>true</code> if the text was successfully drawn, otherwise <code>false<code>.
      */
     public static boolean drawTextHorizontallyCentered(Graphics2D screen, Font font, Color fill, Color outlineColor, float outlineSize, String text, int startY){
-        if (screen != null) {
-            if (font != null) {
-                if (text != null){
-                    // Gets the estimated width of the text
-                    double textWidth = getFontWidth(font, text);
-                    double centerScreen = ScreenSettings.getInstance().getWidth() / 2.0;
-                    // Gets the horizontal centre of the screen adjusting for the width of the text
-                    int startX = (int) (centerScreen - (textWidth / 2.0));
-                    return drawText(screen, font, fill, outlineColor, outlineSize, text, startX, startY);
-                }
-            }
+        if (screen != null && font != null && text != null){
+            // Gets the estimated width of the text
+            double textWidth = getFontWidth(font, text);
+            double centerScreen = ScreenSettings.getInstance().getWidth() / 2.0;
+            // Gets the horizontal centre of the screen adjusting for the width of the text
+            int startX = (int) (centerScreen - (textWidth / 2.0));
+            return drawText(screen, font, fill, outlineColor, outlineSize, text, startX, startY);
         }
         return false;
     }
