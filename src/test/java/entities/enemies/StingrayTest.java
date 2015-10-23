@@ -16,7 +16,7 @@ import enumerations.GameEntities;
  */
 public class StingrayTest {
 	
-	Enemy enemy = new Stingray();
+	Enemy enemy = Enemy.generate(GameEntities.STINGRAY);
     
     /**
      * This method tests the scorescalingfactor.
