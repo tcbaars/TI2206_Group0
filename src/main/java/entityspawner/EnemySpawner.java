@@ -5,11 +5,7 @@ import java.util.Arrays;
 
 import entities.Enemy;
 import entities.Entity;
-import entities.enemies.Dunkleosteus;
-import entities.enemies.Shark;
-import entities.enemies.Stingray;
-import entities.enemies.Swordfish;
-import entities.enemies.Trout;
+import enumerations.GameEntities;
 import settings.EnemySettings;
 import tools.Timer;
 import tools.entitytools.Generator;
@@ -77,19 +73,19 @@ public class EnemySpawner implements EntitySpawner{
         Enemy enemy;
         switch (Generator.generateInteger(4)) {
             case 0:
-                enemy = new Trout();
+                enemy = Enemy.generate(GameEntities.TROUT);
                 break;
             case 1:
-                enemy = new Dunkleosteus();
+                enemy = Enemy.generate(GameEntities.DUNKLEOSTEUS);
                 break;
             case 2:
-                enemy = new Shark();
+                enemy = Enemy.generate(GameEntities.SHARK);
                 break;
             case 3:
-                enemy = new Stingray();
+                enemy = Enemy.generate(GameEntities.STINGRAY);
                 break;
             default:
-                enemy = new Swordfish();
+                enemy = Enemy.generate(GameEntities.SWORDFISH);
                 break;
         }
         return enemy;
