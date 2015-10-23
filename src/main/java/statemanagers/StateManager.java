@@ -46,6 +46,10 @@ public class StateManager {
                 break;
         }
     }
+    
+    public State getCurrentState() {
+	return currentState;
+    }
 
     public void launchNewGame(Game game){
         Logger.info("A new game has been launched.");

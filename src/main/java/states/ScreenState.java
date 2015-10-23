@@ -14,6 +14,7 @@ public abstract class ScreenState implements State{
     private StateManager stateManager;
     public ScreenState(StateManager stateManager){
         this.stateManager = stateManager;
+        
     }
     public void setCurrentState(States state){
         stateManager.setCurrentState(state);

@@ -14,6 +14,7 @@ public class ExitScreenState extends ScreenState{
     public void drawToScreen(Graphics2D screen) {
     }
 
+    @Override
     public void update() {
         MainFrame.getInstance().exit();
     }
