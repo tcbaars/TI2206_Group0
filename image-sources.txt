@@ -11,3 +11,5 @@ Enemy Sprites:
 Player:
 + Default: https://pixabay.com/en/fish-water-animal-159329/
 
+Powerup:
++ Speedup: http://www.clker.com/cliparts/H/7/b/j/m/G/lightning-bolt-hi.png

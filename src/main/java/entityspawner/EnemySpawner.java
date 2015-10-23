@@ -49,6 +49,7 @@ public class EnemySpawner implements EntitySpawner{
             }
         }
     }
+
     public int getNumberEnemies(){
         return currentNumber;
     }
@@ -61,9 +62,11 @@ public class EnemySpawner implements EntitySpawner{
     public ArrayList<Entity> getEntities(){
         return new ArrayList<Entity>(Arrays.asList(enemies));
     }
+
     private int getDesiredNumber(){
         return Generator.generateInteger(min, max);
     }
+
     private void spawnEnemy(){
         for (int i = 0; i < max; i++){
             if (enemies[i] == null) {
@@ -73,6 +76,7 @@ public class EnemySpawner implements EntitySpawner{
             }
         }
     }
+
     private Enemy generateEnemy(){
         Enemy enemy;
         switch (Generator.generateInteger(4)) {
