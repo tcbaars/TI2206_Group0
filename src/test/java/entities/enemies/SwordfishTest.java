@@ -16,7 +16,7 @@ import enumerations.GameEntities;
  */
 public class SwordfishTest {
 	
-	Enemy enemy = new Swordfish();
+	Enemy enemy = Enemy.generate(GameEntities.SWORDFISH);
     
     /**
      * This method tests the scorescalingfactor.
