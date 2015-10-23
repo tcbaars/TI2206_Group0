@@ -10,13 +10,13 @@ public interface InputMenu {
      * Increment the value related to the current selection.
      * If there is a value related to the current selection.
      */
-    public void incrementSelection();
+    void incrementSelection();
 
     /**
      * Decrement the value related to the current selection.
      * If there is a value related to the current selection.
      */
-    public void decrementSelection();
+    void decrementSelection();
 
     /**
      * Set the value related to the current selection.
@@ -24,6 +24,6 @@ public interface InputMenu {
      * This is used to pass values typed by the user.
      * @param value the value typed.
      */
-    public void setValue(char value);
+    void setValue(char value);
 
 }

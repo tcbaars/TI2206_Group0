@@ -35,21 +35,17 @@ public class EnemySpawner implements EntitySpawner{
         for (int i = 0; i < max; i++) {
             if (enemies[i] != null) {
                 enemies[i].update();
-                if (!enemies[i].isAlive()) {
-                    if (!enemies[i].hasSubEntities()) {
-                        enemies[i] = null;
-                        currentNumber--;
-                    }
+                if (!enemies[i].isAlive() && !enemies[i].hasSubEntities()) {
+                    enemies[i] = null;
+                    currentNumber--;
                 }
             }
         }
         spawnDelay.tick();
         if (spawnDelay.hasCompleted()) {
             spawnDelay.reset();
-            if (!finalStage) {
-                if (currentNumber < getDesiredNumber()) {
-                    spawnEnemy();
-                }
+            if (!finalStage && currentNumber < getDesiredNumber()) {
+                spawnEnemy();
             }
         }
     }

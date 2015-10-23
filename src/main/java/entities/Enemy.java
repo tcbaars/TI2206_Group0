@@ -175,20 +175,17 @@ public abstract class Enemy extends EntityBase{
         return sprite;
     }
     public boolean consume(Entity entity) {
-        if (isAlive()) {
-            if (entity != null) {
-                if (entity.isAlive()) {
-                    if (entity.isConsumable()) {
-                        if (intersects(entity)) {
-                            if (isLargerThan(entity)) {
-                                entity.consumedBy(this);
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+        if (isAlive() &&
+                entity != null &&
+                entity.isAlive() &&
+                entity.isConsumable() &&
+                intersects(entity) &&
+                isLargerThan(entity) &&
+                isLargerThan(entity)) {
+                    entity.consumedBy(this);
+                    return true;
         }
+
         return false;
     }
 }

@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import entities.Entity;
 
+/**
+ * Interface for a generic EntitySpawner
+ */
 public interface EntitySpawner {
-    public boolean isActive();
-    public void update();
-    public ArrayList<Entity> getEntities();
+    boolean isActive();
+    void update();
+    ArrayList<Entity> getEntities();
 }

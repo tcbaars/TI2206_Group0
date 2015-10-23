@@ -20,6 +20,7 @@ import util.Logger;
  */
 public class SoundLoader {
 
+    private static final String EXCEPTION = "GameException Occured: ";
     private static final SoundLoader instance = new SoundLoader();
     private HashMap<String, Clip> soundLoader;
 
@@ -72,7 +73,7 @@ public class SoundLoader {
                 String message = "An error occurred while loading the specified sound: " + soundKey;
                 message += ". No location specified.";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             } catch (UnsupportedAudioFileException e){
                 e.printStackTrace();
@@ -80,7 +81,7 @@ public class SoundLoader {
                 String message = "An UnsupportedAudioFileException error occurred while loading the specified sound: " + soundKey;
                 message += " at " + soundUrl + ".";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -88,7 +89,7 @@ public class SoundLoader {
                 String message = "An IOException error occurred while reading the specified sound: " + soundKey;
                 message += " at " + soundUrl + ".";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             } catch (Exception e){
                 e.printStackTrace();
@@ -96,7 +97,7 @@ public class SoundLoader {
                 String message = "An error occurred while loading the specified sound: " + soundKey;
                 message += " at " + soundUrl + ". Due to system restrictions.";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             }
         }

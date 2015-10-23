@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +17,7 @@ public final class Logger {
     private static final String _info = "[INFO] ";
     private static final String _warning = "[WARNING] ";
     private static final String _error = "[ERROR] ";
+    private static final String _MSG = " Message: ";
 
     /**
      * Enum to define log levels.
@@ -36,11 +36,6 @@ public final class Logger {
      * Path to log file.
      */
     private static Path _file;
-
-    /**
-     * The date format to use for logging.
-     */
-    private static DateFormat _dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss ");
 
     /**
      * The static logger instance.
@@ -72,7 +67,7 @@ public final class Logger {
     private static void log(String message, _outputLevel logLevel) {
         Date date = new Date();
 
-        final String messageToLog = _dateFormat.format(date) + message + "\n";
+        final String messageToLog = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss ").format(date) + message + "\n";
 
         // Log to console
         if (_consoleOutputLevel.compareTo(logLevel) <= 0) {
@@ -115,6 +110,7 @@ public final class Logger {
 
     /**
      * Get console output level.
+     * @return Current Console Output Level
      */
     public static _outputLevel getConsoleOutputLevel() {
         return _consoleOutputLevel;
@@ -132,6 +128,7 @@ public final class Logger {
 
     /**
      * Get log file output level.
+     * @return Current Log File Level
      */
     public static _outputLevel getLogFileOutputLevel() {
         return _logFileOutputLevel;
@@ -147,7 +144,7 @@ public final class Logger {
         String messageToLog = _debug;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.DEBUG);
     }
@@ -162,7 +159,7 @@ public final class Logger {
         String messageToLog = _info;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.INFO);
     }
@@ -177,7 +174,7 @@ public final class Logger {
         String messageToLog = _warning;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.WARNING);
     }
@@ -192,7 +189,7 @@ public final class Logger {
         String messageToLog = _error;
 
         messageToLog += getClassAndMethod();
-        messageToLog += " Message: " + message;
+        messageToLog += _MSG + message;
 
         log(messageToLog, _outputLevel.ERROR);
     }

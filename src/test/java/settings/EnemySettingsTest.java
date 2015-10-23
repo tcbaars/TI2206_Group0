@@ -19,7 +19,7 @@ public class EnemySettingsTest {
      * Initialize the EnemySettings instance and a random number generator.
      */
     @BeforeClass
-    public static void setup() {
+    public static void setUp() {
         enemySettings = EnemySettings.getInstance();
         random = new Random();
     }
