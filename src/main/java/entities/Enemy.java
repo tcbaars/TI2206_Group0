@@ -10,7 +10,7 @@ import sprites.EnemySprite;
 import sprites.Sprite;
 import tools.entitytools.Generator;
 
-public abstract class Enemy extends EntityBase{
+public class Enemy extends EntityBase{
 
     private Sprite sprite;
     private BubbleSpawner bubbles;
@@ -21,7 +21,7 @@ public abstract class Enemy extends EntityBase{
     private double movementSpeedScalingFactor;
     private Directions direction;
 
-    public Enemy(GameEntities entity){
+    private Enemy(GameEntities entity){
         sprite = new EnemySprite(entity.getSprite());
         localEntityWidth = entity.getEntityWidth();
         localEntityHeight = entity.getEntityHeight();
@@ -187,5 +187,11 @@ public abstract class Enemy extends EntityBase{
         }
 
         return false;
+    }
+    public static Enemy generate(GameEntities enemy){
+        if (enemy != null) {
+            return new Enemy(enemy);
+        }
+        return null;
     }
 }
