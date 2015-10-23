@@ -16,7 +16,7 @@ import enumerations.GameEntities;
  */
 public class DunkleosteusTest {
 	
-	Enemy enemy = new Dunkleosteus();
+	Enemy enemy = Enemy.generate(GameEntities.DUNKLEOSTEUS);
     
     /**
      * This method tests the scorescalingfactor.
