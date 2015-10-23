@@ -9,12 +9,16 @@ public class PowerupSettings {
     private int spawnRate;
     private static final int minPowerups = 0;
     private static final int maxPowerups = 2;
+    private static final double increment = 2;
+    private static boolean powerupIsActive = false;
+    private static final int powerupRate = 60*10;
+    private static final int despawnRate = 60*5;
 
     /**
      * Creates an instance of the global enemy settings.
      */
     private PowerupSettings(){
-        spawnRate = 1;
+        spawnRate = 60*60*20;
     }
 
     /**
@@ -51,5 +55,25 @@ public class PowerupSettings {
      */
     public int getMaxEnemies(){
         return maxPowerups;
+    }
+
+    public boolean powerupIsActive() {
+        return powerupIsActive;
+    }
+
+    public void togglePowerup() {
+        powerupIsActive = !powerupIsActive;
+    }
+
+    public double getIncrement() {
+        return increment;
+    }
+
+    public int getPowerupRate(){
+        return powerupRate;
+    }
+
+    public int getDespawnRate(){
+        return despawnRate;
     }
 }

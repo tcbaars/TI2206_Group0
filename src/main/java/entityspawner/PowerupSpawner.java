@@ -47,21 +47,11 @@ public class PowerupSpawner implements EntitySpawner {
     private void spawnPowerup(){
         for (int i = 0; i < max; i++){
             if (powerups[i] == null) {
-                powerups[i] = generatePowerup();
+                powerups[i] = new Speedup();
                 currentNumber++;
                 return;
             }
         }
-    }
-
-    private Powerup generatePowerup(){
-        Powerup powerup;
-        switch (Generator.generateInteger(0)) {
-            default:
-                powerup = new Speedup();
-                break;
-        }
-        return powerup;
     }
 
     public ArrayList<Entity> getEntities(){

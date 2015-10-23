@@ -1,9 +1,11 @@
 package entities;
 
 import enumerations.GameEntities;
+import settings.PowerupSettings;
 import settings.ScreenSettings;
 import sprites.PowerupSprite;
 import sprites.Sprite;
+import tools.Timer;
 import tools.entitytools.Generator;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class Powerup extends EntityBase {
     private double movementSpeedScalingFactor;
     private double localEntityWidth;
     private double localEntityHeight;
+    private Timer powerupDelay;
+    private Timer despawnDelay;
 
     public Powerup(GameEntities entity){
         sprite = new PowerupSprite(entity.getSprite());
@@ -28,15 +32,35 @@ public class Powerup extends EntityBase {
         movementSpeedScalingFactor = entity.getMovementSpeedScalingFactor();
         spawn();
         consumable = entity.isConsumable();
+        powerupDelay = new Timer(PowerupSettings.getInstance().getPowerupRate());
+        despawnDelay = new Timer(PowerupSettings.getInstance().getDespawnRate());
+    }
+
+    public void update() {
+        getSprite().update();
+
+        if (PowerupSettings.getInstance().powerupIsActive()) {
+            powerupDelay.tick();
+            if (powerupDelay.hasCompleted()) {
+                PowerupSettings.getInstance().togglePowerup();
+                powerupDelay.reset();
+            }
+        }
+
+        despawnDelay.tick();
+        if (despawnDelay.hasCompleted()) {
+            kill();
+        }
     }
 
     protected void spawn(){
         double screenHeight = ScreenSettings.getInstance().getHeight();
         double height = getEntityHeight();
-        int y = Generator.generateInteger((int)(screenHeight - (height + 10)));
-        sprite.translateSpriteY(y);
+        double screenWidth = ScreenSettings.getInstance().getWidth();
         double width = getEntityWidth();
-        double x = 0 - width;
+        int y = Generator.generateInteger((int)(screenHeight - (height + 10)));
+        int x = Generator.generateInteger((int)(screenWidth - (width + 10)));
+        sprite.translateSpriteY(y);
         sprite.translateSpriteX(x);
     }
 

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import entityspawner.BubbleSpawner;
 import enumerations.Directions;
 import enumerations.GameEntities;
+import settings.PowerupSettings;
 import settings.ScreenSettings;
+import settings.valuesettings.BaseMovementSpeedSettings;
 import sprites.PlayerSprite;
 import sprites.Sprite;
 
@@ -42,6 +44,19 @@ public abstract class Player extends EntityBase{
 
     public boolean isConsumable() {
         return consumable;
+    }
+
+    @Override
+    public double getMovementSpeed(){
+        double baseMovingSpeed = BaseMovementSpeedSettings.getInstance().getBaseMovementSpeed();
+        double movementSpeedScalingFactor = getMovementSpeedScalingFactor();
+        double areaScaling = getArea() / 10;
+        double powerupScaling = 1.0;
+        if (PowerupSettings.getInstance().powerupIsActive()) {
+            powerupScaling = PowerupSettings.getInstance().getIncrement();
+        }
+
+        return baseMovingSpeed * movementSpeedScalingFactor * (1/areaScaling) * powerupScaling;
     }
 
     private void moveUp(){
