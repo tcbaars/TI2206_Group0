@@ -10,7 +10,8 @@ public enum GameAnimations {
     SWORDFISH("Swordfish", "/sprites/Swordfish.png", 1300, 600, 2, 10, true),
     STINGRAY("Stingray", "/sprites/Stingray.png", 1300, 600, 6, 10, true),
     SHARK("Shark", "/sprites/Shark.png", 1300, 600, 3, 10, true),
-    BUBBLE("Bubble", "/sprites/Bubble.png", 1000, 1000, 1, 0, true);
+    BUBBLE("Bubble", "/sprites/Bubble.png", 1000, 1000, 1, 0, true),
+    SPEEDUP("Speedup", "/sprites/Speedup.png", 510, 595, 1, 0, true);
 
     private String key;
     private String url;

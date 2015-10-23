@@ -55,6 +55,7 @@ public class Enemy extends EntityBase{
     protected double getLocalEntityHeight() {
         return localEntityHeight;
     }
+
     protected void spawn(){
         if (Generator.generateBoolean(10)) {
             bubbles  = new BubbleSpawner(this);
@@ -174,6 +175,7 @@ public class Enemy extends EntityBase{
     public Sprite getSprite() {
         return sprite;
     }
+
     public boolean consume(Entity entity) {
         if (isAlive() &&
                 entity != null &&

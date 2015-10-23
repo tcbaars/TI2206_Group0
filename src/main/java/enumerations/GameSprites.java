@@ -12,7 +12,8 @@ public enum GameSprites {
     SWORDFISH(GameAnimations.SWORDFISH, 200, 450),
     STINGRAY(GameAnimations.STINGRAY, 100, 450),
     SHARK(GameAnimations.SHARK, 300, 450),
-    BUBBLE(GameAnimations.BUBBLE, 20, 50);
+    BUBBLE(GameAnimations.BUBBLE, 20, 50),
+    SPEEDUP(GameAnimations.SPEEDUP, 50, 50);
 
     private GameAnimations animation;
     private double minWidth;
