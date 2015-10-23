@@ -16,7 +16,7 @@ import enumerations.GameEntities;
  */
 public class TroutTest {
 	
-	Enemy enemy = new Trout();
+	Enemy enemy = Enemy.generate(GameEntities.TROUT);
     
     /**
      * This method tests the scorescalingfactor.
