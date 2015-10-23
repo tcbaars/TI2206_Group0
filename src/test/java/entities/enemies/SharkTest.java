@@ -16,7 +16,7 @@ import enumerations.GameEntities;
  */
 public class SharkTest {
 	
-	Enemy enemy = new Shark();
+	Enemy enemy = Enemy.generate(GameEntities.SHARK);
     
     /**
      * This method tests the scorescalingfactor.
