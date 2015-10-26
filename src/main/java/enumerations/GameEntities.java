@@ -20,7 +20,8 @@ public enum GameEntities {
     SWORDFISH(GameSprites.SWORDFISH, 1200, 330, 0.1, true, 0.8),
     STINGRAY(GameSprites.STINGRAY, 1075, 155, 0.1, true, 0.4),
     SHARK(GameSprites.SHARK, 1190, 452, 0.1, true, 0.9),
-    BUBBLE(GameSprites.BUBBLE, 1000, 1000, 0.1, false, 0.01);
+    BUBBLE(GameSprites.BUBBLE, 1000, 1000, 0.1, false, 0.01),
+    SPEEDUP(GameSprites.SPEEDUP, 510, 595, 0, true, 0.2);
 
     private GameSprites sprite;
     private double entityWidth;

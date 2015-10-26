@@ -24,7 +24,6 @@ public class BackgroundRectangle {
      * @param startY the Y coordinate of the top-left corner.
      * @param width the desired rectangle width.
      * @param height the desired rectangle height.
-     * @return <code>true</code> if the rectangle was successfully drawn to the screen, otherwise <code>false</code>.
      */
     public static void drawRectangle(Graphics2D screen, int startX, int startY, int width, int height){
         if (screen != null){

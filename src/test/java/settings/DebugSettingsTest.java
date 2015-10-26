@@ -1,6 +1,7 @@
 package settings;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
@@ -16,7 +17,7 @@ public class DebugSettingsTest {
      * Initialize an instance of DebugSettings before each test.
      */
     @BeforeClass
-    public static void setup() {
+    public static void setUp() {
         debugSettings = DebugSettings.getInstance();
     }
 
@@ -45,7 +46,7 @@ public class DebugSettingsTest {
     public void toggleDebugModeTest() {
         boolean value = debugSettings.isDebugModeOn();
         debugSettings.toggleDebugMode();
-        assertTrue(value != debugSettings.isDebugModeOn());
+        assertNotSame(value, debugSettings.isDebugModeOn());
     }
 
     /**

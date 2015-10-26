@@ -10,7 +10,7 @@ import sprites.EnemySprite;
 import sprites.Sprite;
 import tools.entitytools.Generator;
 
-public abstract class Enemy extends EntityBase{
+public class Enemy extends EntityBase{
 
     private Sprite sprite;
     private BubbleSpawner bubbles;
@@ -21,7 +21,7 @@ public abstract class Enemy extends EntityBase{
     private double movementSpeedScalingFactor;
     private Directions direction;
 
-    public Enemy(GameEntities entity){
+    private Enemy(GameEntities entity){
         sprite = new EnemySprite(entity.getSprite());
         localEntityWidth = entity.getEntityWidth();
         localEntityHeight = entity.getEntityHeight();
@@ -55,6 +55,7 @@ public abstract class Enemy extends EntityBase{
     protected double getLocalEntityHeight() {
         return localEntityHeight;
     }
+
     protected void spawn(){
         if (Generator.generateBoolean(10)) {
             bubbles  = new BubbleSpawner(this);
@@ -174,21 +175,25 @@ public abstract class Enemy extends EntityBase{
     public Sprite getSprite() {
         return sprite;
     }
+
     public boolean consume(Entity entity) {
-        if (isAlive()) {
-            if (entity != null) {
-                if (entity.isAlive()) {
-                    if (entity.isConsumable()) {
-                        if (intersects(entity)) {
-                            if (isLargerThan(entity)) {
-                                entity.consumedBy(this);
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+        if (isAlive() &&
+                entity != null &&
+                entity.isAlive() &&
+                entity.isConsumable() &&
+                intersects(entity) &&
+                isLargerThan(entity) &&
+                isLargerThan(entity)) {
+                    entity.consumedBy(this);
+                    return true;
         }
+
         return false;
+    }
+    public static Enemy generate(GameEntities enemy){
+        if (enemy != null) {
+            return new Enemy(enemy);
+        }
+        return null;
     }
 }

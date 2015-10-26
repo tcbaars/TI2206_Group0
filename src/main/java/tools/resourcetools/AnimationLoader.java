@@ -18,6 +18,7 @@ import util.Logger;
  */
 public class AnimationLoader {
 
+    private static final String EXCEPTION = "GameException Occured: ";
     private static final AnimationLoader instance = new AnimationLoader();
     private HashMap<String, BufferedImage[]> animationLoader;
 
@@ -69,21 +70,21 @@ public class AnimationLoader {
                 String desciption = "An error occured while trying to find " + animationKey + " sprite sheet at: " + animationUrl + ".";
                 String message = "IllegalArgumentException occured while trying to located the sprite sheet at : " + animationUrl + ".";
                 GameException exception = new AnimationLoaderException(desciption, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayError(exception);
             } catch (IOException e){
                 e.printStackTrace();
                 String desciption = "An error occured while reading the specified sprite sheet at: " + animationUrl + ".";
                 String message = "IOException occured while reading: (" + animationKey + ", " + animationUrl + ").";
                 GameException exception = new AnimationLoaderException(desciption, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayError(exception);
             }  catch (NullPointerException e) {
                 e.printStackTrace();
                 String desciption = "An error occured while subdividing the specified sprite sheet.";
                 String message = "NullPointerException occured while subdividing the sprite sheet: (" + animationKey + ", " + animationUrl + ").";
                 GameException exception = new AnimationLoaderException(desciption, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayError(exception);
             } catch (RasterFormatException e){
                 e.printStackTrace();
@@ -91,7 +92,7 @@ public class AnimationLoader {
                 String message = "RasterFormatException occured while subdividing the sprite sheet: (" + animationKey + ", " + animationUrl + ").";
                 message += " The specified dimensions: (" + (frameWidth * numberFrames) + ", " + frameHeight + ").";
                 GameException exception = new AnimationLoaderException(desciption, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayError(exception);
             }
         }
@@ -119,7 +120,7 @@ public class AnimationLoader {
             String desciption = "The specified animation " + animationKey + " has not been loaded.";
             String message = "Error occured while getting the specified animation: " + animationKey + ".";
             GameException exception = new AnimationLoaderException(desciption, message);
-            Logger.error("GameException Occured: " + exception.getMessage());
+            Logger.error(EXCEPTION + exception.getMessage());
             DialogBox.displayError(exception);
         }
         return animation;

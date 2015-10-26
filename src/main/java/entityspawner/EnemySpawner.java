@@ -5,11 +5,7 @@ import java.util.Arrays;
 
 import entities.Enemy;
 import entities.Entity;
-import entities.enemies.Dunkleosteus;
-import entities.enemies.Shark;
-import entities.enemies.Stingray;
-import entities.enemies.Swordfish;
-import entities.enemies.Trout;
+import enumerations.GameEntities;
 import settings.EnemySettings;
 import tools.Timer;
 import tools.entitytools.Generator;
@@ -35,24 +31,21 @@ public class EnemySpawner implements EntitySpawner{
         for (int i = 0; i < max; i++) {
             if (enemies[i] != null) {
                 enemies[i].update();
-                if (!enemies[i].isAlive()) {
-                    if (!enemies[i].hasSubEntities()) {
-                        enemies[i] = null;
-                        currentNumber--;
-                    }
+                if (!enemies[i].isAlive() && !enemies[i].hasSubEntities()) {
+                    enemies[i] = null;
+                    currentNumber--;
                 }
             }
         }
         spawnDelay.tick();
         if (spawnDelay.hasCompleted()) {
             spawnDelay.reset();
-            if (!finalStage) {
-                if (currentNumber < getDesiredNumber()) {
-                    spawnEnemy();
-                }
+            if (!finalStage && currentNumber < getDesiredNumber()) {
+                spawnEnemy();
             }
         }
     }
+
     public int getNumberEnemies(){
         return currentNumber;
     }
@@ -65,9 +58,11 @@ public class EnemySpawner implements EntitySpawner{
     public ArrayList<Entity> getEntities(){
         return new ArrayList<Entity>(Arrays.asList(enemies));
     }
+
     private int getDesiredNumber(){
         return Generator.generateInteger(min, max);
     }
+
     private void spawnEnemy(){
         for (int i = 0; i < max; i++){
             if (enemies[i] == null) {
@@ -77,23 +72,24 @@ public class EnemySpawner implements EntitySpawner{
             }
         }
     }
+
     private Enemy generateEnemy(){
         Enemy enemy;
         switch (Generator.generateInteger(4)) {
             case 0:
-                enemy = new Trout();
+                enemy = Enemy.generate(GameEntities.TROUT);
                 break;
             case 1:
-                enemy = new Dunkleosteus();
+                enemy = Enemy.generate(GameEntities.DUNKLEOSTEUS);
                 break;
             case 2:
-                enemy = new Shark();
+                enemy = Enemy.generate(GameEntities.SHARK);
                 break;
             case 3:
-                enemy = new Stingray();
+                enemy = Enemy.generate(GameEntities.STINGRAY);
                 break;
             default:
-                enemy = new Swordfish();
+                enemy = Enemy.generate(GameEntities.SWORDFISH);
                 break;
         }
         return enemy;

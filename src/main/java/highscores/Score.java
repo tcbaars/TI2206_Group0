@@ -66,14 +66,22 @@ public class Score implements Comparable<Score>{
     }
 
     public boolean equals(Object object){
-        if (object != null) {
-            if (object instanceof Score) {
-                Score score = (Score) object;
-                boolean nameEqual = getName().equals(score.getName());
-                boolean scoreEqual = compareTo(score) == 0;
-                return nameEqual && scoreEqual;
-            }
+        if (object != null && object instanceof Score) {
+            Score score = (Score) object;
+            boolean nameEqual = getName().equals(score.getName());
+            boolean scoreEqual = compareTo(score) == 0;
+            return nameEqual && scoreEqual;
         }
         return false;
+    }
+
+    /**
+     * Recommended hashCode implementation from FindBugs
+     * @return 42
+     */
+    @Override
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42; // any arbitrary constant will do
     }
 }

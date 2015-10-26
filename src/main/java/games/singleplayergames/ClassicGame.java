@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import entities.Entity;
 import entityspawner.EnemySpawner;
+import entityspawner.PowerupSpawner;
 import enumerations.GameSounds;
 import games.SinglePlayerGameBase;
 import states.gamestates.GameState;
@@ -19,6 +20,7 @@ public class ClassicGame extends SinglePlayerGameBase{
 
     private boolean gameWon;
     private EnemySpawner enemies;
+    private PowerupSpawner powerups;
     public ClassicGame(){
         super();
         SoundLoader.getInstance().loadSound(GameSounds.CHOMP);
@@ -28,6 +30,7 @@ public class ClassicGame extends SinglePlayerGameBase{
     public void restart() {
         gameWon = false;
         enemies = new EnemySpawner();
+        powerups = new PowerupSpawner();
         super.restart();
     }
 
@@ -49,15 +52,20 @@ public class ClassicGame extends SinglePlayerGameBase{
                 setGameOver();
             }
             enemies.update();
+            powerups.update();
         }
     }
+
     private void handleCollisions(){
         Collisions.handleCollsions(getPlayer(), enemies.getEntities().iterator());
+        Collisions.handleCollsions(getPlayer(), powerups.getEntities().iterator());
     }
+
     public Iterator<Entity> getEntities() {
         ArrayList<Entity> entities =  new ArrayList<Entity>();
         entities.add(getPlayer());
         entities.addAll(enemies.getEntities());
+        entities.addAll(powerups.getEntities());
         return entities.iterator();
     }
 

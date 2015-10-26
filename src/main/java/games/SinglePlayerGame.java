@@ -3,7 +3,10 @@ package games;
 import entities.Player;
 import enumerations.Directions;
 
+/**
+ * Interface for a SinglePlayerGame
+ */
 public interface SinglePlayerGame extends Game{
-    public Player getPlayer();
-    public void movePlayer(Directions direction);
+    Player getPlayer();
+    void movePlayer(Directions direction);
 }

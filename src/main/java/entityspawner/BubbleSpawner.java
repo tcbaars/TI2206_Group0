@@ -30,19 +30,17 @@ public class BubbleSpawner implements EntitySpawner{
             bubbles[i].update();
         }
         spawnDelay.tick();
-        if (spawnDelay.hasCompleted()) {
-            if (currentNumberBubbles < maxBubbles) {
-                spawnDelay.reset();
-                if (entity.isAlive()){
-                    if (noBubblesBlown) {
-                        noBubblesBlown = false;
-                        spawnDelay = new Timer(50);
-                    }
-                    bubbles[currentNumberBubbles] = new Bubble(entity);
-                    currentNumberBubbles++;
-                } else {
-                    maxBubbles = currentNumberBubbles;
+        if (spawnDelay.hasCompleted() && currentNumberBubbles < maxBubbles) {
+            spawnDelay.reset();
+            if (entity.isAlive()){
+                if (noBubblesBlown) {
+                    noBubblesBlown = false;
+                    spawnDelay = new Timer(50);
                 }
+                bubbles[currentNumberBubbles] = new Bubble(entity);
+                currentNumberBubbles++;
+            } else {
+                maxBubbles = currentNumberBubbles;
             }
         }
     }

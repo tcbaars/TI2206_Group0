@@ -19,6 +19,7 @@ import util.Logger;
  */
 public class TrackLoader {
 
+    private static final String EXCEPTION = "GameException Occured: ";
     private static final TrackLoader instance = new TrackLoader();
     private Clip nextTrack;
 
@@ -67,28 +68,28 @@ public class TrackLoader {
                 String description = "The music track location was not specified.";
                 String message = "An error occurred while loading the specified track.";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             } catch (UnsupportedAudioFileException e){
                 e.printStackTrace();
                 String description = "The music track specified is not a valid audio file.";
                 String message = "An UnsupportedAudioFileException error occurred while loading the specified music track.";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             } catch (IOException e) {
                 e.printStackTrace();
                 String description = "There was an error while reading the music track.";
                 String message = "An IOException error occurred while reading the specified music track.";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             } catch (Exception e){
                 e.printStackTrace();
                 String description = "There was an error while loading the music track. Due to system restrictions.";
                 String message = "There was an error while loading the music track. Due to system restrictions.";
                 GameException exception = new SoundLoaderException(description, message);
-                Logger.error("GameException Occured: " + exception.getMessage());
+                Logger.error(EXCEPTION + exception.getMessage());
                 DialogBox.displayWarning(exception);
             }
         }
