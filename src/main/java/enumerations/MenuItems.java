@@ -20,18 +20,48 @@ package enumerations;
  */
 public enum MenuItems {
     /**
-     * Start new game.
+     * Start new single-player classic game mode.
      */
     CLASSIC("New Classic Game"),
+    /**
+     * View the instructions screen.
+     */
     INSTRUCTIONS("Instructions"),
+    /**
+     * View the high scores screen.
+     */
     HIGH_SCORES("High Scores"),
+    /**
+     * Go back to the previous screen.
+     */
     BACK("Back"),
+    /**
+     * Resume the current paused game.
+     */
     RESUME("Resume Game"),
+    /**
+     * Restart the current game.
+     */
     RESTART("Restart"),
+    /**
+     * Increment the currently selected value.
+     */
     INCREMENT("Increment Current Value"),
+    /**
+     * Enter currently selected value.
+     */
     SET_VALUE("Set Current Value"),
+    /**
+     * Decrement the currently selected value.
+     */
     DECREMENT("Decrement Current Value"),
+    /**
+     * Go back to the main screen.
+     */
     TITLE_SCREEN("Go Back To Title Screen"),
+    /**
+     * Exit the application.
+     */
     EXIT("Exit");
 
     private String text;

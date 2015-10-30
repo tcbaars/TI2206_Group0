@@ -2,7 +2,7 @@ package enumerations;
 
 /**
  * The GameStates enumeration is used as a way to easily reference the possible states that the game can be in.
- * The properties are structured in such a way that changes in the games state can easily be logged.
+ * The properties are structured in such a way that state changes can easily be logged.
  */
 public enum States {
     TITLE_SCREEN("Title Screen"),
