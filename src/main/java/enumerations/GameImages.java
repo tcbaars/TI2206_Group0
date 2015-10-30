@@ -10,8 +10,6 @@ public enum GameImages {
     MUSIC_ON("MusicOn","/icons/musicOn.png", 30, 30),
     SOUND_OFF("SoundOff", "/icons/soundOff.png", 30, 30),
     SOUND_ON("SoundOn", "/icons/soundOn.png", 30, 30),
-    ARROW("Arrow", "/icons/arrow.png", 0, 0),
-    SELECTED_ARROW("SelectedArrow", "/icons/arrowSelected.png", 0, 0),
     DIRECTION_KEYS("ArrowKeys", "/icons/arrowKeys.png", 332, 227),
     ESC_KEY("Esc", "/icons/escKey.png", 559, 527),
     M_KEY("M", "/icons/mKey.png", 559, 527),
