@@ -12,7 +12,7 @@ import enumerations.GameEntities;
 
 public class BubbleSpawnerTest {
 	
-	Enemy enemy = Enemy.generate(GameEntities.Trout);
+	Enemy enemy = Enemy.generate(GameEntities.TROUT);
 	BubbleSpawner bubblespawner = new BubbleSpawner(enemy);
 	
 	/**
