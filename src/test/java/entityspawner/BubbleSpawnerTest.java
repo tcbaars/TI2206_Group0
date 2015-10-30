@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import entities.Enemy;
 import entityspawner.BubbleSpawner;
+import enumerations.GameEntities;
 
 public class BubbleSpawnerTest {
 	
