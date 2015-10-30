@@ -50,5 +50,21 @@ public class EnemySpawnerTest {
 	@Test
 	public void isActiveTest() {
 		assertTrue(enemyspawner.isActive());
-	}	
+	}
+	
+	/**
+	 * this method tests the update method for looping the frames
+	 */
+	@Test
+	public void updateTest() {
+		while(enemyspawner.getNumberEnemies() == 0) {
+			enemyspawner.update();
+		}
+		assertFalse(enemyspawner.getNumberEnemies() == 0);
+		enemyspawner.setFinalStage();
+		while(enemyspawner.getNumberEnemies() != 0) {
+			enemyspawner.update();
+		}
+		assertFalse(enemyspawner.isActive());
+	}
 }
