@@ -9,6 +9,7 @@ import settings.MusicSettings;
 import settings.SoundSettings;
 import statemanagers.StateManager;
 import tools.resourcetools.MusicPlayer;
+import util.Logger;
 
 public abstract class ScreenState implements State{
     private StateManager stateManager;
@@ -28,6 +29,8 @@ public abstract class ScreenState implements State{
     public void handleKeyPressed(Key key) {
     }
     public void handleKeyReleased(Key key){
+	Logger.info("key.getKey() returned " + key.getKey());
+	
         switch (key.getKey()) {
             case SOUND:
                 SoundSettings.getInstance().toggleSound();
@@ -43,5 +46,6 @@ public abstract class ScreenState implements State{
         }
     }
     public void handleKeyTyped(TypedKey key) {
+	
     }
 }

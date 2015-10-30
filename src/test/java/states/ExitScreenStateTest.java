@@ -1,15 +1,12 @@
 
 package states;
 
-import org.junit.*;
 import mockit.*;
-import mockit.integration.junit4.JMockit;
-import java.awt.Graphics2D;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import statemanagers.StateManager;
 import gui.MainFrame;
+import enumerations.States;
 import mockit.integration.junit4.JMockit;
 import org.junit.runner.RunWith;
 	
@@ -18,11 +15,16 @@ public class ExitScreenStateTest {
     static ExitScreenState ess; 
     
     @Mocked
-    StateManager sm;
+    StateManager mocked_sm;
+    States mocked_state;
     
+    
+    /*
+     *	Create an instance of ExitScreenState, using a mock-up of StateManager
+     */
     @Before
     public void setUp() {
-	ess = new ExitScreenState(sm);
+	ess = new ExitScreenState(mocked_sm);
     }
     
     
@@ -37,9 +39,22 @@ public class ExitScreenStateTest {
 	
 	new Verifications() {
 	    {
-		mf.getInstance().exit();
+		mf.exit();
 	    }
 	};
     }
     
+    /*
+     *	Test to see if the current state gets set;
+     */
+    public void testSetCurrentState(){
+	
+        ess.setCurrentState(mocked_state);
+	
+	new Verifications() {
+	    {
+		mocked_sm.setCurrentState(mocked_state);
+	    }
+	};
+    }
 }
