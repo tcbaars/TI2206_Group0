@@ -7,8 +7,8 @@ public class MusicPlayerException extends GameException{
 
     /**
      * Creates a new music player error.
-     * @param description A description of the error in natural language.
-     * @param message The detail message.
+     * @param description a description of the error in natural language.
+     * @param message the detail message.
      */
     public MusicPlayerException(String description, String message) {
         super("Music Player Error", description, message);

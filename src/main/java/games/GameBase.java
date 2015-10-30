@@ -3,23 +3,44 @@ package games;
 import states.gamestates.GameState;
 import util.Logger;
 
+/**
+ * The GameBase class represents a general implementation of the Game interface.
+ */
 public abstract class GameBase implements Game{
 
     private boolean paused;
     private boolean gameOver;
     private GameState currentState;
 
+    /**
+     * Creates a new game.
+     */
     public GameBase(){
         restart();
     }
+
     public void restart(){
         gameOver = false;
         resume();
         Logger.info("The game has been restarted.");
     }
 
+    /**
+     * Returns the game-specific state for when the game is running.
+     * @return the game running state.
+     */
     abstract protected GameState runningGameState();
+
+    /**
+     * Returns the game-specific state for when the game is paused.
+     * @return the game paused state.
+     */
     abstract protected GameState pausedGameState();
+
+    /**
+     * Returns the game-specific state for when the game is over.
+     * @return the game over state.
+     */
     abstract protected GameState gameOverGameState();
 
     public void pause(){
@@ -38,6 +59,9 @@ public abstract class GameBase implements Game{
         return paused;
     }
 
+    /**
+     * Sets the current game state to the game over state.
+     */
     protected void setGameOver(){
         gameOver = true;
         pause();
@@ -53,6 +77,10 @@ public abstract class GameBase implements Game{
         return currentState;
     }
 
+    /**
+     * Sets the current game state to the specified state.
+     * @param currentState the new state.
+     */
     protected void setCurrentState(GameState currentState){
         this.currentState = currentState;
     }

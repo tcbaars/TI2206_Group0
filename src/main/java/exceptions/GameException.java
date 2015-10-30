@@ -11,9 +11,9 @@ public class GameException extends RuntimeException {
     /**
      * Creates a new general game exception.
      * Which can be displayed via a dialog box.
-     * @param title The root of the error.
-     * @param description A description of the error in natural language.
-     * @param message The detail message.
+     * @param title the root of the error.
+     * @param description a description of the error in natural language.
+     * @param message the detail message.
      */
     public GameException(String title, String description, String message){
         super(message);

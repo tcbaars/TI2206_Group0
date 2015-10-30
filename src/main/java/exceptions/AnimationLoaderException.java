@@ -7,8 +7,8 @@ public class AnimationLoaderException extends GameException{
 
     /**
      * Creates a new animation loader error.
-     * @param description A description of the error in natural language.
-     * @param message The detail message.
+     * @param description a description of the error in natural language.
+     * @param message the detail message.
      */
     public AnimationLoaderException(String description, String message) {
         super("Animation Loader Error", description, message);

@@ -7,8 +7,8 @@ public class TrackLoaderException extends GameException{
 
     /**
      * Creates a new track loader error.
-     * @param description A description of the error in natural language.
-     * @param message The detail message.
+     * @param description a description of the error in natural language.
+     * @param message the detail message.
      */
     public TrackLoaderException(String description, String message) {
         super("Track Loader Error", description, message);

@@ -7,8 +7,8 @@ public class SoundLoaderException extends GameException{
 
     /**
      * Creates a new sound loader error.
-     * @param description A description of the error in natural language.
-     * @param message The detail message.
+     * @param description a description of the error in natural language.
+     * @param message the detail message.
      */
     public SoundLoaderException(String description, String message) {
         super("Sound Loader Error", description, message);
