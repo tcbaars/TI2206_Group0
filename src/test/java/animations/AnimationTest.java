@@ -54,4 +54,15 @@ public class AnimationTest {
 		assertEquals(GameAnimations.TROUT.isFacingLeft(),animation.isFacingLeft());
 	}
 
+	/**
+	 * this method tests the update method for looping the frames
+	 */
+	@Test
+	public void updateTest() {
+		for(int i = animation.getNumberFrames(); i == 0; i--) {
+			animation.update();
+		}
+		AnimationLoader.getInstance().loadAnimation(GameAnimations.TROUT);
+		assertEquals(AnimationLoader.getInstance().getAnimation(GameAnimations.TROUT)[0],animation.getCurrentFrame());
+	}
 }
