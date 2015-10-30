@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.enemies.Trout;
+import entities.Enemy;
 import enumerations.GameEntities;
 
 public class GuppyTest {
@@ -89,7 +89,7 @@ public class GuppyTest {
      */
     @Test
     public void consumeTest() {
-        Trout trout = new Trout();
+        Enemy trout = Enemy.generate(GameEntities.TROUT);
         assertFalse(guppy.consume(trout));
     }
 
