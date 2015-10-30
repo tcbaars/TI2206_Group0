@@ -63,5 +63,4 @@ public class MainFrame extends JFrame{
         dispose();
         Logger.info("Main frame has been exited.");
     }
-
 }

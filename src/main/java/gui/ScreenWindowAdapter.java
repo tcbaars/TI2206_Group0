@@ -4,15 +4,20 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /**
- * The ScreenWindowAdapter class handles window events.
+ * The ScreenWindowAdapter class is used to handle useful window events.
  */
 public class ScreenWindowAdapter implements WindowListener{
 
     private Screen gameScreen;
 
+    /**
+     * Creates a new window listener which will be attached to the specified screen.
+     * @param screen the screen.
+     */
     public ScreenWindowAdapter(Screen screen){
         gameScreen = screen;
     }
+
     public void windowClosing(WindowEvent e) {
         // Notify the game screen
         gameScreen.windowClosing();

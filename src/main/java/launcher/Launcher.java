@@ -19,7 +19,6 @@ public class Launcher {
             // If an unhandled game error occurred display pop-up box, log, and exit
             Logger.error("GameException Occured: " + e.getMessage());
             DialogBox.displayError(e);
-            MainFrame.getInstance().exit();
         } catch (Exception e){
             // If an unhandled error occurred log and exit
             Logger.error("Exception Occured: " + e.getMessage());

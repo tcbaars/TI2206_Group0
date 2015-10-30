@@ -76,12 +76,15 @@ public class Score implements Comparable<Score>{
     }
 
     /**
-     * Recommended hashCode implementation from FindBugs
-     * @return 42
+     * Implemented as recommended by the FindBug report.
+     * The hashCode should not be used, and will throw a AssertionError when used.
+     * @return an arbitrary constant, (42).
      */
     @Override
     public int hashCode() {
+        // throw a AssertionError
         assert false : "hashCode not designed";
-        return 42; // any arbitrary constant will do
+        // return an arbitrary constant
+        return 42;
     }
 }
