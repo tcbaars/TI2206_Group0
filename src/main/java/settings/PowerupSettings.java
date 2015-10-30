@@ -9,7 +9,7 @@ public class PowerupSettings {
     private int spawnRate;
     private static final int minPowerups = 0;
     private static final int maxPowerups = 2;
-    private static final double increment = 2;
+    private static final int increment = 2;
     private static boolean powerupIsActive = false;
     private static final int powerupRate = 60*10;
     private static final int despawnRate = 60*5;
@@ -65,7 +65,7 @@ public class PowerupSettings {
         powerupIsActive = !powerupIsActive;
     }
 
-    public double getIncrement() {
+    public int getIncrement() {
         return increment;
     }
 
