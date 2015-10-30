@@ -7,6 +7,7 @@ import sprites.PowerupSprite;
 import sprites.Sprite;
 import tools.Timer;
 import tools.entitytools.Generator;
+import util.Logger;
 
 import java.util.ArrayList;
 
@@ -62,6 +63,7 @@ public class Powerup extends EntityBase {
         int x = Generator.generateInteger((int)(screenWidth - (width + 10)));
         sprite.translateSpriteY(y);
         sprite.translateSpriteX(x);
+        Logger.info("Powerup Spawned!");
     }
 
     public boolean isConsumable() {
