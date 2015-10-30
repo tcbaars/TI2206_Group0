@@ -26,16 +26,14 @@ public class BackgroundRectangle {
      * @param height the desired rectangle height.
      */
     public static void drawRectangle(Graphics2D screen, int startX, int startY, int width, int height){
-        if (screen != null){
-            // Get the current colour
-            Color tempColor = screen.getColor();
-            // Change the current colour
-            screen.setColor(backgorundColor);
-            // Draw rounded rectangle
-            screen.fillRoundRect(startX, startY, width, height, arcWidth, arcHeight);
-            // Restore the previous current colour
-            screen.setColor(tempColor);
-        }
+        // Get the current colour
+        Color tempColor = screen.getColor();
+        // Change the current colour
+        screen.setColor(backgorundColor);
+        // Draw rounded rectangle
+        screen.fillRoundRect(startX, startY, width, height, arcWidth, arcHeight);
+        // Restore the previous current colour
+        screen.setColor(tempColor);
     }
 
     /**
