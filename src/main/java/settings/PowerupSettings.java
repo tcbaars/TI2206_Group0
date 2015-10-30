@@ -18,7 +18,7 @@ public class PowerupSettings {
      * Creates an instance of the global enemy settings.
      */
     private PowerupSettings(){
-        spawnRate = 60*60*20;
+        spawnRate = 60*20;
     }
 
     /**

@@ -5,7 +5,6 @@ import entities.Powerup;
 import entities.powerups.Speedup;
 import settings.PowerupSettings;
 import tools.Timer;
-import tools.entitytools.Generator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
