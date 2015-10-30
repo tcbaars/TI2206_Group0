@@ -7,12 +7,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import entities.Enemy;
-import entities.enemies.Trout;
 import entityspawner.BubbleSpawner;
 
 public class BubbleSpawnerTest {
 	
-	Enemy enemy = new Trout();//Enemy.generate(GameEntities.DUNKLEOSTEUS);
+	Enemy enemy = Enemy.generate(GameEntities.Trout);
 	BubbleSpawner bubblespawner = new BubbleSpawner(enemy);
 	
 	/**
