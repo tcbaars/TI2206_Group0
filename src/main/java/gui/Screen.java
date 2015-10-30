@@ -15,6 +15,9 @@ import settings.ScreenSettings;
 import statemanagers.StateManager;
 import util.Logger;
 
+/**
+ * The Screen class represents the main screen of the application.
+ */
 public class Screen extends JPanel implements Runnable, KeyListener{
 
     private Thread thread;
@@ -26,6 +29,9 @@ public class Screen extends JPanel implements Runnable, KeyListener{
     private Graphics2D screen;
     private StateManager gameStateManager;
 
+    /**
+     * .
+     */
     public Screen(){
         super();
         running = false;
@@ -38,6 +44,9 @@ public class Screen extends JPanel implements Runnable, KeyListener{
         requestFocus();
     }
 
+    /**
+     * .
+     */
     public void initialise(){
         screenImage = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_RGB);
         screen = (Graphics2D)screenImage.getGraphics();
@@ -66,6 +75,9 @@ public class Screen extends JPanel implements Runnable, KeyListener{
         gameStateManager.handleKeyTyped(KeyAdapter.convertKeyTyped(e));
     }
 
+    /**
+     * .
+     */
     public void windowClosing(){
         Logger.info("The user has pressed the 'Close' button.");
         gameStateManager.setCurrentState(States.EXIT_SCREEN);
@@ -96,10 +108,16 @@ public class Screen extends JPanel implements Runnable, KeyListener{
         }
     }
 
+    /**
+     * .
+     */
     public void update(){
         gameStateManager.update();
     }
 
+    /**
+     * .
+     */
     public void drawToScreen(){
         gameStateManager.drawToScreen(screen);
         Graphics panelGraphic = getGraphics();
@@ -108,6 +126,9 @@ public class Screen extends JPanel implements Runnable, KeyListener{
 
     }
 
+    /**
+     * .
+     */
     protected void exit(){
         running = false;
         Logger.info("The screen has been exited.");
